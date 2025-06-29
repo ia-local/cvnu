@@ -199,12 +199,8 @@ app.post('/api/generate', async (req, res) => {
 
   } catch (error) {
     console.error('Erreur lors de l\'appel à l\'API Groq (ponctuel):', error);
-    if (error.response && error.response.status === 429) {
-        res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
-    } else {
-        writeLog({ type: 'ERROR', message: 'Erreur API Groq (ponctuel)', details: error.message, prompt: userPrompt, model: modelToUse });
-        res.status(500).json({ error: 'Une erreur interne est survenue lors de la communication avec l\'IA.' });
-    }
+    writeLog({ type: 'ERROR', message: 'Erreur API Groq (ponctuel)', details: error.message, prompt: userPrompt, model: modelToUse });
+    res.status(500).json({ error: 'Une erreur interne est survenue lors de la communication avec l\'IA.' });
   }
 });
 
@@ -436,18 +432,14 @@ app.post('/api/conversations/:id/message', async (req, res) => {
 
   } catch (error) {
     console.error(`❌ Erreur lors de l'appel à l'API Groq pour la conversation ${id}:`, error);
-    if (error.response && error.response.status === 429) {
-        res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
-    } else {
-        writeLog({
-            type: 'CONVERSATION_ERROR',
-            action: 'AI_API_ERROR',
-            conversationId: id,
-            errorMessage: error.message,
-            stack: error.stack?.substring(0, 500) + '...' || 'N/A'
-        });
-        res.status(500).json({ error: "Une erreur interne est survenue lors de la communication avec l'IA." });
-    }
+    writeLog({
+        type: 'CONVERSATION_ERROR',
+        action: 'AI_API_ERROR',
+        conversationId: id,
+        errorMessage: error.message,
+        stack: error.stack?.substring(0, 500) + '...' || 'N/A'
+    });
+    res.status(500).json({ error: "Une erreur interne est survenue lors de la communication avec l'IA." });
   }
 });
 
@@ -493,12 +485,8 @@ app.post('/api/cv/parse-and-structure', async (req, res) => {
         res.status(200).json(structuredData);
     } catch (error) {
         console.error('Erreur lors du parsing et structuration du CV:', error);
-        if (error.response && error.response.status === 429) {
-            res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer de structurer le CV." });
-        } else {
-            writeLog({ type: 'CV_PROCESSING', action: 'PARSE_AND_STRUCTURE', status: 'ERROR', error: error.message });
-            res.status(500).json({ error: 'Échec de l\'analyse et de la structuration du CV.', details: error.message });
-        }
+        writeLog({ type: 'CV_PROCESSING', action: 'PARSE_AND_STRUCTURE', status: 'ERROR', error: error.message });
+        res.status(500).json({ error: 'Échec de l\'analyse et de la structuration du CV.', details: error.message });
     }
 });
 
@@ -570,11 +558,7 @@ app.post('/api/valorize-cv', async (req, res) => {
         });
     } catch (error) {
         console.error('Erreur lors de la valorisation du CV avec Groq (route /api/valorize-cv):', error);
-        if (error.response && error.response.status === 429) {
-            res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
-        } else {
-            res.status(500).json({ message: 'Erreur serveur lors de la valorisation du CV.', error: error.message });
-        }
+        res.status(500).json({ message: 'Erreur serveur lors de la valorisation du CV.', error: error.message });
     }
 });
 
@@ -605,18 +589,14 @@ app.get('/api/conversations/:id/cv-professional-summary', async (req, res) => {
 
     } catch (error) {
         console.error(`Erreur lors de la génération du résumé professionnel pour la conversation ${id}:`, error);
-        if (error.response && error.response.status === 429) {
-            res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
-        } else {
-            writeLog({
-                type: 'CV_GENERATION_FROM_CHAT',
-                action: 'GENERATE_SUMMARY',
-                status: 'ERROR',
-                conversationId: id,
-                error: error.message
-            });
-            res.status(500).json({ error: 'Échec de la génération du résumé professionnel.', details: error.message });
-        }
+        writeLog({
+            type: 'CV_GENERATION_FROM_CHAT',
+            action: 'GENERATE_SUMMARY',
+            status: 'ERROR',
+            conversationId: id,
+            error: error.message
+        });
+        res.status(500).json({ error: 'Échec de la génération du résumé professionnel.', details: error.message });
     }
 });
 

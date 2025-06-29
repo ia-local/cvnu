@@ -1,0 +1,216 @@
+[
+  {
+    "timestamp": "2025-06-29T10:21:10.647Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:21:19.677Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:21:21.893Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:21:28.758Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:21:30.746Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "d97a15d6-b0a7-43fb-af24-d590708cef3b",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:21:30.749Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:22:43.711Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:42:23.931Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:42:36.507Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:42:41.254Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:43:00.856Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:43:02.942Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "cf2e0480-8eb7-4a5d-9faa-ffa94328566f",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:43:02.945Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T10:52:40.241Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T10:53:15.701Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T10:53:30.131Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:00:20.344Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:00:28.860Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:06:21.172Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:06:39.332Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:07:29.286Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:15:33.114Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:19:35.002Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:19:36.316Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:38:31.519Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:38:42.016Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:38:46.570Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "41a1d0c0-2294-4f59-8b50-8b433bfd7823",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T11:38:46.578Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:39:26.530Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:40:33.278Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:40:41.160Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:43:10.592Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:43:12.623Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:43:31.356Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "test",
+    "response": "Please tell me what you'd like me to test!  \n\nFor example, you could ask me to:\n\n* **Answer a question:** \"What is the capital of France?\"\n* **Generate some text:** \"Write a short story about a cat who goes on an adventure.\"\n* **Translate something:** \"Translate 'Hello world' into Spanish.\"\n* **Summarize a piece of text:** \"Summarize the plot of the movie Inception.\"\n\n\nLet me know how I can help! 😊 \n",
+    "model": "gemma2-9b-it",
+    "utmi": 17.56,
+    "estimatedCost": 0.00001,
+    "processingTime": 0.572
+  }
+]

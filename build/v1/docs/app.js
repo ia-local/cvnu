@@ -1,4 +1,4 @@
-// public/app.js - Logique UI Complète avec Chatroom intégrée (plus de modal chatbot)
+// public/app.js - Logique UI Complète avec Chatroom intégrée et Nouvelle NavBar
 // Importation des modules externes
 import { showModal } from './modal.js';
 import { setConversations, renderChatConversationList, changeChatPage, initPaginationControls, setActiveConversationId } from './pagination.js';
@@ -7,15 +7,17 @@ const API_BASE_URL = window.location.origin;
 
 // --- DOM Elements (Global) ---
 const globalStatusMessage = document.getElementById('globalStatusMessage');
-// Les éléments du modal générique sont définis dans modal.js, pas besoin de les redéclarer ici
-// pour ne pas créer de confusion sur la portée. Le showModal les gère en interne.
 
-// --- Header Elements ---
-const navigateToChatroomBtn = document.getElementById('navigateToChatroomBtn'); // Nouveau : bouton Chat IA du header
+// --- Nouvelle Navbar Elements ---
+const mainNavbar = document.getElementById('mainNavbar');
+const navbarMainLinks = document.querySelector('.navbar-main-links');
+const navbarSearchInput = document.getElementById('navbarSearchInput');
+const navbarSearchBtn = document.getElementById('navbarSearchBtn');
+const openCmsModalBtn = document.getElementById('openCmsModalBtn'); // Nouveau bouton "Gérer Contenu"
 const themeToggle = document.getElementById('themeToggle');
 
-// --- Navigation Elements ---
-const navLinks = document.querySelectorAll('.nav-link');
+// --- Sidebar Navigation Elements (Gardés pour la structure mobile/secondaire) ---
+const sidebarNavLinks = document.querySelectorAll('.sidebar-nav .nav-link');
 const appPages = document.querySelectorAll('.content-section');
 
 // --- Page: Accueil (Home) ---
@@ -52,22 +54,22 @@ const downloadCvBtn = document.getElementById('downloadCvBtn');
 const valorizeCvContentBtn = document.getElementById('valorizeCvContentBtn');
 const valorizationOutput = document.getElementById('valorization-output');
 
-// --- Chatroom Page Elements (anciennement du modal) ---
+// --- Chatroom Page Elements ---
 const startNewConversationBtn = document.getElementById('startNewConversationBtn');
 const generateChatCvSummaryBtn = document.getElementById('generateChatCvSummaryBtn');
-const conversationList = document.getElementById('conversation-list'); // Toujours utilisé par pagination.js
+const conversationList = document.getElementById('conversation-list');
 const currentConversationIdSpan = document.getElementById('current-conversation-id');
 const chatWindow = document.getElementById('chat-window');
 const chatInput = document.getElementById('chat-input');
 const sendChatBtn = document.getElementById('send-chat-btn');
-const modalCvSummarySection = document.getElementById('modalCvSummarySection'); // Son ID est conservé pour la rétrocompatibilité des styles et fonctions
+const modalCvSummarySection = document.getElementById('modalCvSummarySection');
 const modalCvSummaryOutput = document.getElementById('modalCvSummaryOutput');
 const copyModalCvSummaryBtn = document.getElementById('copyModalCvSummaryBtn');
 
 // --- State Variables ---
 let currentConversationId = null;
-let currentConversationMessages = []; // Full message history including system message
-let generatedCvHtmlContent = ''; // Stores the HTML content of the generated CV for download/valorization
+let currentConversationMessages = [];
+let generatedCvHtmlContent = '';
 
 
 // --- UI Utility Functions ---
@@ -141,21 +143,50 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.querySelector('.toggle-circle').innerHTML = '<i class="fas fa-sun"></i>';
     }
 
-    // Event Listeners for Global Actions
-    navigateToChatroomBtn.addEventListener('click', (event) => { // Mise à jour pour le bouton Chat IA du header
-        event.preventDefault();
-        showPage('chatroom'); // Navigue vers la nouvelle page chatroom
-    });
+    // Event Listeners for Global Actions (new navbar)
     themeToggle.addEventListener('click', toggleTheme);
 
-    // Event Listeners for Page Navigation
-    navLinks.forEach(link => {
+    // Navigation links in the main navbar
+    navbarMainLinks.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
             const pageId = event.target.dataset.page;
             showPage(pageId);
         });
     });
+
+    // Navigation links in the sidebar (for mobile or as secondary nav)
+    sidebarNavLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const pageId = event.target.dataset.page;
+            showPage(pageId);
+        });
+    });
+
+    // Search functionality in navbar
+    navbarSearchBtn.addEventListener('click', () => {
+        const query = navbarSearchInput.value.trim();
+        if (query) {
+            showGlobalStatus(`Recherche lancée pour : "${query}"`, 'info');
+            // Implement actual search logic here, e.g., redirect to a search page or filter content
+        } else {
+            showGlobalStatus('Veuillez entrer un terme de recherche.', 'info');
+        }
+    });
+
+    navbarSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            navbarSearchBtn.click();
+        }
+    });
+
+    // "Gérer Contenu" button (CMS-like modal trigger)
+    openCmsModalBtn.addEventListener('click', async () => {
+        // Here you would define the content and type of your CMS modal
+        await showModal('Gestion de Contenu (CMS)', '<p>Bienvenue dans votre interface de gestion de contenu. Ici vous pourrez éditer les textes, images et autres éléments de l\'application.</p><p>Ceci est un exemple de modal déclenché par la NavBar.</p>', 'alert');
+    });
+
 
     // Default page to show on load
     showPage('home'); // Display home page by default
@@ -202,24 +233,26 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Lie les callbacks de pagination à la fenêtre globale pour `pagination.js`
-    window.onConversationLoadCallback = loadConversationInChatroom; // Renommé pour correspondre à la nouvelle structure
+    window.onConversationLoadCallback = loadConversationInChatroom;
     window.onConversationDeleteCallback = deleteChatConversation;
 
 
-    // --- IPC Renderer Listeners for Electron Menu ---
-    // Écouteur pour la navigation depuis le menu Electron
-    if (window.electronAPI && typeof window.electronAPI.onNavigateToPage === 'function') {
+    // --- IPC Renderer Listeners for Electron Menu (Remains important for desktop app) ---
+    if (window.electronAPI) {
+        // Listen for navigation requests from Electron main process (e.g., from native menu)
         window.electronAPI.onNavigateToPage((pageId) => {
+            console.log(`[IPC] Navigating to page: ${pageId}`);
             showPage(pageId);
         });
-    }
 
-    // Écouteur pour démarrer une nouvelle conversation de chat depuis le menu Electron
-    if (window.electronAPI && typeof window.electronAPI.onStartNewChatConversation === 'function') {
+        // Listen for "start new chat" request from Electron native menu
         window.electronAPI.onStartNewChatConversation(() => {
-            showPage('chatroom'); // Assurez-vous d'être sur la page chatroom
-            startNewConversation(); // Démarre une nouvelle conversation
+            console.log("[IPC] Starting new chat conversation.");
+            showPage('chatroom'); // Ensure chatroom page is active
+            startNewConversation();
         });
+    } else {
+        console.warn("Electron API not available. Running in web mode.");
     }
 });
 
@@ -238,7 +271,7 @@ function toggleTheme() {
 /**
  * Manages which main page section is visible and initializes page-specific logic.
  * Implements the "Multi Modo" principle.
- * @param {string} pageId - The ID of the page to show (e.g., 'home', 'dashboard', 'user-profile', 'chatroom', 'workspace').
+ * @param {string} pageId - The ID of the page to show (e.g., 'home', 'dashboard', 'user-profile', 'chatroom', 'workspace', 'documentation', 'contact').
  */
 function showPage(pageId) {
     // Hide all pages first
@@ -246,22 +279,19 @@ function showPage(pageId) {
         page.classList.remove('active');
     });
 
-    // Set active navigation link
-    navLinks.forEach(link => {
+    // Set active navigation link in both main navbar and sidebar
+    mainNavbar.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if (link.dataset.page === pageId) {
             link.classList.add('active');
         }
     });
-
-    // Also, update the header chat button if the page is 'chatroom'
-    const headerChatBtn = document.getElementById('navigateToChatroomBtn');
-    if (pageId === 'chatroom') {
-        headerChatBtn.classList.add('active'); // Or a specific class for active state
-    } else {
-        headerChatBtn.classList.remove('active');
-    }
-
+    sidebarNavLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.dataset.page === pageId) {
+            link.classList.add('active');
+        }
+    });
 
     // Show the selected page
     document.getElementById(`${pageId}-page`).classList.add('active');
@@ -286,6 +316,12 @@ function showPage(pageId) {
         case 'workspace':
             initializeWorkspacePage();
             break;
+        case 'documentation': // Nouvelle page
+            initializeDocumentationPage();
+            break;
+        case 'contact': // Nouvelle page
+            initializeContactPage();
+            break;
         default:
             console.warn(`Page '${pageId}' not recognized or has no specific initialization logic.`);
     }
@@ -295,35 +331,41 @@ function showPage(pageId) {
 
 function initializeHomePage() {
     console.log('Initializing Home Page...');
-    // No specific async data fetch needed here initially, but could be added.
 }
 
 function initializeDashboardPage() {
     console.log('Initializing Dashboard Page...');
-    fetchDashboardInsights(); // Ensure dashboard insights are fetched when entering this page
+    fetchDashboardInsights();
 }
 
 function initializeUserProfilePage() {
     console.log('Initializing User Profile Page...');
-    // Logic for loading user profile data, CV preview, etc.
-    // For now, it's mainly static content, but could load CV from backend.
 }
 
 function initializeChatroomPage() {
     console.log('Initializing Chatroom Page...');
     fetchChatConversations(); // Load conversations when entering the chatroom
-    // Reset active conversation UI if needed when simply entering the page
-    // setActiveConversationId(null); // Optional: clear active conversation highlight on page entry
-    // displayChatMessages(); // Optional: clear chat window
+    setActiveConversationId(currentConversationId); // Ensure the correct conversation is highlighted on page load
+    displayChatMessages(); // Re-display messages in case of re-entry
 }
 
 function initializeWorkspacePage() {
     console.log('Initializing Workspace Page...');
-    // This is where you would add logic for your Workspace:
-    // - Load user's projects or custom tools
-    // - Render specific widgets
-    // - Fetch data relevant to the workspace
     showGlobalStatus('Bienvenue dans votre Espace de Travail !', 'info', 2000);
+}
+
+function initializeDocumentationPage() {
+    console.log('Initializing Documentation Page...');
+    showGlobalStatus('Chargement de la Documentation...', 'info', 1500);
+    // Ajoutez ici la logique pour charger le contenu de la documentation
+    // Cela pourrait être un fetch vers un fichier Markdown, un affichage de contenu statique, etc.
+}
+
+function initializeContactPage() {
+    console.log('Initializing Contact Page...');
+    showGlobalStatus('Chargement de la page Contact...', 'info', 1500);
+    // Ajoutez ici la logique pour charger le contenu de la page contact
+    // Cela pourrait être un formulaire de contact, des informations de contact statiques, etc.
 }
 
 
@@ -354,7 +396,7 @@ async function generateResponse() {
                 <p>${data.response}</p>
                 <p class="meta-info">UTMi généré: ${data.utmi.toFixed(2)} EUR | Coût estimé: ${data.estimatedCost.toFixed(6)} USD</p>
             `;
-            fetchDashboardInsights(); // Update dashboard
+            fetchDashboardInsights();
             showGlobalStatus('Réponse ponctuelle générée !', 'success');
         } else {
             iaResponseOutput.innerHTML = `<p class="placeholder-text error-message">Erreur: ${data.error || 'Réponse inattendue du serveur.'}</p>`;
@@ -378,13 +420,12 @@ async function fetchDashboardInsights() {
         const response = await fetch(`${API_BASE_URL}/api/dashboard-insights`);
         const insights = await response.json();
 
-        // Utilisation de l'opérateur de coalescence nullish (??) pour s'assurer que les valeurs sont des nombres ou 0
         totalUtmiEl.textContent = `${(insights.totalUtmi ?? 0).toFixed(2)} EUR`;
         totalEstimatedCostUSDEl.textContent = `${(insights.totalEstimatedCostUSD ?? 0).toFixed(2)} USD`;
         totalEstimatedCostEUREl.textContent = `${(insights.totalEstimatedCostEUR ?? 0).toFixed(2)} EUR`;
         totalInteractionCountEl.textContent = insights.totalInteractionCount ?? 0;
         averageUtmiPerInteractionEl.textContent = `${(insights.averageUtmiPerInteraction ?? 0).toFixed(2)} EUR`;
-        totalUtmiPerCostRatioEl.textContent = (insights.totalUtmiPerCostRatio ?? 0).toFixed(2); // Pas d'unité ici car c'est un ratio
+        totalUtmiPerCostRatioEl.textContent = (insights.totalUtmiPerCostRatio ?? 0).toFixed(2);
 
         renderList(utmiByTypeEl, insights.utmiByType || [], item => `<strong>${item.name}:</strong> ${(item.utmi ?? 0).toFixed(2)} EUR`);
         renderList(utmiByModelEl, insights.utmiByModel || [], item => `<strong>${item.name}:</strong> ${(item.utmi ?? 0).toFixed(2)} EUR`);
@@ -392,19 +433,18 @@ async function fetchDashboardInsights() {
         renderList(utmiByCognitiveAxisEl, insights.utmiByCognitiveAxis || [], item => `<strong>${item.name}:</strong> ${(item.utmi ?? 0).toFixed(2)} EUR`);
 
         thematicUtmiMarketingEl.textContent = (insights.thematicUtmi?.marketing ?? 0).toFixed(2);
-        thematicUtmiAffiliationEl.textContent = (insights.thematicUtmi?.affiliation ?? 0).toFixed(2);
+        thematicUtmiAffiliationEl.textContent = (insights.thematicUtmi?.affiliation ?? 0).toFixed(2); // Correction: insights.thematicUtmi.affiliation
         thematicUtmiFiscalEconomicEl.textContent = (insights.thematicUtmi?.fiscalEconomic ?? 0).toFixed(2);
 
         renderList(mostValuableTopicsEl, insights.mostValuableTopics || [], item => `${item.name} (${(item.utmi ?? 0).toFixed(2)} EUR)`);
         renderList(mostCommonActivitiesEl, insights.mostCommonActivities || [], item => `${item.name} (${item.count ?? 0} fois)`);
-        renderObjectList(exchangeRatesEl, insights.exchangeRates || {}, (key, value) => `1 EUR = ${(value ?? 0)} ${key}`); // Pas de toFixed ici, taux de change peut être long
+        renderObjectList(exchangeRatesEl, insights.exchangeRates || {}, (key, value) => `1 EUR = ${(value ?? 0)} ${key}`);
 
         showGlobalStatus('Tableau de bord actualisé !', 'success');
 
     } catch (error) {
         console.error('Erreur lors de la récupération des insights du tableau de bord:', error);
         showGlobalStatus(`Erreur d'actualisation du tableau de bord: ${error.message}`, 'error');
-        // Fallback text in case of error
         const elementsToUpdate = [
             totalUtmiEl, totalEstimatedCostUSDEl, totalEstimatedCostEUREl, totalInteractionCountEl,
             averageUtmiPerInteractionEl, totalUtmiPerCostRatioEl, thematicUtmiMarketingEl,
@@ -422,10 +462,6 @@ async function fetchDashboardInsights() {
 
 // --- Page: Profil Utilisateur (CV) - Fonctions ---
 
-/**
- * Génère un CV HTML à partir du texte d'entrée.
- * Cette fonction utilise l'ancienne logique d'analyse de conversation collée.
- */
 async function generateCvFromInput() {
     const rawCvContent = cvInput.value.trim();
     if (!rawCvContent) {
@@ -441,9 +477,7 @@ async function generateCvFromInput() {
     cvOutput.innerHTML = '<p class="placeholder-text">Génération en cours...</p>';
     valorizationOutput.innerHTML = '<p class="placeholder-text">En attente de valorisation...</p>';
 
-
     try {
-        // Envoi le contenu brut pour analyse et enregistrement comme une "conversation collée"
         const analyzeResponse = await fetch(`${API_BASE_URL}/api/record-and-analyze`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -455,7 +489,6 @@ async function generateCvFromInput() {
             throw new Error(errorData.message || 'Échec de l\'analyse du contenu pour le CV.');
         }
 
-        // Ensuite, on génère le CV HTML basé sur les logs mis à jour
         const generateCvResponse = await fetch(`${API_BASE_URL}/api/generate-cv`);
         if (!generateCvResponse.ok) {
             const errorText = await generateCvResponse.text();
@@ -478,9 +511,6 @@ async function generateCvFromInput() {
     }
 }
 
-/**
- * Valorise le contenu du CV généré via l'IA.
- */
 async function valorizeCvContent() {
     if (!generatedCvHtmlContent) {
         showGlobalStatus('Veuillez d\'abord générer le CV.', 'error');
@@ -494,7 +524,7 @@ async function valorizeCvContent() {
     try {
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = generatedCvHtmlContent;
-        const cvTextContent = tempDiv.innerText || tempDiv.textContent; // Extraire le texte brut du HTML
+        const cvTextContent = tempDiv.innerText || tempDiv.textContent;
 
         const response = await fetch(`${API_BASE_URL}/api/valorize-cv`, {
             method: 'POST',
@@ -520,21 +550,17 @@ async function valorizeCvContent() {
 }
 
 
-// --- Chatroom Page Functions (anciennement du Modal Chatbot) ---
+// --- Chatroom Page Functions ---
 
-/**
- * Fetches all chat conversations for the chatroom list.
- */
 async function fetchChatConversations() {
     try {
         showGlobalStatus('Chargement des conversations...', 'info');
         const response = await fetch(`${API_BASE_URL}/api/conversations`);
         const conversations = await response.json();
-        setConversations(conversations); // Utilise la fonction du module pagination.js
+        setConversations(conversations);
         showGlobalStatus('Conversations chargées.', 'success');
     } catch (error) {
         console.error('Error fetching chat conversations:', error);
-        // Utilise la liste de conversations directement pour afficher l'erreur
         document.getElementById('conversation-list').innerHTML = '<p class="placeholder-text error-message">Erreur de chargement des conversations.</p>';
         showGlobalStatus('Erreur de chargement des conversations.', 'error');
     }
@@ -543,8 +569,8 @@ async function fetchChatConversations() {
 async function startNewConversation() {
     showGlobalStatus('Démarrage d\'une nouvelle conversation...', 'info');
     startNewConversationBtn.disabled = true;
-    generateChatCvSummaryBtn.style.display = 'none'; // Hide summary button for new conv
-    modalCvSummarySection.style.display = 'none'; // Hide summary section
+    generateChatCvSummaryBtn.style.display = 'none';
+    modalCvSummarySection.style.display = 'none';
     modalCvSummaryOutput.innerHTML = '<p class="placeholder-text">Un résumé pertinent pour votre CV à partir de la conversation apparaîtra ici.</p>';
     copyModalCvSummaryBtn.disabled = true;
 
@@ -555,8 +581,8 @@ async function startNewConversation() {
         });
         const data = await response.json();
         if (response.ok) {
-            await fetchChatConversations(); // Reload all conversations to include the new one (will reset to page 1)
-            loadConversationInChatroom(data.id); // Load the new conversation
+            await fetchChatConversations();
+            loadConversationInChatroom(data.id);
             showGlobalStatus('Nouvelle conversation démarrée !', 'success');
         } else {
             await showModal('Erreur', `Impossible de démarrer une nouvelle conversation: ${data.error}`, 'alert');
@@ -573,7 +599,6 @@ async function startNewConversation() {
 
 async function loadConversationInChatroom(id) {
     showGlobalStatus('Chargement de la conversation...', 'info');
-    // Reset state for new conversation loading
     generateChatCvSummaryBtn.style.display = 'none';
     generateChatCvSummaryBtn.disabled = true;
     modalCvSummarySection.style.display = 'none';
@@ -587,15 +612,14 @@ async function loadConversationInChatroom(id) {
         }
         const conversation = await response.json();
         currentConversationId = conversation.id;
-        currentConversationMessages = conversation.messages; // Full message history including system message
+        currentConversationMessages = conversation.messages;
 
         displayChatMessages();
         chatInput.disabled = false;
         sendChatBtn.disabled = false;
         currentConversationIdSpan.textContent = `(ID: ${currentConversationId.substring(0, 8)}...)`;
 
-        // Update active conversation in the pagination module as well
-        setActiveConversationId(id); // Nouvelle ligne pour synchroniser avec pagination.js
+        setActiveConversationId(id);
 
         showGlobalStatus('Conversation chargée.', 'success');
 
@@ -612,7 +636,6 @@ async function loadConversationInChatroom(id) {
 
 function displayChatMessages() {
     chatWindow.innerHTML = '';
-    // Filter system messages for user display
     const userVisibleMessages = currentConversationMessages.filter(msg => msg.role !== 'system');
 
     if (userVisibleMessages.length === 0) {
@@ -623,7 +646,6 @@ function displayChatMessages() {
     userVisibleMessages.forEach(msg => {
         const div = document.createElement('div');
         div.className = `chat-message ${msg.role}`;
-        // Assurez-vous que msg.utmi et msg.estimated_cost_usd existent pour ne pas afficher 'undefined'
         const utmiInfo = msg.utmi !== undefined && msg.utmi !== null ? `UTMi: ${msg.utmi.toFixed(2)} EUR` : '';
         const costInfo = msg.estimated_cost_usd !== undefined && msg.estimated_cost_usd !== null ? `Coût: ${msg.estimated_cost_usd.toFixed(6)} USD` : '';
         const metaInfo = (utmiInfo || costInfo) ? `<br><small>${utmiInfo} ${costInfo}</small>` : '';
@@ -631,7 +653,7 @@ function displayChatMessages() {
         div.innerHTML = `<strong>${msg.role === 'user' ? 'Vous' : 'IA'}:</strong> ${msg.content}${metaInfo}`;
         chatWindow.appendChild(div);
     });
-    chatWindow.scrollTop = chatWindow.scrollHeight; // Scroll to bottom
+    chatWindow.scrollTop = chatWindow.scrollHeight;
 }
 
 async function sendMessage() {
@@ -640,15 +662,14 @@ async function sendMessage() {
         return;
     }
 
-    // Add user message to UI immediately
     currentConversationMessages.push({
         role: 'user',
         content: message,
         timestamp: new Date().toISOString()
     });
     displayChatMessages();
-    chatInput.value = ''; // Clear input
-    chatInput.disabled = true; // Disable input while AI responds
+    chatInput.value = '';
+    chatInput.disabled = true;
     sendChatBtn.disabled = true;
     showGlobalStatus('Envoi du message...', 'info');
 
@@ -662,14 +683,12 @@ async function sendMessage() {
         const data = await response.json();
         if (response.ok) {
             showGlobalStatus('Réponse de l\'IA reçue !', 'success');
-            // Reload conversation to get full updated state (including UTMi/cost from server)
             await loadConversationInChatroom(currentConversationId);
-            await fetchChatConversations(); // Update list (especially UTMi totals)
-            await fetchDashboardInsights(); // Update dashboard
+            await fetchChatConversations();
+            await fetchDashboardInsights();
         } else {
             await showModal('Erreur', `Erreur lors de l\'envoi du message: ${data.error}`, 'alert');
             showGlobalStatus(`Erreur: ${data.error}`, 'error');
-            // Remove the last user message if AI failed to respond
             currentConversationMessages.pop();
             displayChatMessages();
         }
@@ -677,7 +696,7 @@ async function sendMessage() {
         console.error('Erreur lors de l\'envoi du message:', error);
         await showModal('Erreur', `Erreur de connexion lors de l\'envoi du message.`, 'alert');
         showGlobalStatus(`Erreur de connexion: ${error.message}`, 'error');
-        currentConversationMessages.pop(); // Remove the message if sending failed
+        currentConversationMessages.pop();
         displayChatMessages();
     } finally {
         chatInput.disabled = false;
@@ -686,7 +705,6 @@ async function sendMessage() {
 }
 
 async function deleteChatConversation(id, title) {
-    // Utilise le modal de confirmation personnalisé
     const confirmDelete = await showModal('Confirmer la suppression', `Êtes-vous sûr de vouloir supprimer la conversation "${title}" ? Cette action est irréversible.`, 'confirm');
     if (!confirmDelete) {
         return;
@@ -699,7 +717,7 @@ async function deleteChatConversation(id, title) {
         });
         if (response.ok) {
             showGlobalStatus('Conversation supprimée avec succès !', 'success');
-            if (currentConversationId === id) { // If the active conversation is deleted
+            if (currentConversationId === id) {
                 currentConversationId = null;
                 currentConversationMessages = [];
                 currentConversationIdSpan.textContent = '(Sélectionnez une conversation)';
@@ -710,11 +728,10 @@ async function deleteChatConversation(id, title) {
                 modalCvSummaryOutput.innerHTML = '<p class="placeholder-text">Un résumé pertinent pour votre CV à partir de la conversation apparaîtra ici.</p>';
                 copyModalCvSummaryBtn.disabled = true;
             }
-            await fetchChatConversations(); // Reload chat conversations (updates pagination)
-            await fetchDashboardInsights(); // Reload dashboard insights
-            displayChatMessages(); // Clear chat window if active conversation deleted
+            await fetchChatConversations();
+            await fetchDashboardInsights();
+            displayChatMessages();
 
-            // Après suppression, si la conversation active était celle supprimée, désactiver aussi dans pagination.js
             if (currentConversationId === null) {
                 setActiveConversationId(null);
             }
@@ -763,10 +780,6 @@ async function generateCvSummaryFromChat(conversationId) {
     }
 }
 
-/**
- * Copies the provided text content to the clipboard.
- * @param {string} text - The text content to copy.
- */
 function copyToClipboard(text) {
     if (!text || text.trim() === '') {
         showGlobalStatus('Rien à copier : le contenu est vide.', 'error');

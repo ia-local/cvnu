@@ -10,15 +10,15 @@ const { v4: uuidv4 } = require('uuid');
 require('dotenv').config();
 
 // Importation des modules de calcul UTMi et des scores de qualité des modèles
-const { calculateUtmi, calculateDashboardInsights, COEFFICIENTS } = require('./server_modules/utms_calculator');
-const { MODEL_QUALITY_SCORES } = require('./server_modules/model_quality_config');
+const { calculateUtmi, calculateDashboardInsights, COEFFICIENTS } = require('../server_modules/utms_calculator');
+const { MODEL_QUALITY_SCORES } = require('../server_modules/model_quality_config');
 
 // Modules spécifiques au générateur de CV
-const { analyzeRawConversation } = require('./analyse_soup');
-const { analyzeConversationCognitively } = require('./llama_cognitive_analysis'); // MOCK ou votre implémentation
-const { generateCurriculumVitae } = require('./generateCV'); // MOCK ou votre implémentation
-const { valorizeSkillsWithGroq } = require('./groq_cv_analyse');
-const { generateProfessionalSummary } = require('./server_modules/cv_professional_analyzer');
+const { analyzeRawConversation } = require('../src/analyse_soup');
+const { analyzeConversationCognitively } = require('../src/llama_cognitive_analysis'); // MOCK ou votre implémentation
+const { generateCurriculumVitae } = require('../src/generateCV'); // MOCK ou votre implémentation
+const { valorizeSkillsWithGroq } = require('../src/groq_cv_analyse');
+const { generateProfessionalSummary } = require('../server_modules/cv_professional_analyzer');
 
 
 // --- Server and AI Configuration ---

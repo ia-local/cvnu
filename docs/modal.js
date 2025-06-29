@@ -1,98 +1,97 @@
 // public/modal.js
 
-/**
- * Composant Modal Générique.
- * Gère l'affichage des boîtes de dialogue personnalisées (alertes et confirmations).
- */
-
-// Références aux éléments du DOM du modal générique
 const genericAppModal = document.getElementById('genericAppModal');
 const genericModalTitle = document.getElementById('genericModalTitle');
 const genericModalBody = document.getElementById('genericModalBody');
-const genericModalConfirmBtn = document.getElementById('genericModalConfirmBtn');
-const genericModalCancelBtn = document.getElementById('genericModalCancelBtn');
-const genericModalOkBtn = document.getElementById('genericModalOkBtn');
-const genericCloseModalBtn = document.getElementById('genericCloseModalBtn');
+const genericModalFooter = document.getElementById('genericModalFooter');
 
-// Map pour stocker les gestionnaires d'événements afin de pouvoir les retirer correctement
-const eventHandlers = new Map();
+// Références aux boutons (déclarées globalement, mais initialisées lors de DOMContentLoaded dans cv.js)
+let genericCloseModalBtn, genericModalConfirmBtn, genericModalCancelBtn, genericModalOkBtn;
+
+let resolveModalPromise; // Function to resolve the promise when modal is closed
+
+// Initialisation des éléments DOM de la modale une fois le DOM chargé
+document.addEventListener('DOMContentLoaded', () => {
+    genericCloseModalBtn = document.getElementById('genericCloseModalBtn');
+    genericModalConfirmBtn = document.getElementById('genericModalConfirmBtn');
+    genericModalCancelBtn = document.getElementById('genericModalCancelBtn');
+    genericModalOkBtn = document.getElementById('genericModalOkBtn');
+});
+
 
 /**
- * Affiche une boîte de dialogue modale personnalisée.
- * @param {string} title - Le titre du modal.
- * @param {string} bodyHtml - Le contenu HTML du corps du modal.
- * @param {'alert'|'confirm'} type - Le type de modal. 'alert' affiche un bouton OK, 'confirm' affiche Confirmer/Annuler.
- * @returns {Promise<boolean|undefined>} Résout à `true` pour confirmer, `false` pour annuler (type confirm), ou `undefined` pour alerte.
+ * Shows a generic modal with customizable content and buttons.
+ * @param {string} title - The title of the modal.
+ * @param {string} bodyHtml - The HTML content for the modal body.
+ * @param {'alert'|'confirm'|'info'} type - Type of modal to determine button visibility.
+ * @param {string} [maxWidth='500px'] - Optional: maximum width for the modal content.
+ * @returns {Promise<boolean|undefined>} Resolves to true for 'confirm' if confirmed, false if cancelled. Undefined for 'alert'/'info'.
  */
-export function showModal(title, bodyHtml, type = 'alert') {
-    return new Promise(resolve => {
-        // S'assurer que le modal existe avant de tenter d'interagir avec
-        if (!genericAppModal) {
-            console.error("Erreur: Le modal générique '#genericAppModal' n'a pas été trouvé dans le DOM.");
-            // Fallback pour les environnements sans le HTML du modal
-            if (type === 'confirm') {
-                resolve(confirm(bodyHtml));
-            } else {
-                alert(bodyHtml);
-                resolve(undefined);
-            }
-            return;
-        }
+export function showModal(title, bodyHtml, type = 'alert', maxWidth = '500px') {
+    return new Promise((resolve) => {
+        resolveModalPromise = resolve; // Store resolve function for later use
 
-        // Nettoyer les anciens écouteurs pour éviter les fuites de mémoire et les déclenchements multiples
-        if (eventHandlers.has('confirm')) genericModalConfirmBtn.removeEventListener('click', eventHandlers.get('confirm'));
-        if (eventHandlers.has('cancel')) genericModalCancelBtn.removeEventListener('click', eventHandlers.get('cancel'));
-        if (eventHandlers.has('ok')) genericModalOkBtn.removeEventListener('click', eventHandlers.get('ok'));
-        if (eventHandlers.has('close')) genericCloseModalBtn.removeEventListener('click', eventHandlers.get('close'));
-        if (eventHandlers.has('outsideClick')) genericAppModal.removeEventListener('click', eventHandlers.get('outsideClick'));
-
-        genericModalTitle.textContent = title;
+        genericModalTitle.innerHTML = title;
         genericModalBody.innerHTML = bodyHtml;
-
-        // Cacher tous les boutons par défaut
-        genericModalConfirmBtn.style.display = 'none';
-        genericModalCancelBtn.style.display = 'none';
-        genericModalOkBtn.style.display = 'none';
-
-        // Définir les gestionnaires d'événements
-        const confirmHandler = () => { genericAppModal.classList.remove('active'); resolve(true); };
-        const cancelHandler = () => { genericAppModal.classList.remove('active'); resolve(false); };
-        const okHandler = () => { genericAppModal.classList.remove('active'); resolve(undefined); };
-        const closeHandler = () => {
-            if (type === 'confirm') {
-                cancelHandler(); // Le bouton de fermeture agit comme Annuler pour les confirmations
-            } else {
-                okHandler(); // Le bouton de fermeture agit comme OK pour les alertes
-            }
-        };
-        const clickOutsideHandler = (event) => {
-            if (event.target === genericAppModal) {
-                closeHandler(); // Un clic à l'extérieur ferme le modal
-            }
-        };
-
-        // Stocker les gestionnaires pour le nettoyage futur
-        eventHandlers.set('confirm', confirmHandler);
-        eventHandlers.set('cancel', cancelHandler);
-        eventHandlers.set('ok', okHandler);
-        eventHandlers.set('close', closeHandler);
-        eventHandlers.set('outsideClick', clickOutsideHandler);
-
-        // Attacher les nouveaux écouteurs basés sur le type de modal
-        if (type === 'confirm') {
-            genericModalConfirmBtn.style.display = 'inline-flex';
-            genericModalCancelBtn.style.display = 'inline-flex';
-            genericModalConfirmBtn.addEventListener('click', confirmHandler);
-            genericModalCancelBtn.addEventListener('click', cancelHandler);
-        } else { // 'alert'
-            genericModalOkBtn.style.display = 'inline-flex';
-            genericModalOkBtn.addEventListener('click', okHandler);
+        if (genericAppModal && genericAppModal.querySelector('.modal-content')) {
+            genericAppModal.querySelector('.modal-content').style.maxWidth = maxWidth; // Set max-width
         }
 
-        genericCloseModalBtn.addEventListener('click', closeHandler);
-        genericAppModal.addEventListener('click', clickOutsideHandler);
 
-        // Afficher le modal
-        genericAppModal.classList.add('active');
+        // Reset button visibility
+        if (genericModalConfirmBtn) genericModalConfirmBtn.style.display = 'none';
+        if (genericModalCancelBtn) genericModalCancelBtn.style.display = 'none';
+        if (genericModalOkBtn) genericModalOkBtn.style.display = 'none';
+
+        // Remove existing event listeners to prevent multiple bindings
+        // IMPORTANT: Always check if the element exists before trying to add/remove listeners
+        const cleanListeners = (btn, handler) => {
+            if (btn) {
+                btn.removeEventListener('click', handler);
+            }
+        };
+
+        // Remove all potential handlers before adding new ones
+        cleanListeners(genericCloseModalBtn, () => hideModal(type === 'confirm' ? false : undefined));
+        cleanListeners(genericModalOkBtn, () => hideModal(undefined));
+        cleanListeners(genericModalConfirmBtn, () => hideModal(true));
+        cleanListeners(genericModalCancelBtn, () => hideModal(false));
+
+        // Configure and add new event listeners based on type
+        if (type === 'confirm') {
+            if (genericModalConfirmBtn) {
+                genericModalConfirmBtn.style.display = 'inline-block';
+                genericModalConfirmBtn.addEventListener('click', () => hideModal(true));
+            }
+            if (genericModalCancelBtn) {
+                genericModalCancelBtn.style.display = 'inline-block';
+                genericModalCancelBtn.addEventListener('click', () => hideModal(false));
+            }
+        } else { // 'alert' or 'info'
+            if (genericModalOkBtn) {
+                genericModalOkBtn.style.display = 'inline-block';
+                genericModalOkBtn.addEventListener('click', () => hideModal(undefined));
+            }
+        }
+
+        // Add close button listener
+        if (genericCloseModalBtn) {
+            genericCloseModalBtn.addEventListener('click', () => hideModal(type === 'confirm' ? false : undefined));
+        }
+
+        // Show the modal
+        if (genericAppModal) genericAppModal.classList.add('active');
     });
+}
+
+/**
+ * Hides the generic modal and resolves the promise.
+ * @param {boolean|undefined} result - The value to resolve the modal promise with.
+ */
+function hideModal(result) {
+    if (genericAppModal) genericAppModal.classList.remove('active');
+    if (resolveModalPromise) {
+        resolveModalPromise(result);
+        resolveModalPromise = null; // Clear the stored resolve function
+    }
 }

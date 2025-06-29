@@ -1,11 +1,10 @@
-// serveur.js - Version unifiée et complète avec SCSS et pagination corrigée
+// serveur.js - Version unifiée et complète
 const express = require('express');
 const Groq = require('groq-sdk');
 const cors = require('cors');
 const path = require('path');
 const fs = require('fs'); // Utilisation de fs standard, pas fs.promises ici pour compatibilité avec les fonctions existantes
 const { v4: uuidv4 } = require('uuid');
-const sassMiddleware = require('node-sass-middleware'); // NOUVEAU: Pour la compilation SCSS
 
 // Load environment variables from .env file
 require('dotenv').config();
@@ -14,8 +13,15 @@ require('dotenv').config();
 const { calculateUtmi, calculateDashboardInsights, COEFFICIENTS } = require('./server_modules/utms_calculator');
 const { MODEL_QUALITY_SCORES } = require('./server_modules/model_quality_config'); // Assurez-vous que ce fichier existe
 
-// Modules spécifiques au générateur de CV
-const { generateStructuredCvData, renderCvHtml } = require('./src/cv_processing'); // Nouveau module centralisé
+// NOUVEAU/RÉINTÉGRATION: Modules spécifiques au générateur de CV (section "Analyser le Texte")
+const { analyzeRawConversation } = require('./src/analyse_soup'); // Assurez-vous que ce fichier existe
+// NOTE: llama_cognitive_analysis.js et generateCV.js n'ont pas été fournis dans le contexte récent.
+// Je les inclurai comme "mocks" ou des rappels pour leur besoin.
+const { analyzeConversationCognitively } = require('./src/llama_cognitive_analysis'); // MOCK ou votre implémentation
+const { generateCurriculumVitae } = require('./src/generateCV'); // MOCK ou votre implémentation
+const { valorizeSkillsWithGroq } = require('./src/groq_cv_analyse'); // Le fichier que vous aviez
+
+// NOUVEAU: Importation du module d'analyse CV pour le chat
 const { generateProfessionalSummary } = require('./server_modules/cv_professional_analyzer');
 
 
@@ -35,8 +41,7 @@ const config = {
     chatbotContext: "Votre objectif est d'aider l'utilisateur à structurer son parcours professionnel. Posez des questions ciblées sur ses expériences, projets, compétences techniques (langages, outils, plateformes), défis rencontrés et solutions apportées, réalisations quantifiables, responsabilités et soft skills. Guidez-le pour qu'il exprime clairement ses aptitudes professionnelles.",
   },
   logFilePath: path.join(__dirname, 'data','logs.json'),
-  conversationsFilePath: path.join(__dirname, 'conversations.json'),
-  lastStructuredCvFilePath: path.join(__dirname, 'data', 'last_structured_cv.json') // Nouveau chemin pour le CV JSON
+  conversationsFilePath: path.join(__dirname, 'conversations.json')
 };
 
 // Validate Groq API Key
@@ -49,6 +54,7 @@ const groq = new Groq({ apiKey: config.groq.apiKey });
 const app = express();
 
 // --- Global Log Management ---
+// Utilisation de fs synchrone pour éviter les conflits d'écriture si le serveur est redémarré rapidement.
 const writeLog = (logEntry) => {
   const timestamp = new Date().toISOString();
   const log = { timestamp, ...logEntry };
@@ -114,18 +120,7 @@ loadConversations();
 app.use(cors());
 app.use(express.json()); // For parsing JSON request bodies
 
-// NOUVEAU: SCSS Middleware
-app.use(
-    sassMiddleware({
-        src: path.join(__dirname, 'docs'), // Répertoire source de vos fichiers SCSS
-        dest: path.join(__dirname, 'docs'), // Répertoire de destination pour les fichiers CSS compilés
-        debug: true, // Affiche des messages de debug dans la console
-        outputStyle: 'compressed', // Style de sortie (expanded, compressed, etc.)
-        force: true // Force la recompilation à chaque requête (utile en dev)
-    })
-);
-
-// Serve static files from the 'docs' directory
+// Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'docs')));
 console.log(`➡️ Service des fichiers statiques depuis : ${path.join(__dirname, 'docs')}`);
 
@@ -199,12 +194,8 @@ app.post('/api/generate', async (req, res) => {
 
   } catch (error) {
     console.error('Erreur lors de l\'appel à l\'API Groq (ponctuel):', error);
-    if (error.response && error.response.status === 429) {
-        res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
-    } else {
-        writeLog({ type: 'ERROR', message: 'Erreur API Groq (ponctuel)', details: error.message, prompt: userPrompt, model: modelToUse });
-        res.status(500).json({ error: 'Une erreur interne est survenue lors de la communication avec l\'IA.' });
-    }
+    writeLog({ type: 'ERROR', message: 'Erreur API Groq (ponctuel)', details: error.message, prompt: userPrompt, model: modelToUse });
+    res.status(500).json({ error: 'Une erreur interne est survenue lors de la communication avec l\'IA.' });
   }
 });
 
@@ -233,33 +224,12 @@ app.get('/api/dashboard-insights', (req, res) => {
 
 /**
  * GET /api/conversations
- * Retrieves all stored conversation histories with pagination.
- * @query {number} page - Current page number (default 1).
- * @query {number} limit - Number of conversations per page (default 5).
+ * Retrieves all stored conversation histories.
  */
 app.get('/api/conversations', (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 5;
-
-  const startIndex = (page - 1) * limit;
-  const endIndex = page * limit;
-
-  // IMPORTANT: conversations should be loaded from disk once, or a proper DB
-  // For now, it's an in-memory array.
-  const allConversationsSorted = conversations.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-  const paginatedConversations = allConversationsSorted.slice(startIndex, endIndex);
-  const totalCount = allConversationsSorted.length;
-  const totalPages = Math.ceil(totalCount / limit);
-
-  writeLog({ type: 'CONVERSATION_HISTORY', action: 'READ_ALL', page, limit, count: paginatedConversations.length, totalCount });
-
-  res.status(200).json({
-    conversations: paginatedConversations.map(({ id, createdAt, title, utmi_total, estimated_cost_total_usd }) => ({ id, createdAt, title, utmi_total, estimated_cost_total_usd })),
-    totalCount,
-    totalPages,
-    currentPage: page
-  });
+  writeLog({ type: 'CONVERSATION_HISTORY', action: 'READ_ALL', count: conversations.length });
+  // Retourne un aperçu des conversations (pas tous les messages pour alléger la charge)
+  res.status(200).json(conversations.map(({ id, createdAt, title, utmi_total, estimated_cost_total_usd }) => ({ id, createdAt, title, utmi_total, estimated_cost_total_usd })));
 });
 
 /**
@@ -436,18 +406,14 @@ app.post('/api/conversations/:id/message', async (req, res) => {
 
   } catch (error) {
     console.error(`❌ Erreur lors de l'appel à l'API Groq pour la conversation ${id}:`, error);
-    if (error.response && error.response.status === 429) {
-        res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
-    } else {
-        writeLog({
-            type: 'CONVERSATION_ERROR',
-            action: 'AI_API_ERROR',
-            conversationId: id,
-            errorMessage: error.message,
-            stack: error.stack?.substring(0, 500) + '...' || 'N/A'
-        });
-        res.status(500).json({ error: "Une erreur interne est survenue lors de la communication avec l'IA." });
-    }
+    writeLog({
+        type: 'CONVERSATION_ERROR',
+        action: 'AI_API_ERROR',
+        conversationId: id,
+        errorMessage: error.message,
+        stack: error.stack?.substring(0, 500) + '...' || 'N/A'
+    });
+    res.status(500).json({ error: "Une erreur interne est survenue lors de la communication avec l'IA." });
   }
 });
 
@@ -471,78 +437,85 @@ app.delete('/api/conversations/:id', (req, res) => {
 });
 
 
-// --- ROUTES POUR LE GÉNÉRATEUR DE CV ---
+// --- NOUVELLES ROUTES POUR LE GÉNÉRATEUR DE CV À PARTIR DE TEXTE (Section 1) ---
 
 /**
- * POST /api/cv/parse-and-structure
- * Reçoit le texte brut du CV, utilise l'IA pour le structurer en JSON.
- * @body {string} cvContent - Le texte brut du CV.
- * @returns {object} - L'objet JSON structuré du CV.
+ * @route POST /api/record-and-analyze
+ * @description Reçoit la conversation Markdown brute, l'enregistre, puis la traite avec Llama pour générer et mettre à jour logs.json.
+ * @body {string} conversationMarkdown - Le contenu de la conversation au format Markdown.
+ * @returns {object} - Statut de l'opération, chemins des fichiers traités.
  */
-app.post('/api/cv/parse-and-structure', async (req, res) => {
-    const { cvContent } = req.body;
-    if (!cvContent) {
-        return res.status(400).json({ error: 'Le contenu du CV est manquant.' });
+app.post('/api/record-and-analyze', async (req, res) => {
+    const { conversationMarkdown } = req.body;
+
+    if (!conversationMarkdown) {
+        return res.status(400).json({ message: 'Contenu Markdown de la conversation manquant.' });
     }
+
     try {
-        // Appelle la fonction de génération de données structurées du nouveau module
-        const structuredData = await generateStructuredCvData(cvContent);
-        // Sauvegarder la dernière structure de CV générée pour un accès facile par d'autres routes
-        fs.writeFileSync(config.lastStructuredCvFilePath, JSON.stringify(structuredData, null, 2), 'utf8');
-        writeLog({ type: 'CV_PROCESSING', action: 'PARSE_AND_STRUCTURE', status: 'SUCCESS', data: structuredData.nom || 'N/A' });
-        res.status(200).json(structuredData);
-    } catch (error) {
-        console.error('Erreur lors du parsing et structuration du CV:', error);
-        if (error.response && error.response.status === 429) {
-            res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer de structurer le CV." });
-        } else {
-            writeLog({ type: 'CV_PROCESSING', action: 'PARSE_AND_STRUCTURE', status: 'ERROR', error: error.message });
-            res.status(500).json({ error: 'Échec de l\'analyse et de la structuration du CV.', details: error.message });
+        // 1. Enregistrement initial de la conversation
+        const structuredConversation = analyzeRawConversation(conversationMarkdown); // Prépare les données pour Llama
+
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const markdownFileName = `conversation_pasted_${timestamp}.md`;
+        const markdownFilePath = path.join(__dirname, 'conversations_pasted_raw', markdownFileName); // Nouveau dossier
+
+        // Assurez-vous que le répertoire 'conversations_pasted_raw' existe
+        if (!fs.existsSync(path.join(__dirname, 'conversations_pasted_raw'))) {
+            fs.mkdirSync(path.join(__dirname, 'conversations_pasted_raw'), { recursive: true });
         }
+        fs.writeFileSync(markdownFilePath, conversationMarkdown, 'utf8');
+        console.log(`Conversation brute collée enregistrée dans ${markdownFilePath}`);
+
+        // 2. Analyse cognitive par Llama et enregistrement dans logs.json
+        const cognitiveAnalysisResult = await analyzeConversationCognitively(structuredConversation);
+
+        const logEntry = {
+            id: `pasted_conv_${timestamp}`,
+            date: new Date().toISOString(),
+            rawMarkdownPath: markdownFilePath,
+            analysis: cognitiveAnalysisResult
+        };
+
+        let existingLogs = [];
+        if (fs.existsSync(config.logFilePath)) {
+            const data = fs.readFileSync(config.logFilePath, 'utf8');
+            existingLogs = JSON.parse(data);
+        }
+        existingLogs.push(logEntry);
+        fs.writeFileSync(config.logFilePath, JSON.stringify(existingLogs, null, 2), 'utf8');
+        console.log(`Logs de conversation mis à jour dans ${config.logFilePath}`);
+
+        res.status(200).json({
+            message: 'Conversation enregistrée et analysée cognitivement avec succès.',
+            markdownFile: markdownFileName,
+            logFile: 'logs.json',
+            analysisResult: cognitiveAnalysisResult
+        });
+
+    } catch (error) {
+        console.error('Erreur lors de l\'enregistrement ou de l\'analyse de la conversation collée:', error);
+        res.status(500).json({ message: 'Erreur serveur lors du traitement de la conversation.', error: error.message });
     }
 });
 
 /**
- * POST /api/cv/render-html
- * Reçoit une structure JSON du CV et renvoie le HTML formaté.
- * @body {object} cvData - L'objet JSON structuré du CV.
- * @returns {string} - La chaîne HTML du CV.
+ * @route GET /api/generate-cv
+ * @description Génère un CV HTML/CSS basé sur les logs de conversation.
+ * @returns {string} - Le contenu HTML du CV.
  */
-app.post('/api/cv/render-html', (req, res) => {
-    const { cvData } = req.body;
-    if (!cvData) {
-        return res.status(400).json({ error: 'Les données structurées du CV sont manquantes.' });
-    }
+app.get('/api/generate-cv', async (req, res) => {
     try {
-        // Appelle la fonction de rendu HTML du nouveau module
-        const htmlContent = renderCvHtml(cvData);
-        writeLog({ type: 'CV_PROCESSING', action: 'RENDER_HTML', status: 'SUCCESS', name: cvData.nom || 'N/A' });
+        const logs = JSON.parse(fs.readFileSync(config.logFilePath, 'utf8'));
+
+        // Génère le CV en HTML/CSS à partir des logs analysés
+        const cvHtml = await generateCurriculumVitae(logs);
+
         res.setHeader('Content-Type', 'text/html');
-        res.status(200).send(htmlContent);
+        res.status(200).send(cvHtml);
     } catch (error) {
-        console.error('Erreur lors du rendu HTML du CV:', error);
-        writeLog({ type: 'CV_PROCESSING', action: 'RENDER_HTML', status: 'ERROR', error: error.message });
-        res.status(500).json({ error: 'Échec du rendu HTML du CV.', details: error.message });
-    }
-});
-
-/**
- * GET /api/cv/last-structured-data
- * Retourne la dernière structure JSON de CV enregistrée.
- * Utile pour pré-remplir le formulaire d'édition.
- */
-app.get('/api/cv/last-structured-data', (req, res) => {
-    if (fs.existsSync(config.lastStructuredCvFilePath)) {
-        try {
-            const data = fs.readFileSync(config.lastStructuredCvFilePath, 'utf8');
-            const structuredCv = JSON.parse(data);
-            res.status(200).json(structuredCv);
-        } catch (error) {
-            console.error('Erreur lors de la lecture du dernier CV structuré:', error);
-            res.status(500).json({ error: 'Impossible de lire les dernières données de CV structurées.', details: error.message });
-        }
-    } else {
-        res.status(404).json({ error: 'Aucune donnée de CV structurée trouvée.' });
+        console.error('Erreur lors de la génération du CV HTML:', error);
+        res.status(500).json({ message: 'Erreur serveur lors de la génération du CV.', error: error.message });
     }
 });
 
@@ -560,9 +533,8 @@ app.post('/api/valorize-cv', async (req, res) => {
     }
 
     try {
-        // Appelle la fonction de valorisation avec Groq (du module groq_cv_analyse)
-        // Note: Assurez-vous que valorizeSkillsWithGroq est bien configuré pour utiliser la clé API Groq
-        const valorizedResult = await require('./src/groq_cv_analyse').valorizeSkillsWithGroq(cvContent);
+        // Appelle la fonction de valorisation avec Groq
+        const valorizedResult = await valorizeSkillsWithGroq(cvContent);
 
         res.status(200).json({
             message: 'Compétences du CV valorisées avec succès.',
@@ -570,11 +542,7 @@ app.post('/api/valorize-cv', async (req, res) => {
         });
     } catch (error) {
         console.error('Erreur lors de la valorisation du CV avec Groq (route /api/valorize-cv):', error);
-        if (error.response && error.response.status === 429) {
-            res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
-        } else {
-            res.status(500).json({ message: 'Erreur serveur lors de la valorisation du CV.', error: error.message });
-        }
+        res.status(500).json({ message: 'Erreur serveur lors de la valorisation du CV.', error: error.message });
     }
 });
 
@@ -605,18 +573,14 @@ app.get('/api/conversations/:id/cv-professional-summary', async (req, res) => {
 
     } catch (error) {
         console.error(`Erreur lors de la génération du résumé professionnel pour la conversation ${id}:`, error);
-        if (error.response && error.response.status === 429) {
-            res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
-        } else {
-            writeLog({
-                type: 'CV_GENERATION_FROM_CHAT',
-                action: 'GENERATE_SUMMARY',
-                status: 'ERROR',
-                conversationId: id,
-                error: error.message
-            });
-            res.status(500).json({ error: 'Échec de la génération du résumé professionnel.', details: error.message });
-        }
+        writeLog({
+            type: 'CV_GENERATION_FROM_CHAT',
+            action: 'GENERATE_SUMMARY',
+            status: 'ERROR',
+            conversationId: id,
+            error: error.message
+        });
+        res.status(500).json({ error: 'Échec de la génération du résumé professionnel.', details: error.message });
     }
 });
 
@@ -636,16 +600,14 @@ app.listen(config.port, () => {
   console.log(`  --- Chatbot Conversationnel ---`);
   console.log(`    POST /api/conversations/new`);
   console.log(`    POST /api/conversations/:id/message`);
-  console.log(`    GET /api/conversations (Avec pagination)`);
+  console.log(`    GET /api/conversations`);
   console.log(`    GET /api/conversations/:id`);
   console.log(`    DELETE /api/conversations/:id`);
   console.log(`    GET /api/conversations/:id/cv-professional-summary (Résumé CV depuis chat)`);
   console.log(`  --- Générateur de CV depuis Texte ---`);
-  console.log(`    POST /api/cv/parse-and-structure`);
-  console.log(`    POST /api/cv/render-html`);
-  console.log(`    GET /api/cv/last-structured-data`);
+  console.log(`    POST /api/record-and-analyze`);
+  console.log(`    GET /api/generate-cv`);
   console.log(`    POST /api/valorize-cv`);
   console.log(`Logs enregistrés dans : ${config.logFilePath}`);
   console.log(`Historique des conversations enregistré dans : ${config.conversationsFilePath}`);
-  console.log(`Dernier CV structuré enregistré dans : ${config.lastStructuredCvFilePath}`);
 });

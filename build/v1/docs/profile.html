@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WALLET PAI : Dashboard - Revenu Passif avec l'IA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* FIX: Application universelle de box-sizing: border-box; */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 1.5rem;
+            line-height: 1.6;
+        }
+        .main-container {
+            max-width: 100%;
+            width: 1000px;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Important pour contenir les éléments flottants ou débordants */
+            display: flex;
+            flex-direction: column; /* Default for mobile */
+            min-height: 80vh;
+        }
+        aside.sidebar {
+            background-color: #1a202c;
+            color: #ffffff;
+            padding: 1.5rem;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            border-radius: 1.5rem 1.5rem 0 0; /* Rounded top for mobile */
+        }
+        main.content-area {
+            flex-grow: 1;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+        nav.sidebar-nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        nav.sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+        nav.sidebar-nav a {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+        }
+        nav.sidebar-nav a:hover,
+        nav.sidebar-nav a.active {
+            background-color: #2d3748;
+            color: #4299e1;
+        }
+        section.content-section {
+            display: none; /* Hidden by default */
+        }
+        section.content-section.active {
+            display: block; /* Shown when active */
+        }
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #2d3748;
+        }
+        h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+        h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            color: #4a5568;
+        }
+        p, ul, ol {
+            margin-bottom: 1rem;
+            color: #4a5568;
+        }
+        ul, ol {
+            padding-left: 1.5rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        em {
+            font-style: italic;
+        }
+        strong {
+            font-weight: 600;
+        }
+        .card {
+            background-color: #f7fafc;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+            border: 1px solid #edf2f7;
+        }
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 0.5em;
+        }
+        /* Adjusted for responsive pre tags */
+        pre.code-schema {
+            overflow-x: auto; /* Allows horizontal scrolling for wide content */
+            padding: 1rem;
+            background-color: #e2e8f0;
+            border-radius: 0.5rem;
+            white-space: pre-wrap; /* Allows text to wrap within the pre tag */
+            word-wrap: break-word; /* Breaks long words to prevent overflow */
+            max-width: 100%; /* Ensures it doesn't exceed parent width */
+        }
+        /* Dashboard specific styles */
+        .metric-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 1rem;
+            background-color: #e0f2fe; /* Light blue background */
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            min-height: 120px;
+        }
+        .metric-value {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700;   /* font-bold */
+            color: #1d4ed8;     /* text-blue-700 */
+        }
+        .metric-label {
+            font-size: 0.875rem; /* text-sm */
+            color: #4b5563;      /* text-gray-700 */
+            margin-top: 0.5rem;
+        }
+        .activity-item {
+            display: flex;
+            flex-direction: column; /* Changed to column for better mobile stacking */
+            align-items: flex-start; /* Align text to the left */
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        .activity-name {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.25rem; /* Space between name and description */
+        }
+        .activity-revenue {
+            font-weight: 700;
+            color: #10b981; /* green-500 */
+            margin-top: 0.5rem; /* Space from details to revenue */
+            align-self: flex-end; /* Push to the right on larger screens, but stack on smaller */
+        }
+        @media (min-width: 640px) { /* sm breakpoint */
+            .activity-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center; /* Align items back to center for wider screens */
+            }
+            .activity-revenue {
+                margin-top: 0;
+            }
+        }
+
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .main-container {
+                flex-direction: row;
+            }
+            aside.sidebar {
+                border-radius: 1.5rem 0 0 1.5rem; /* Rounded left for desktop */
+                min-height: 80vh; /* Match main container height */
+            }
+            main.content-area {
+                border-radius: 0 1.5rem 1.5rem 0;
+            }
+        }
+        @media (max-width: 767px) {
+            body {
+                padding: 0.5rem; /* Reduce padding even more on very small screens */
+            }
+            aside.sidebar {
+                padding-bottom: 1rem;
+            }
+            nav.sidebar-nav ul {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+            }
+            nav.sidebar-nav li {
+                flex: 1 1 auto; /* Allow items to wrap */
+                margin: 0.25rem;
+            }
+            nav.sidebar-nav a {
+                justify-content: center;
+                padding: 0.5rem 0.75rem;
+            }
+            h1 {
+                font-size: 1.5rem; /* Adjust heading size for smaller screens */
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+            h3 {
+                font-size: 1.1rem;
+            }
+            main.content-area {
+                padding: 1rem; /* Reduce main content padding on small screens */
+            }
+            .card, .metric-card {
+                padding: 1rem; /* Reduce card padding */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <aside class="sidebar" role="navigation" aria-label="Menu de navigation du projet WALLET PAI">
+            <h1 class="text-2xl font-bold mb-8 text-center">
+                Stratégie<br><span class="text-blue-400 text-base">Revenu Passif IA</span>
+            </h1>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#accueil" class="active" data-section="accueil">🏠 Accueil</a></li>
+                    <li><a href="#dashboard" data-section="dashboard">📊 Tableau de Bord</a></li>
+                    <li><a href="#smart-progression-valorisation" data-section="smart-progression-valorisation">🎯 SMART & Contrats</a></li>
+                    <li><a href="#vision-globale" data-section="vision-globale">👁️ Vision Globale</a></li>
+                    <li><a href="#niveau-1-revenu" data-section="niveau-1-revenu">💸 Niveau 1: 500€ - 2K€</a></li>
+                    <li><a href="#niveau-2-croissance" data-section="niveau-2-croissance">📈 Niveau 2: 2K€ - 5K€</a></li>
+                    <li><a href="#niveau-3-scalabilite" data-section="niveau-3-scalabilite">🚀 Niveau 3: 5K€ - 10K€+</a></li>
+                    <li><a href="#optimisation-comptable" data-section="optimisation-comptable">💰 Opt. Comptable & Conseils</a></li>
+                    <li><a href="#profile-management" data-section="profile-management">👤 Gestion de profil</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content-area" role="main">
+            <section id="accueil" class="content-section active" aria-labelledby="accueil-heading">
+                <h2 id="accueil-heading" class="text-2xl font-bold text-center mb-6">🏠 Accueil : Présentation du Projet WALLET PAI</h2>
+
+                <h3>Description du Projet :</h3>
+                <p>Bienvenue dans le guide du **Portefeuille d'Activité Intelligent (PAI)**, votre compagnon stratégique pour générer des revenus passifs significatifs grâce à la puissance de l'Intelligence Artificielle. Le PAI est conçu pour valoriser vos compétences, identifier les opportunités de marché et optimiser vos investissements en temps et en ressources IA, vous guidant vers une autonomie financière.</p>
+                <p>Notre objectif ambitieux est de vous aider à atteindre un revenu passif progressif, de 500€ à plus de 10 000€ par mois, en tirant parti des activités numériques innovantes et des capacités analytiques de l'IA.</p>
+
+                <h3>Structure Générale du Projet WALLET PAI :</h3>
+                <div class="card">
+                    <p class="font-semibold text-gray-700">Composants Clés du WALLET PAI :</p>
+                    <pre class="code-schema">
+    [UTILISATEUR]
+         |
+         V
+    [WALLET PAI - Interface Intelligente]
+         |
+         +--- [1. Accueil] (Vous êtes ici !)
+         |
+         +--- [2. Tableau de Bord]
+         |
+         +--- [3. Progression SMART, Contrats Intelligents & Valorisation]
+         |       (Objectifs, Niveaux de Revenu, Planification)
+         |
+         +--- [4. Vision & Stratégie]
+         |       (Concepts de base, Rôle de l'IA)
+         |
+         +--- [5. Niveaux de Revenu Passif]
+         |       (Activités ciblées pour chaque tranche de revenu)
+         |
+         +--- [6. Comptabilité & Optimisation Fiscale]
+         |       (Suivi Bénéfice Net, ROI IA, Conseils fiscaux)
+         |
+         V
+    [Génération de Revenu Passif & Impact Social]
+                    </pre>
+                    <p class="text-sm text-gray-600 mt-2">Le WALLET PAI est un écosystème intégré qui transforme vos activités numériques en valeur monétisable et durable.</p>
+                    <div class="mt-4" style="height: 250px;">
+                        <canvas id="accueilChart" aria-label="Graphique de répartition des piliers du projet"></canvas>
+                    </div>
+                </div>
+
+                <h3>Objectifs du WALLET PAI :</h3>
+                <ul>
+                    <li><strong class="emoji">💰 Générer un Revenu Passif :</strong> Créer des sources de revenus qui demandent un effort initial, puis une maintenance minimale.</li>
+                    <li><strong class="emoji">🧠 Exploiter l'IA :</strong> Utiliser l'intelligence artificielle pour l'automatisation, l'analyse stratégique et la création de valeur.</li>
+                    <li><strong class="emoji">🎓 Valoriser les Compétences :</strong> Monétiser votre Curriculum Vitae Numérique Universel (CVNU) grâce à des projets concrets.</li>
+                    <li><strong class="emoji">♻️ Promouvoir l'Économie Circulaire :</strong> Contribuer à un modèle économique plus durable et équitable.</li>
+                    <li><strong class="emoji">⚖️ Optimiser Financièrement :</strong> Gérer et prévoir vos finances avec des outils comptables et fiscaux intelligents.</li>
+                </ul>
+                <p class="font-semibold text-lg text-gray-700 mt-6">
+                    Naviguez à travers les sections du menu pour découvrir chaque aspect de cette stratégie et comment le WALLET PAI vous accompagnera à chaque étape de votre parcours.
+                </p>
+            </section>
+
+            <section id="dashboard" class="content-section" aria-labelledby="dashboard-heading">
+                <h2 id="dashboard-heading" class="text-2xl font-bold text-center mb-6">📊 Tableau de Bord PAI : Vue d'Ensemble de Vos Performances</h2>
+
+                <h3>Description de la Section :</h3>
+                <p>Le Tableau de Bord PAI est le centre de contrôle global de votre portefeuille d'activités. Il offre une vue d'ensemble rapide et concise de vos principales métriques financières et opérationnelles, structurées autour des piliers clés du projet WALLET PAI. C'est ici que vous suivez votre progression vers l'autonomie financière et prenez des décisions stratégiques éclairées par les données IA.</p>
+
+                <h4>📈 Performance Globale du PAI :</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="metric-card">
+                        <p class="metric-value" id="total-revenue">0€</p>
+                        <p class="metric-label">Revenu Passif Est. (28j) 💰</p>
+                        <p class="text-xs text-gray-500 mt-1">Cible: 500-5000€ dès 16 ans</p>
+                    </div>
+                    <div class="metric-card">
+                        <p class="metric-value" id="total-net-profit">0€</p>
+                        <p class="metric-label">Bénéfice Net PAI Est. (28j) 💸</p>
+                    </div>
+                    <div class="metric-card">
+                        <p class="metric-value" id="pai-growth-rate">0%</p>
+                        <p class="metric-label">Taux de Croissance PAI 📊</p>
+                    </div>
+                </div>
+
+                <h4>🎓 Engagement & Croissance (CVNU & Niveaux) :</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="metric-card">
+                        <p class="metric-value" id="overall-cvnu-value">0</p>
+                        <p class="metric-label">Niveau CVNU Actuel 🧠</p>
+                    </div>
+                    <div class="metric-card">
+                        <p class="metric-value" id="skills-valorized">0</p>
+                        <p class="metric-label">Compétences CVNU Valor. 💡</p>
+                    </div>
+                    <div class="metric-card">
+                        <p class="metric-value" id="new-skills-acquired">0</p>
+                        <p class="metric-label">Compétences Acquises (Dernier mois) 📚</p>
+                    </div>
+                </div>
+
+                <h4>🧠 Gestion des Ressources IA & Valorisation (Smart Contracts) :</h4>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    <div class="metric-card">
+                        <p class="metric-value" id="ai-units-remaining">0</p>
+                        <p class="metric-label">Unités IA Restantes 🤖</p>
+                    </div>
+                    <div class="metric-card">
+                        <p class="metric-value" id="smartt-contracts-active">0</p>
+                        <p class="metric-label">Contrats Smartt Actifs ✅</p>
+                    </div>
+                     <div class="metric-card">
+                        <p class="metric-value" id="ai-automation-efficiency">0%</p>
+                        <p class="metric-label">Efficacité d'Automatisation IA ⚙️</p>
+                    </div>
+                </div>
+
+                <h4>✨ Optimisation de la Performance (KPI & Température IA) :</h4>
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="metric-card">
+                        <p class="metric-value" id="roi-per-ai-unit">0€/€ AI</p>
+                        <p class="metric-label">ROI Moyen des Unités IA 💰</p>
+                    </div>
+                    <div class="metric-card">
+                        <p class="metric-value" id="average-activity-kpi">0.00</p>
+                        <p class="metric-label">Température Moyenne des Projets 🔥</p>
+                    </div>
+                </div>
+
+                <h4>♻️ Impact Économique & Social (Économie Circulaire) :</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div class="metric-card">
+                        <p class="metric-value" id="sustainability-score">0%</p>
+                        <p class="metric-label">Score de Durabilité IA 🌳</p>
+                    </div>
+                    <div class="metric-card">
+                        <p class="metric-value" id="tva-redistributed">0€</p>
+                        <p class="metric-label">TVA Locale Redistribuée 🤝</p>
+                    </div>
+                </div>
+
+                <h3>Simuler une Nouvelle Interaction IA :</h3>
+                <div class="card">
+                    <form id="interaction-form" class="space-y-4">
+                        <div>
+                            <label for="prompt-input" class="block text-sm font-medium text-gray-700">Votre Prompt IA :</label>
+                            <textarea id="prompt-input" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="Ex: 'Génère un article sur les avantages fiscaux des PME utilisant l'IA.'"></textarea>
+                        </div>
+                        <div>
+                            <label for="ai-response-input" class="block text-sm font-medium text-gray-700">Réponse de l'IA (simulée) :</label>
+                            <textarea id="ai-response-input" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="Ex: 'Voici un article détaillé sur les déductions fiscales pour l'innovation IA...'"></textarea>
+                        </div>
+                        <div>
+                            <label for="user-cvnu-value-input" class="block text-sm font-medium text-gray-700">Votre Valeur CVNU Actuelle (simulée) :</label>
+                            <input type="number" id="user-cvnu-value-input" value="1500" min="1" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                        </div>
+                        <div>
+                            <label for="interaction-type-select" class="block text-sm font-medium text-gray-700">Type d'Interaction :</label>
+                            <select id="interaction-type-select" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2">
+                                <option value="auto_detect">Détection Automatique</option>
+                                <option value="prompt">Prompt (question/instruction)</option>
+                                <option value="ai_response">Réponse IA (analyse, résumé)</option>
+                                <option value="code_generation">Génération de Code</option>
+                                <option value="media_generation">Génération de Média</option>
+                                <option value="structured_content_generation">Génération de Contenu Structuré</option>
+                                <option value="fiscal_economic_impact">Impact Fiscal/Économique</option>
+                                <option value="social_chain_contribution">Contribution SocialChain</option>
+                                <option value="security_juridique_improvement">Amélioration Sécurité Juridique</option>
+                                <option value="circular_economy_contribution">Contribution Économie Circulaire</option>
+                                <option value="other">Autre</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="human-input-strategy" class="block text-sm font-medium text-gray-700">Stratégie d'Apport Humain (pour évaluation CVNU) :</label>
+                            <textarea id="human-input-strategy" rows="2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2" placeholder="Ex: 'J'ai guidé l'IA avec une stratégie SEO avancée.'"></textarea>
+                        </div>
+                        <button type="submit" class="w-full inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Évaluer l'Interaction
+                        </button>
+                    </form>
+                    <div id="interaction-results" class="mt-6 p-4 bg-gray-100 rounded-md">
+                        <p class="font-semibold text-gray-800 mb-2">Résultats de la Dernière Interaction :</p>
+                        <p>UTM Générés : <span id="result-utmi" class="font-bold text-blue-700">N/A</span></p>
+                        <p>Température IA (KPI) : <span id="result-kpi" class="font-bold text-green-700">N/A</span></p>
+                        <p>Valeur CVNU Ajustée : <span id="result-cvnu" class="font-bold text-purple-700">N/A</span></p>
+                        <p>Récompense CITYZEN : <span id="result-cityzen-reward" class="font-bold text-yellow-700">N/A</span> Tokens</p>
+                        <p class="text-sm text-gray-600 mt-2">Justification KPI : <span id="result-kpi-justification">N/A</span></p>
+                        <p class="text-sm text-gray-600">Niveau CVNU Groq : <span id="result-cvnu-level-groq">N/A</span></p>
+                    </div>
+                </div>
+
+                <h3>Mes Activités PAI Détaillées :</h3>
+                <div class="card p-0">
+                    <div id="activity-list" class="divide-y divide-gray-200">
+                        <div class="activity-item">
+                            <div class="flex-1">
+                                <p class="activity-name">Chargement des activités...</p>
+                                <p class="text-gray-500 text-sm">Veuillez patienter.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="smart-progression-valorisation" class="content-section" aria-labelledby="smart-progression-valorisation-heading">
+                <h2 id="smart-progression-valorisation-heading" class="text-2xl font-bold text-center mb-6">🎯 Progression SMART, Contrats Intelligents & Valorisation</h2>
+                <h3>Description de la Section :</h3>
+                <p>Cette section combine l'approche itérative et structurée des objectifs **SMART** (Spécifique, Mesurable, Atteignable, Réaliste, Temporel) avec le rôle fondamental des **Contrats Intelligents (Smart Contracts)** et de la **Valorisation par Unités IA**. Elle démontre comment le WALLET PAI vous aide à définir, suivre et atteindre vos objectifs de revenu passif, tout en assurant une monétisation transparente et automatisée de vos compétences et de votre travail grâce à la blockchain et aux algorithmes de valorisation.</p>
+                <h3>Schéma du Plan de Développement SMART & Smart Contracts :</h3>
+                <div class="card">
+                    <p class="font-semibold text-gray-700">Le Cycle SMART et la Valorisation Décentralisée :</p>
+                    <pre class="code-schema">
+    Définir Objectifs SMART & Activités PAI
+           |
+           V
+    (Phase 1: Fondations) --> Actions & Investissements IA (Unités IA Consommées)
+           |                                                 |
+           V                                                 V
+    (Phase 2: Optimisation) --> Mesure UTMS & KPIs --> (utms_calculalor.js) --+
+           |                                                 |
+           V                                                 V
+    (Phase 3: Scalabilité) --> Données CVNU Utilisateur --------> Contrat Smartt (CITYZEN)
+           |                                                 |
+           V                                                 V
+    Nouvelle Itération SMART <-- Récompenses CITYZEN (NFTs) <----- Distribution Automatisée
+                    </pre>
+                    <p class="text-sm text-gray-600 mt-2">Un processus intégré où chaque progression SMART est directement liée à la valorisation par smart contract, prenant en compte les UTMs, KPIs et votre CVNU.</p>
+                    <div class="mt-4" style="height: 250px;">
+                        <canvas id="progressionSmartChart" aria-label="Graphique du plan de développement SMART"></canvas>
+                    </div>
+                </div>
+
+                <h3>Mécanismes Clés :</h3>
+                <ul>
+                    <li>**Objectifs SMART :** Définition d'objectifs clairs et mesurables pour chaque niveau de revenu passif.</li>
+                    <li>**Contrats Intelligents :** Automatisation de la valorisation et de la distribution des récompenses basées sur l'atteinte des objectifs et la qualité des interactions IA.</li>
+                    <li>**Valorisation par Unités IA :** Chaque interaction et contribution est mesurée en "Unités Temporelles Monétisables" (UTMs) qui reflètent sa valeur réelle et son impact.</li>
+                    <li>**Intégration CVNU :** Votre "Curriculum Vitae Numérique Universel" est dynamiquement mis à jour, reflétant vos compétences valorisées et votre progression.</li>
+                </ul>
+
+                <p class="font-semibold text-lg text-gray-700 mt-6">
+                    Cette section est la pierre angulaire de votre stratégie, transformant vos efforts en gains concrets et mesurables.
+                </p>
+            </section>
+
+            <section id="vision-globale" class="content-section" aria-labelledby="vision-globale-heading">
+                <h2 id="vision-globale-heading" class="text-2xl font-bold text-center mb-6">👁️ Vision Globale : Stratégie & Concepts du WALLET PAI</h2>
+
+                <h3>Description de la Section :</h3>
+                <p>Cette section détaille la philosophie et les principes fondamentaux qui sous-tendent le projet WALLET PAI. Elle explore comment l'intelligence artificielle est intégrée au cœur de chaque stratégie pour maximiser l'efficacité, la rentabilité et la durabilité de vos activités de génération de revenu passif. Comprendre cette vision est essentiel pour exploiter pleinement le potentiel du PAI.</p>
+
+                <h4>Les 4 Piliers Fondamentaux du WALLET PAI :</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="card">
+                        <h3 class="flex items-center text-blue-700 mb-2">
+                            <span class="emoji">🛠️</span> Valorisation & Monétisation
+                        </h3>
+                        <p>Le PAI transforme vos compétences et interactions en valeur monétaire et non-monétaire (UTMs, CITYZENs). Chaque activité est mesurée pour son impact et sa contribution au réseau.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-green-700 mb-2">
+                            <span class="emoji">🧠</span> Intelligence Artificielle au Cœur
+                        </h3>
+                        <p>L'IA est utilisée pour l'analyse de marché, l'automatisation des tâches, la génération de contenu, la personnalisation des stratégies et l'optimisation continue de votre portefeuille.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-purple-700 mb-2">
+                            <span class="emoji">🌐</span> Économie Circulaire & Blockchain
+                        </h3>
+                        <p>Intégration des principes de l'économie circulaire et de la technologie blockchain (Smart Contracts, CVNU, CITYZEN) pour une transparence, une équité et une durabilité accrues.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-yellow-700 mb-2">
+                            <span class="emoji">📈</span> Croissance Personnelle & Financière
+                        </h3>
+                        <p>Au-delà du revenu, le PAI vise à développer votre CVNU (Curriculum Vitae Numérique Universel), augmentant votre valeur sur le marché du travail et votre autonomie.</p>
+                    </div>
+                </div>
+
+                <h3>Le Rôle de l'IA dans la Génération de Revenu Passif :</h3>
+                <p>L'IA agit comme un catalyseur pour débloquer de nouvelles opportunités de revenu passif. Elle peut :</p>
+                <ul>
+                    <li>**Automatiser** la création et la gestion de vos actifs numériques (blogs, e-commerce, services).</li>
+                    <li>**Identifier** les niches de marché rentables et les tendances émergentes.</li>
+                    <li>**Optimiser** vos campagnes marketing et d'affiliation pour un ROI maximal.</li>
+                    <li>**Analyser** de grands ensembles de données pour des décisions stratégiques éclairées.</li>
+                    <li>**Créer** du contenu unique et de haute qualité à grande échelle.</li>
+                </ul>
+
+                <p class="font-semibold text-lg text-gray-700 mt-6">
+                    La vision du WALLET PAI est de vous outiller pour devenir un acteur clé de l'économie numérique de demain, en maximisant votre potentiel avec l'IA.
+                </p>
+                <div class="mt-4" style="height: 250px;">
+                    <canvas id="visionGlobaleChart" aria-label="Graphique de la vision globale du projet"></canvas>
+                </div>
+            </section>
+
+            <section id="niveau-1-revenu" class="content-section" aria-labelledby="niveau-1-revenu-heading">
+                <h2 id="niveau-1-revenu-heading" class="text-2xl font-bold text-center mb-6">💸 Niveau 1: 500€ - 2K€ de Revenu Passif Mensuel</h2>
+                <h3>Description de la Section :</h3>
+                <p>Ce premier niveau est conçu pour établir les bases de votre revenu passif avec l'IA. Il se concentre sur des stratégies à faible barrière à l'entrée, idéales pour les débutants ou ceux qui souhaitent valider le concept du WALLET PAI. L'objectif est d'atteindre un revenu stable de 500€ à 2000€ par mois grâce à des activités automatisées et intelligentes.</p>
+
+                <h4>Stratégies Recommandées pour le Niveau 1 :</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="card">
+                        <h3 class="flex items-center text-blue-600 mb-2">
+                            <span class="emoji">✍️</span> Blogging & Contenu Automatisé (SEO IA)
+                        </h3>
+                        <p>Utilisez l'IA pour générer des articles de blog optimisés SEO, des descriptions de produits ou des scripts. Monétisez via l'affiliation, Google AdSense ou la vente de leads.</p>
+                        <ul>
+                            <li>**Outils IA :** ChatGPT, Jasper AI, Copy.ai</li>
+                            <li>**Actions :** Recherche de mots-clés, rédaction automatisée, publication régulière.</li>
+                            <li>**Potentiel :** 500€ - 1000€/mois</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-green-600 mb-2">
+                            <span class="emoji">🛒</span> E-commerce Niche (Dropshipping IA)
+                        </h3>
+                        <p>L'IA identifie les produits gagnants, optimise les descriptions et gère le service client. Vous vous concentrez sur la stratégie et la promotion.</p>
+                        <ul>
+                            <li>**Outils IA :** Spocket, Zendrop (pour dropshipping), IA générative pour descriptions.</li>
+                            <li>**Actions :** Analyse de marché, sélection de produits, création de boutique en ligne simplifiée.</li>
+                            <li>**Potentiel :** 700€ - 2000€/mois</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-purple-600 mb-2">
+                            <span class="emoji">📈</span> Marketing d'Affiliation Ciblé (IA)
+                        </h3>
+                        <p>L'IA analyse les données pour trouver les meilleures offres d'affiliation et cible les audiences les plus réceptives sur les plateformes sociales ou les blogs.</p>
+                        <ul>
+                            <li>**Outils IA :** Affilae, Semrush, IA pour ciblage publicitaire.</li>
+                            <li>**Actions :** Création de contenu promotionnel, gestion de campagnes publicitaires automatisées.</li>
+                            <li>**Potentiel :** 600€ - 1500€/mois</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Exemples Concrets :</h3>
+                <ul>
+                    <li>Création d'un blog de niche sur les "voyages durables" avec des articles générés par IA et monétisé par affiliation (hôtels écologiques, tours opérateurs éthiques).</li>
+                    <li>Lancement d'une boutique dropshipping vendant des accessoires pour animaux de compagnie, avec des publicités Facebook ciblées par IA.</li>
+                </ul>
+                <div class="mt-4" style="height: 250px;">
+                    <canvas id="niveau1Chart" aria-label="Graphique des revenus du niveau 1"></canvas>
+                </div>
+            </section>
+
+            <section id="niveau-2-croissance" class="content-section" aria-labelledby="niveau-2-croissance-heading">
+                <h2 id="niveau-2-croissance-heading" class="text-2xl font-bold text-center mb-6">📈 Niveau 2: 2K€ - 5K€ de Revenu Passif Mensuel</h2>
+                <h3>Description de la Section :</h3>
+                <p>Une fois les bases du Niveau 1 établies, le Niveau 2 vise à faire croître significativement vos revenus en diversifiant vos sources et en approfondissant l'automatisation IA. L'accent est mis sur la création de produits numériques plus complexes et l'exploitation de l'IA pour des tâches à plus forte valeur ajoutée.</p>
+
+                <h4>Stratégies Recommandées pour le Niveau 2 :</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="card">
+                        <h3 class="flex items-center text-blue-600 mb-2">
+                            <span class="emoji">📚</span> Création & Vente d'Infoproduits (IA)
+                        </h3>
+                        <p>Développez des ebooks, des cours en ligne, des templates ou des guides. L'IA peut aider à structurer le contenu, générer des brouillons, créer des supports visuels et optimiser les pages de vente.</p>
+                        <ul>
+                            <li>**Outils IA :** Writesonic, Descript (pour audio/vidéo), Midjourney (pour visuels).</li>
+                            <li>**Actions :** Planification de cours, rédaction assistée par IA, marketing automatisé.</li>
+                            <li>**Potentiel :** 1500€ - 4000€/mois</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-green-600 mb-2">
+                            <span class="emoji">🤖</span> SaaS & Outils IA Simples
+                        </h3>
+                        <p>Créez des micro-SaaS ou des outils basés sur l'IA répondant à un besoin spécifique (ex: générateur de titres optimisés SEO, outil d'analyse de sentiment). L'IA peut aider au développement initial et au support client.</p>
+                        <ul>
+                            <li>**Outils IA :** OpenAI API, Google AI Platform, Bubble (pour no-code SaaS).</li>
+                            <li>**Actions :** Identification de niche, MVP avec IA, marketing de contenu.</li>
+                            <li>**Potentiel :** 2000€ - 5000€/mois</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-purple-600 mb-2">
+                            <span class="emoji">📊</span> Agence de Services Marketing IA
+                        </h3>
+                        <p>Proposez des services (rédaction SEO, gestion de réseaux sociaux, publicité) où l'IA gère 80% des tâches. Vous supervisez et apportez l'expertise stratégique.</p>
+                        <ul>
+                            <li>**Outils IA :** Hootsuite (gestion sociale), IA pour analytics, Surfer SEO.</li>
+                            <li>**Actions :** Prospection client, délégation IA, optimisation des processus.</li>
+                            <li>**Potentiel :** 2500€ - 6000€/mois (potentiellement plus avec des clients à forte valeur)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Exemples Concrets :</h3>
+                <ul>
+                    <li>Lancement d'un cours en ligne sur "Maîtriser ChatGPT pour l'entrepreneuriat", avec des modules et des quiz générés par IA.</li>
+                    <li>Création d'un petit outil web permettant aux créateurs de contenu de générer des idées de vidéos YouTube basées sur les tendances IA.</li>
+                </ul>
+                <div class="mt-4" style="height: 250px;">
+                    <canvas id="niveau2Chart" aria-label="Graphique des revenus du niveau 2"></canvas>
+                </div>
+            </section>
+
+            <section id="niveau-3-scalabilite" class="content-section" aria-labelledby="niveau-3-scalabilite-heading">
+                <h2 id="niveau-3-scalabilite-heading" class="text-2xl font-bold text-center mb-6">🚀 Niveau 3: 5K€ - 10K€+ de Revenu Passif Mensuel</h2>
+                <h3>Description de la Section :</h3>
+                <p>Le Niveau 3 est le palier de la scalabilité et de l'innovation. Il s'agit de construire des écosystèmes complets où l'IA gère des opérations complexes, permettant un revenu passif très élevé. Ce niveau requiert une vision stratégique plus poussée et la capacité à intégrer diverses technologies IA.</p>
+
+                <h4>Stratégies Recommandées pour le Niveau 3 :</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="card">
+                        <h3 class="flex items-center text-blue-600 mb-2">
+                            <span class="emoji">📈</span> Plateformes & Marketplaces (IA-Driven)
+                        </h3>
+                        <p>Développez une plateforme (ex: mise en relation freelance/client, marketplace de produits numériques) où l'IA optimise le matching, la modération, la personnalisation et la gestion des transactions.</p>
+                        <ul>
+                            <li>**Outils IA :** TensorFlow, PyTorch (pour modèles ML), IA pour personnalisation.</li>
+                            <li>**Actions :** Développement complet, stratégie d'acquisition, partenariats.</li>
+                            <li>**Potentiel :** 5000€ - 15000€+/mois</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-green-600 mb-2">
+                            <span class="emoji">💡</span> Solutions d'Automatisation B2B (IA)
+                        </h3>
+                        <p>Concevez et vendez des solutions d'automatisation basées sur l'IA pour les entreprises (ex: IA pour la gestion des stocks, automatisation du support client, analyse prédictive des ventes).</p>
+                        <ul>
+                            <li>**Outils IA :** IBM Watson, Microsoft Azure AI, custom ML models.</li>
+                            <li>**Actions :** Développement de solutions spécifiques, vente complexe, support entreprise.</li>
+                            <li>**Potentiel :** 7000€ - 20000€+/mois</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-purple-600 mb-2">
+                            <span class="emoji">🔗</span> Réseaux Sociaux & Communautés Décentralisées (IA & Blockchain)
+                        </h3>
+                        <p>Créez des réseaux sociaux de niche ou des plateformes communautaires où l'IA gère la curation de contenu, la modération, la détection des tendances et la monétisation via des tokens (blockchain).</p>
+                        <ul>
+                            <li>**Outils IA :** IA pour NLP (Natural Language Processing), Smart Contracts pour tokens.</li>
+                            <li>**Actions :** Construction de communauté, gestion de tokens, partenariats stratégiques.</li>
+                            <li>**Potentiel :** 6000€ - 18000€+/mois</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Exemples Concrets :</h3>
+                <ul>
+                    <li>Lancement d'une plateforme d'apprentissage IA personnalisée, où l'IA adapte les parcours éducatifs et met en relation les apprenants avec des mentors IA qualifiés.</li>
+                    <li>Développement d'une solution d'IA pour les restaurants afin d'optimiser les commandes, les stocks et la gestion du personnel, vendue sous forme d'abonnement.</li>
+                </ul>
+                <div class="mt-4" style="height: 250px;">
+                    <canvas id="niveau3Chart" aria-label="Graphique des revenus du niveau 3"></canvas>
+                </div>
+            </section>
+
+            <section id="optimisation-comptable" class="content-section" aria-labelledby="optimisation-comptable-heading">
+                <h2 id="optimisation-comptable-heading" class="text-2xl font-bold text-center mb-6">💰 Optimisation Comptable & Conseils Fiscaux IA</h2>
+                <h3>Description de la Section :</h3>
+                <p>Cette section est dédiée à la gestion intelligente de vos finances au sein du WALLET PAI. L'IA n'est pas seulement un moteur de revenu, mais aussi un outil puissant pour optimiser votre comptabilité, suivre vos profits et obtenir des conseils fiscaux pertinents. L'objectif est de maximiser votre bénéfice net et d'assurer la conformité fiscale.</p>
+
+                <h4>Outils & Stratégies d'Optimisation IA :</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div class="card">
+                        <h3 class="flex items-center text-blue-600 mb-2">
+                            <span class="emoji">📊</span> Suivi des Bénéfices & Dépenses (IA)
+                        </h3>
+                        <p>Utilisez l'IA pour catégoriser automatiquement vos transactions, prévoir vos flux de trésorerie et identifier les postes de dépenses à optimiser. Intégration possible avec vos comptes bancaires et plateformes de paiement.</p>
+                        <ul>
+                            <li>**Outils IA :** Quickbooks (avec IA intégrée), Bankin', BudgetBakers.</li>
+                            <li>**Actions :** Connexion des comptes, analyse des rapports, alertes personnalisées.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-green-600 mb-2">
+                            <span class="emoji">⚖️</span> Conseils Fiscaux Personnalisés (IA)
+                        </h3>
+                        <p>L'IA analyse votre situation financière et les réglementations fiscales pour vous proposer des optimisations légales, des déductions possibles et des stratégies pour réduire votre charge fiscale. Rappel des échéances fiscales.</p>
+                        <ul>
+                            <li>**Outils IA :** Simulateurs fiscaux avancés, plateformes de conseil juridique IA.</li>
+                            <li>**Actions :** Saisie des données fiscales, interprétation des recommandations, préparation.</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3 class="flex items-center text-purple-600 mb-2">
+                            <span class="emoji">🔄</span> Optimisation du ROI de l'IA
+                        </h3>
+                        <p>Le PAI mesure le retour sur investissement de chaque Unité IA consommée, vous aidant à allouer vos ressources d'IA là où elles génèrent le plus de valeur et de profit.</p>
+                        <ul>
+                            <li>**Outils IA :** Tableau de bord PAI (sections ROI), outils d'analyse de performance.</li>
+                            <li>**Actions :** Révision régulière des métriques, ajustement des stratégies IA.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Principes Clés pour une Gestion Fiscale Optimale :</h3>
+                <ul>
+                    <li>**Séparer les Comptes :** Ayez des comptes bancaires dédiés à vos activités professionnelles IA.</li>
+                    <li>**Documenter Tout :** Gardez une trace de toutes les dépenses liées à l'IA, aux logiciels, formations, etc.</li>
+                    <li>**Consulter un Expert :** L'IA est une aide précieuse, mais un expert-comptable ou fiscaliste humain est indispensable pour les situations complexes.</li>
+                </ul>
+
+                <p class="font-semibold text-lg text-gray-700 mt-6">
+                    Une gestion comptable et fiscale intelligente est la clé pour maximiser votre revenu net passif et assurer la pérennité de votre projet WALLET PAI.
+                </p>
+                <div class="mt-4" style="height: 250px;">
+                    <canvas id="optimisationComptableChart" aria-label="Graphique d'optimisation comptable"></canvas>
+                </div>
+            </section>
+
+            <section id="profile-management" class="content-section" aria-labelledby="profile-management-heading">
+                <h2 id="profile-management-heading" class="text-2xl font-bold text-center mb-6">👤 Gestion de profil</h2>
+                <div class="card">
+                    <p>Contenu de la section Gestion de profil. Ici, l'utilisateur pourra gérer ses informations personnelles, ses compétences CVNU, et d'autres paramètres liés à son profil.</p>
+                    </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="level.js"></script>
+</body>
+</html>

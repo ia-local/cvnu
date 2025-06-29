@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <!-- Police Inter pour un look moderne et professionnel -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Votre fichier CSS principal (sera compilé depuis cv.scss par le serveur) -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Votre fichier CSS principal -->
+    <link rel="stylesheet" href="aside.css">
     <!-- Chart.js CDN pour les graphiques (si nécessaire pour le dashboard, sinon peut être retiré) -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -23,9 +23,7 @@
         <div class="navbar-main-links">
             <a href="#home" class="nav-link active" data-page="home">Accueil</a>
             <a href="#dashboard" class="nav-link" data-page="dashboard">Dashboard UTMi</a>
-            <a href="#user-profile" class="nav-link" data-page="user-profile">Profil Utilisateur</a>
-            <!-- NOUVEAU LIEN: Gestion CV -->
-            <a href="#cv-management" class="nav-link" data-page="cv-management">Gestion CV</a>
+            <a href="#user-profile" class="nav-link" data-page="user-profile">Profil</a>
             <a href="#chatroom" class="nav-link" data-page="chatroom">Chatroom IA</a>
             <a href="#workspace" class="nav-link" data-page="workspace">Workspace</a>
             <a href="#documentation" class="nav-link" data-page="documentation">Documentation</a>
@@ -170,52 +168,10 @@
                 </article>
             </section>
 
-            <!-- PAGE 3: PROFIL UTILISATEUR (informations génériques, potentiellement blockchain) -->
+            <!-- PAGE 3: PROFIL UTILISATEUR (CV) -->
             <section id="user-profile-page" class="content-section" data-page="user-profile" aria-labelledby="profile-heading">
-                <h2 id="profile-heading" class="page-main-title"><i class="fas fa-user-circle"></i> Votre Profil Utilisateur</h2>
-                <p class="page-main-intro">Gérez vos informations de compte, les accès, et visualisez votre identité numérique liée à la blockchain CVNU.</p>
-
-                <article class="card">
-                    <h3 class="card-title"><i class="fas fa-id-badge"></i> Identité CVNU</h3>
-                    <p class="text-gray-700">Votre identifiant unique sur la plateforme.</p>
-                    <div class="form-group">
-                        <label class="label-text">ID Utilisateur :</label>
-                        <div id="userIdDisplay" class="content-output-field small-height">Chargement...</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="label-text">Adresse Blockchain CVNU :</label>
-                        <div id="cvnuAddressDisplay" class="content-output-field small-height">Non connecté</div>
-                        <p class="text-gray-600 text-sm mt-2">Connectez votre portefeuille pour lier votre identité blockchain.</p>
-                    </div>
-                </article>
-
-                <article class="card">
-                    <h3 class="card-title"><i class="fas fa-link"></i> Comptes Liés</h3>
-                    <p class="text-gray-700">Gérez les services externes connectés à votre profil.</p>
-                    <div class="linked-accounts-list">
-                        <div class="account-item">
-                            <i class="fab fa-google google-icon"></i> Google
-                            <button class="btn btn-secondary btn-sm ml-auto">Lier</button>
-                        </div>
-                        <div class="account-item">
-                            <i class="fab fa-paypal paypal-icon"></i> PayPal
-                            <button class="btn btn-secondary btn-sm ml-auto">Lier</button>
-                        </div>
-                        <!-- Ajoutez d'autres comptes liés ici -->
-                    </div>
-                </article>
-
-                <article class="card">
-                    <h3 class="card-title"><i class="fas fa-lock"></i> Paramètres de Sécurité</h3>
-                    <p class="text-gray-700">Gérez votre mot de passe et vos préférences de sécurité.</p>
-                    <button class="btn btn-primary">Changer le Mot de Passe</button>
-                </article>
-            </section>
-
-            <!-- NOUVELLE PAGE 4: GESTION DU CV (Contient l'ancien contenu du profil utilisateur lié au CV) -->
-            <section id="cv-management-page" class="content-section" data-page="cv-management" aria-labelledby="cv-management-heading">
-                <h2 id="cv-management-heading" class="page-main-title"><i class="fas fa-address-card"></i> Gestion du CV & Monétisation</h2>
-                <p class="page-main-intro">Générez et valorisez votre CV professionnel basé sur vos interactions IA et vos compétences. Explorez la monétisation de vos compétences grâce à des coefficients de valeur unitaires.</p>
+                <h2 id="profile-heading" class="page-main-title"><i class="fas fa-address-card"></i> Profil Utilisateur & Génération de CV</h2>
+                <p class="page-main-intro">Générez un CV professionnel basé sur vos informations et activités IA. Explorez la monétisation de vos compétences grâce à des coefficients de valeur unitaires.</p>
 
                 <article class="card">
                     <h3 class="card-title"><i class="fas fa-file-alt"></i> Générateur de CV</h3>
@@ -240,7 +196,6 @@ Compétences:
                         <div class="button-row">
                             <button id="generateCvBtn" class="btn btn-primary"><i class="fas fa-magic"></i> Générer le CV</button>
                             <button id="clearCvInputBtn" class="btn btn-secondary"><i class="fas fa-eraser"></i> Effacer</button>
-                            <button id="editCvBtn" class="btn btn-secondary" style="display:none;"><i class="fas fa-edit"></i> Modifier le CV</button> <!-- NOUVEAU BOUTON -->
                         </div>
                         <h3 class="card-subtitle mt-20"><i class="fas fa-code"></i> Aperçu du CV (HTML)</h3>
                         <div id="cv-output" class="content-output-field custom-scrollbar">
@@ -263,7 +218,7 @@ Compétences:
                 </article>
             </section>
 
-            <!-- PAGE 5: CHATROOM IA -->
+            <!-- NOUVELLE PAGE: CHATROOM IA -->
             <section id="chatroom-page" class="content-section" data-page="chatroom" aria-labelledby="chatroom-heading">
                 <h2 id="chatroom-heading" class="page-main-title"><i class="fas fa-comment-dots"></i> Chatroom IA</h2>
                 <p class="page-main-intro">Discutez en direct avec votre assistant IA personnel. Idéal pour des sessions de brainstorming ou des conversations étendues sur un sujet.</p>
@@ -312,7 +267,7 @@ Compétences:
                 </div>
             </section>
 
-            <!-- PAGE 6: WORKSPACE -->
+            <!-- NOUVELLE PAGE: WORKSPACE -->
             <section id="workspace-page" class="content-section" data-page="workspace" aria-labelledby="workspace-heading">
                 <h2 id="workspace-heading" class="page-main-title"><i class="fas fa-briefcase"></i> Mon Espace de Travail</h2>
                 <p class="page-main-intro">Cet espace est dédié à vos outils et projets. Vous pouvez l'adapter à vos besoins spécifiques.</p>
@@ -339,7 +294,7 @@ Compétences:
                 </article>
             </section>
 
-            <!-- PAGE 7: DOCUMENTATION -->
+            <!-- NOUVELLE PAGE: DOCUMENTATION -->
             <section id="documentation-page" class="content-section" data-page="documentation" aria-labelledby="documentation-heading">
                 <h2 id="documentation-heading" class="page-main-title"><i class="fas fa-book-open"></i> Documentation</h2>
                 <p class="page-main-intro">Accédez à la documentation complète de CVNU pour maîtriser toutes ses fonctionnalités.</p>
@@ -364,7 +319,7 @@ Compétences:
                 </article>
             </section>
 
-            <!-- PAGE 8: CONTACT -->
+            <!-- NOUVELLE PAGE: CONTACT -->
             <section id="contact-page" class="content-section" data-page="contact" aria-labelledby="contact-heading">
                 <h2 id="contact-heading" class="page-main-title"><i class="fas fa-headset"></i> Contactez-nous</h2>
                 <p class="page-main-intro">Vous avez des questions, des suggestions ou besoin d'assistance ? N'hésitez pas à nous contacter.</p>
@@ -430,6 +385,6 @@ Compétences:
     <!-- Vos fichiers JavaScript. L'ordre est important ! -->
     <script type="module" src="modal.js"></script>
     <script type="module" src="pagination.js"></script>
-    <script type="module" src="cv.js"></script>
+    <script type="module" src="aside.js"></script>
 </body>
 </html>

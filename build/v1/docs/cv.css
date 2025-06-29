@@ -1,4 +1,4 @@
-/* public/cv.css - Refonte Complète de l'UI Inspirée WALLET PAI */
+/* public/style.css - Refonte Complète de l'UI Inspirée WALLET PAI */
 
 /* Variables CSS pour les Thèmes Clair et Sombre (Adaptées du WALLET PAI) */
 :root {
@@ -297,7 +297,7 @@ body.dark-theme .dynamic-left-nav {
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
     text-decoration: none;
-    color:var(--text-medium); /* Couleur du texte par défaut */
+    color:rgba(201, 201, 215, 0.04); /* Couleur du texte par défaut */
     font-weight: 500;
 }
 body.dark-theme .dynamic-nav-list a {

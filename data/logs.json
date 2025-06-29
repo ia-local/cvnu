@@ -42,5 +42,930 @@
     "type": "CONVERSATION_HISTORY",
     "action": "READ_ALL",
     "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:42:23.931Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:42:36.507Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:42:41.254Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:43:00.856Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:43:02.942Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "cf2e0480-8eb7-4a5d-9faa-ffa94328566f",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:43:02.945Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T10:52:40.241Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T10:53:15.701Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T10:53:30.131Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:00:20.344Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:00:28.860Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:06:21.172Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:06:39.332Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:07:29.286Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:15:33.114Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:19:35.002Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:19:36.316Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:38:31.519Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:38:42.016Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T11:38:46.570Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "41a1d0c0-2294-4f59-8b50-8b433bfd7823",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T11:38:46.578Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:39:26.530Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:40:33.278Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:40:41.160Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:43:10.592Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:43:12.623Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T11:43:31.356Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "test",
+    "response": "Please tell me what you'd like me to test!  \n\nFor example, you could ask me to:\n\n* **Answer a question:** \"What is the capital of France?\"\n* **Generate some text:** \"Write a short story about a cat who goes on an adventure.\"\n* **Translate something:** \"Translate 'Hello world' into Spanish.\"\n* **Summarize a piece of text:** \"Summarize the plot of the movie Inception.\"\n\n\nLet me know how I can help! 😊 \n",
+    "model": "gemma2-9b-it",
+    "utmi": 17.56,
+    "estimatedCost": 0.00001,
+    "processingTime": 0.572
+  },
+  {
+    "timestamp": "2025-06-29T12:02:10.958Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 0
+  },
+  {
+    "timestamp": "2025-06-29T12:02:13.134Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "e4ab93fd-d08c-4aae-8430-fac7074535f2",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T12:02:13.142Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T12:02:16.357Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "346e1a46-9ad7-4854-adfc-4aab82919f29",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T12:02:16.365Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T12:02:26.271Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "cb76c05d-293b-45df-93d2-057e19d64229",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T12:02:26.277Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T12:02:26.889Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "f6922dc7-68ea-4748-aa3f-4005465a7896",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T12:02:26.898Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 4
+  },
+  {
+    "timestamp": "2025-06-29T12:02:35.881Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "bonjour",
+    "response": "Bonjour ! 👋  Comment puis-je vous aider aujourd'hui ? 😊\n",
+    "model": "gemma2-9b-it",
+    "utmi": 7.61,
+    "estimatedCost": 0.000002,
+    "processingTime": 0.371
+  },
+  {
+    "id": "pasted_conv_2025-06-29T12-03-12-430Z",
+    "date": "2025-06-29T12:03:12.436Z",
+    "rawMarkdownPath": "/Volumes/devOps/projets/cvnu/beta/conversations_pasted_raw/conversation_pasted_2025-06-29T12-03-12-430Z.md",
+    "analysis": {
+      "conversation_summary": "L'utilisateur a résolu un bug critique lié à l'intégration d'une API (Stripe) en mettant à jour Node.js, puis a documenté la solution et automatisé le déploiement.",
+      "identified_skills": [
+        "Débogage (API Stripe)",
+        "Mise à jour de dépendances (Node.js)",
+        "Configuration de hooks d'API",
+        "Automatisation de déploiement",
+        "Documentation technique (Wiki interne)"
+      ],
+      "soft_skills_demonstrated": [
+        "Résolution de problèmes complexes",
+        "Proactivité",
+        "Autonomie",
+        "Orientation vers l'amélioration continue",
+        "Rigueur (documentation)"
+      ],
+      "key_topics": [
+        "Problème d'intégration API",
+        "Solution technique Node.js",
+        "Optimisation des processus",
+        "Documentation"
+      ],
+      "potential_projects": [
+        "Résolution et optimisation de l'intégration du module de paiement Stripe : Diagnostic, mise à jour de Node.js, reconfiguration des hooks, documentation et automatisation du déploiement pour assurer la stabilité du site."
+      ]
+    }
+  },
+  {
+    "id": "pasted_conv_2025-06-29T12-03-24-958Z",
+    "date": "2025-06-29T12:03:24.961Z",
+    "rawMarkdownPath": "/Volumes/devOps/projets/cvnu/beta/conversations_pasted_raw/conversation_pasted_2025-06-29T12-03-24-958Z.md",
+    "analysis": {
+      "conversation_summary": "L'utilisateur a résolu un bug critique lié à l'intégration d'une API (Stripe) en mettant à jour Node.js, puis a documenté la solution et automatisé le déploiement.",
+      "identified_skills": [
+        "Débogage (API Stripe)",
+        "Mise à jour de dépendances (Node.js)",
+        "Configuration de hooks d'API",
+        "Automatisation de déploiement",
+        "Documentation technique (Wiki interne)"
+      ],
+      "soft_skills_demonstrated": [
+        "Résolution de problèmes complexes",
+        "Proactivité",
+        "Autonomie",
+        "Orientation vers l'amélioration continue",
+        "Rigueur (documentation)"
+      ],
+      "key_topics": [
+        "Problème d'intégration API",
+        "Solution technique Node.js",
+        "Optimisation des processus",
+        "Documentation"
+      ],
+      "potential_projects": [
+        "Résolution et optimisation de l'intégration du module de paiement Stripe : Diagnostic, mise à jour de Node.js, reconfiguration des hooks, documentation et automatisation du déploiement pour assurer la stabilité du site."
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-29T12:04:49.446Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "Synthèse de Valorisation\n\n            \nMessage: Compétences du CV valorisées avec succès.\n\n\n            \nValorisation Détaillée:\n\n\n            \n{\n  \"catch_phrase\": \"Innovant et passionné par l'informatique, je mets mon expertise au service des entreprises pour les aider à atteindre leurs objectifs.\",\n  \"valorized_technical_skills\": [\n    {\n      \"skill\": \"Expérience en informatique\",\n      \"valorization\": \"Trois ans d'expérience dans le domaine de l'informatique, ce qui me permet de comprendre les besoins spécifiques des entreprises et de proposer des solutions efficaces.\"\n    }\n  ],\n  \"professional_attributes\": [\n    {\n      \"attribute\": \"Innovativité\",\n      \"justification\": \"Mon expérience et ma passion pour l'informatique me permettent de trouver des solutions créatives et innovantes pour résoudre les problèmes.\"\n    },\n    {\n      \"attribute\": \"Communication\",\n      \"justification\": \"En tant qu'expert en recrutement et en analyse de carrière, je suis capable de communiquer efficacement avec les entreprises et les candidats pour comprendre leurs besoins et proposer des solutions adaptées.\"\n    }\n  ]\n}",
+    "response": "## Synthèse de Valorisation\n\nVotre message \"Compétences du CV valorisées avec succès\" est bien parti ! \n\nLa valorisation détaillée fournie est un excellent point de départ. Elle met en avant :\n\n**Points forts:**\n\n* **Catchphrase percutante:** \"Innovant et passionné par l'informatique, je mets mon expertise au service des entreprises pour les aider à atteindre leurs objectifs.\"  Elle est concise, accrocheuse et reflète votre motivation.\n\n* **Valorisation des compétences techniques:** L'expérience en informatique de 3 ans est clairement mise en avant, avec une justification précise de son impact.\n* **Mise en avant des qualités professionnelles:** L'innovation et la communication sont des atouts précieux pour vous démarquer. Les justifications fournies sont convaincantes et illustrent concrètement vos compétences.\n\n\n**Suggestions d'amélioration:**\n\n* **Développer davantage les compétences techniques:**  \n    * Listez d'autres compétences techniques spécifiques (langages de programmation, outils, etc.) et associez-les à des réalisations tangibles. \n    * Quantifiez vos expériences (ex: \"développé 3 applications web\", \"implémenté 2 systèmes d'automatisation\").\n* **Exemplifier les qualités professionnelles:** \n    * Donnez des exemples concrets de situations où vous avez démontré votre innovation et votre communication. \n    *  Parlez d'un projet innovant ou d'une situation où vous avez réussi à communiquer efficacement avec des parties prenantes différentes.\n* **Adapter la valorisation à chaque offre d'emploi:** \n    *  Identifiez les compétences et les qualités recherchées dans chaque offre et mettez en avant celles qui sont les plus pertinentes. \n\n\nEn enrichissant votre valorisation avec des exemples précis et en l'adaptant à chaque situation, vous maximiserez vos chances de succès dans votre recherche d'emploi. \n\n\n\n",
+    "model": "gemma2-9b-it",
+    "utmi": 101.38,
+    "estimatedCost": 0.000046,
+    "processingTime": 1.017
+  },
+  {
+    "id": "pasted_conv_2025-06-29T12-08-35-682Z",
+    "date": "2025-06-29T12:08:35.686Z",
+    "rawMarkdownPath": "/Volumes/devOps/projets/cvnu/beta/conversations_pasted_raw/conversation_pasted_2025-06-29T12-08-35-682Z.md",
+    "analysis": {
+      "conversation_summary": "L'utilisateur a résolu un bug critique lié à l'intégration d'une API (Stripe) en mettant à jour Node.js, puis a documenté la solution et automatisé le déploiement.",
+      "identified_skills": [
+        "Débogage (API Stripe)",
+        "Mise à jour de dépendances (Node.js)",
+        "Configuration de hooks d'API",
+        "Automatisation de déploiement",
+        "Documentation technique (Wiki interne)"
+      ],
+      "soft_skills_demonstrated": [
+        "Résolution de problèmes complexes",
+        "Proactivité",
+        "Autonomie",
+        "Orientation vers l'amélioration continue",
+        "Rigueur (documentation)"
+      ],
+      "key_topics": [
+        "Problème d'intégration API",
+        "Solution technique Node.js",
+        "Optimisation des processus",
+        "Documentation"
+      ],
+      "potential_projects": [
+        "Résolution et optimisation de l'intégration du module de paiement Stripe : Diagnostic, mise à jour de Node.js, reconfiguration des hooks, documentation et automatisation du déploiement pour assurer la stabilité du site."
+      ]
+    }
+  },
+  {
+    "id": "pasted_conv_2025-06-29T12-09-09-309Z",
+    "date": "2025-06-29T12:09:09.311Z",
+    "rawMarkdownPath": "/Volumes/devOps/projets/cvnu/beta/conversations_pasted_raw/conversation_pasted_2025-06-29T12-09-09-309Z.md",
+    "analysis": {
+      "conversation_summary": "L'utilisateur a résolu un bug critique lié à l'intégration d'une API (Stripe) en mettant à jour Node.js, puis a documenté la solution et automatisé le déploiement.",
+      "identified_skills": [
+        "Débogage (API Stripe)",
+        "Mise à jour de dépendances (Node.js)",
+        "Configuration de hooks d'API",
+        "Automatisation de déploiement",
+        "Documentation technique (Wiki interne)"
+      ],
+      "soft_skills_demonstrated": [
+        "Résolution de problèmes complexes",
+        "Proactivité",
+        "Autonomie",
+        "Orientation vers l'amélioration continue",
+        "Rigueur (documentation)"
+      ],
+      "key_topics": [
+        "Problème d'intégration API",
+        "Solution technique Node.js",
+        "Optimisation des processus",
+        "Documentation"
+      ],
+      "potential_projects": [
+        "Résolution et optimisation de l'intégration du module de paiement Stripe : Diagnostic, mise à jour de Node.js, reconfiguration des hooks, documentation et automatisation du déploiement pour assurer la stabilité du site."
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-29T12:11:12.867Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "Synthèse de Valorisation\n\n            \nMessage: Compétences du CV valorisées avec succès.\n\n\n            \nValorisation Détaillée:\n\n\n            \n{\n  \"catch_phrase\": \"Innovant et passionné, je suis prêt à déployer mes compétences pour améliorer les vies des autres.\",\n  \"valorized_technical_skills\": [\n    {\n      \"skill\": \"CIP (Certificat d'Initiation Professionnelle)\",\n      \"valorization\": \"Formation de base en gestion de projet et en communication, permettant de gérer efficacement les équipes et les ressources pour atteindre des objectifs.\"\n    },\n    {\n      \"skill\": \"Stage auprès des Restos du Cœur\",\n      \"valorization\": \"Expérience concrète dans l'accompagnement et l'aide aux personnes vulnérables, développant les compétences en empathie et en écoute active.\"\n    },\n    {\n      \"skill\": \"Stage\",\n      \"valorization\": \"Oportunité de mettre en pratique les compétences acquises au cours de la formation CIP et de développer des compétences en gestion de projet et en communication.\"\n    }\n  ],\n  \"professional_attributes\": [\n    {\n      \"attribute\": \"Empathie\",\n      \"justification\": \"Permet de comprendre les besoins et les attentes des autres, ce qui est essentiel dans les professions liées à l'aide et au service.\"\n    },\n    {\n      \"attribute\": \"Intégration sociale\",\n      \"justification\": \"Facilite la communication et la collaboration avec les autres, ce qui est essentiel dans les équipes et les organisations.\"\n    },\n    {\n      \"attribute\": \"Dynamisme\",\n      \"justification\": \"Permet de gérer les situations stressantes et de trouver des solutions créatives pour résoudre les problèmes.\"\n    }\n  ]\n}",
+    "response": "## Analyse de Synthèse de Valorisation\n\nVotre synthèse de valorisation est un bon début, mais elle peut être encore améliorée pour maximiser son impact. \n\n**Points forts:**\n\n* **Phraseaccroche percutante:** \"Innovant et passionné, je suis prêt à déployer mes compétences pour améliorer les vies des autres.\" est une excellente introduction qui met en avant votre motivation et votre ambition.\n* **Structure claire:** La division en \"Compétences techniques\" et \"Attributs professionnels\" facilite la lecture et la compréhension.\n* **Exemples concrets:** L'inclusion de \"Stage auprès des Restos du Cœur\" et \"Stage\" permet d'illustrer vos compétences et expériences.\n\n**Suggestions d'amélioration :**\n\n* **Développer les valorisations:**\n\n    *  Pour chaque compétence technique, **quantifiez** vos réalisations et **expliquez** comment elles ont contribué à un résultat positif. \n    * **Mettez en relation vos expériences** avec les besoins du poste visé.  Par exemple, au lieu de dire \"Expérience concrète dans l'accompagnement...\", expliquez comment vos compétences en empathie et écoute active ont aidé les bénéficiaires des Restos du Cœur.\n\n    * **Connectez vos attributs professionnels aux compétences techniques.** \n        *  Par exemple, \"Empathie\" peut être illustrée par une anecdote de votre stage où vous avez dû comprendre et répondre aux besoins spécifiques d'un bénéficiaire.\n        * \"Dynamisme\" peut être démontré par votre capacité à gérer des situations stressantes lors d'un projet, en expliquant les actions que vous avez entreprises pour trouver des solutions.\n* **Utiliser des mots-clés pertinents:** \n    * Analysez les offres d'emploi qui vous intéressent et intégrez les mots-clés utilisés pour décrire les compétences recherchées.\n* **Personnalisez votre synthèse:** \n    * Adaptez votre synthèse à chaque poste auquel vous postulez en mettant en avant les compétences et expériences les plus pertinentes.\n\nEn suivant ces suggestions, vous pourrez renforcer votre synthèse de valorisation et accroître vos chances de succès lors de vos candidatures. \n\n\n",
+    "model": "gemma2-9b-it",
+    "utmi": 95.57,
+    "estimatedCost": 0.000052,
+    "processingTime": 1.125
+  },
+  {
+    "timestamp": "2025-06-29T12:23:41.373Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 4
+  },
+  {
+    "timestamp": "2025-06-29T12:23:46.019Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 4
+  },
+  {
+    "timestamp": "2025-06-29T12:28:23.113Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 4
+  },
+  {
+    "timestamp": "2025-06-29T12:28:34.525Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "test",
+    "response": "Please tell me what you would like me to test!  \n\nFor example, you could ask me to:\n\n* **Generate some creative text:**  \"Write me a short story about a robot who learns to feel emotions.\"\n* **Answer a question:** \"What is the capital of France?\"\n* **Translate something:** \"Translate 'Hello, how are you?' into Spanish.\"\n* **Summarize a piece of text:** \"Summarize the plot of the movie 'The Matrix'.\"\n\nI'm ready for your challenge! 😊  \n",
+    "model": "gemma2-9b-it",
+    "utmi": 19.12,
+    "estimatedCost": 0.000011,
+    "processingTime": 0.501
+  },
+  {
+    "timestamp": "2025-06-29T12:29:23.198Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 4
+  },
+  {
+    "timestamp": "2025-06-29T12:49:27.018Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T12:49:27.032Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T12:49:47.026Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 4
+  },
+  {
+    "timestamp": "2025-06-29T12:49:48.661Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "424c7b73-d9f3-4daa-aa86-e09225d67a10",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T12:49:48.666Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 5
+  },
+  {
+    "timestamp": "2025-06-29T12:49:53.452Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 5
+  },
+  {
+    "timestamp": "2025-06-29T12:49:57.998Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T12:49:58.005Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T12:56:25.872Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T12:56:25.899Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T12:56:33.554Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T12:56:33.561Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T12:57:37.662Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T12:57:37.669Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T12:57:38.562Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5
+  },
+  {
+    "timestamp": "2025-06-29T12:57:59.622Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5
+  },
+  {
+    "timestamp": "2025-06-29T12:58:17.266Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "test",
+    "response": "Hello! 👋  How can I help you test something?\n\nPlease tell me what you'd like me to do. For example, you could ask me to:\n\n* **Answer a question:** \"What is the capital of France?\"\n* **Generate some text:** \"Write a short poem about a cat.\"\n* **Translate something:** \"Translate 'hello world' into Spanish.\"\n* **Summarize a piece of text:** \"Summarize the plot of the movie 'The Matrix'.\"\n\n\nI'm ready for your challenge! 😊 \n\n",
+    "model": "gemma2-9b-it",
+    "utmi": 18.6,
+    "estimatedCost": 0.000011,
+    "processingTime": 0.49
+  },
+  {
+    "timestamp": "2025-06-29T13:00:12.688Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:00:12.696Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:00:36.345Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:00:36.355Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:00:51.476Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:00:51.486Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:05:06.973Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "tes",
+    "response": "Please provide me with a question or a task so I can help you! \n\nFor example, you could ask me:\n\n* To translate a word or phrase\n* To write a poem or story\n* To explain a concept\n* To generate a list of ideas\n* To answer a trivia question\n\n\nI'm ready! 😊\n",
+    "model": "gemma2-9b-it",
+    "utmi": 11.13,
+    "estimatedCost": 0.000006,
+    "processingTime": 0.447
+  },
+  {
+    "timestamp": "2025-06-29T13:05:11.121Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:05:11.130Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:05:12.951Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:05:12.959Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:05:16.816Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5
+  },
+  {
+    "timestamp": "2025-06-29T13:05:25.229Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5
+  },
+  {
+    "timestamp": "2025-06-29T13:05:26.480Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:05:26.486Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:05:34.733Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:05:34.742Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:07:28.059Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:07:28.068Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:08:10.512Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:08:10.515Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5
+  },
+  {
+    "timestamp": "2025-06-29T13:08:10.520Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:08:13.841Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:08:13.876Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:08:19.745Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5
+  },
+  {
+    "timestamp": "2025-06-29T13:08:19.769Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:08:19.773Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:08:29.539Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:08:29.543Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "Milkael"
+  },
+  {
+    "timestamp": "2025-06-29T13:08:34.702Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "teste"
+  },
+  {
+    "timestamp": "2025-06-29T13:08:34.707Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "teste"
+  },
+  {
+    "timestamp": "2025-06-29T13:20:54.019Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5
+  },
+  {
+    "timestamp": "2025-06-29T13:21:00.908Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "teste"
+  },
+  {
+    "timestamp": "2025-06-29T13:21:00.917Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "teste"
+  },
+  {
+    "timestamp": "2025-06-29T13:23:33.828Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "Bernard Claude"
+  },
+  {
+    "timestamp": "2025-06-29T13:23:33.842Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "Bernard Claude"
+  },
+  {
+    "timestamp": "2025-06-29T13:24:34.054Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "Bernard Claude"
+  },
+  {
+    "timestamp": "2025-06-29T13:24:34.066Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "Bernard Claude"
+  },
+  {
+    "timestamp": "2025-06-29T13:25:09.686Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "Bernard Claude, j'habite à 4, rue de la de Rambouillet à Babot, Bavent, j'ai travaillé en charcuterie en 1984, et après j'ai travaillé comme surveillant de 1986 à 1999, je surveille des jeunes aux troubles du comportement en foyer en 99. J'ai fêté la nouvel an que t'en donnes un maximum, tu vois t'es hyper motivé dans mon travail dynamique, collection aucun problème, travail en collectif historique. L'idée de la démarche nous sommes en face de développement donc par rapport aux opérations techniques je te demanderai de rédiger ta forme de rédiger ta réponse au format HTM/CSSL, respectant les normes du Web, w3C\nSynthèse de Valorisation\n\n            \nMessage: Compétences du CV valorisées avec succès.\n\n\n            \nValorisation Détaillée:\n\n\n            \n{\n  \"catch_phrase\": \"Motivé par l'impact que j'ai sur les jeunes, je suis prêt à relever les défis du développement pour améliorer leur vie.\",\n  \"valorized_technical_skills\": [\n    {\n      \"skill\": \"Connaissance de la charcuterie\",\n      \"valorization\": \"Expérience dans la gestion de stocks et la préparation de produits alimentaires, compétence essentielle pour une gestion efficace des opérations.\"\n    },\n    {\n      \"skill\": \"Surveillance et encadrement\",\n      \"valorization\": \"Compétence en gestion de groupes et en résolution de conflits, permettant de maintenir un environnement serein et productif.\"\n    },\n    {\n      \"skill\": \"HTML/CSS\",\n      \"valorization\": \"Maîtrise des langages de programmation web, permettant de créer des sites web efficaces et accessibles.\"\n    }\n  ],\n  \"professional_attributes\": [\n    {\n      \"attribute\": \"Motivation\",\n      \"justification\": \"Mon désir de voir les jeunes grandir et se développer est une force motrice qui me pousse à travailler avec enthousiasme et détermination.\"\n    },\n    {\n      \"attribute\": \"Travail en équipe\",\n      \"justification\": \"Mon expérience en collectif et mon succès dans la résolution de problèmes en équipe démontrent ma capacité à collaborer efficacement avec les autres.\"\n    },\n    {\n      \"attribute\": \"Flexibilité\",\n      \"justification\": \"Mon adaptation à de nouveaux défis et mon ouverture à de nouvelles idées démontrent ma capacité à évoluer et à s'adapter dans un environnement en constante évolution.\"\n    }\n  ]\n}",
+    "response": "Voici une synthèse de valorisation au format HTML/CSS, respectant les normes du Web W3C, à partir des informations que vous avez fournies :\n\n```html\n<!DOCTYPE html>\n<html>\n<head>\n  <title>Synthèse de Valorisation</title>\n  <style>\n    body {\n      font-family: sans-serif;\n    }\n    h1, h2, h3 {\n      text-align: center;\n    }\n    .container {\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n    }\n    .section {\n      margin-bottom: 20px;\n    }\n  </style>\n</head>\n<body>\n\n<div class=\"container\">\n  <h1>Synthèse de Valorisation</h1>\n\n  <div class=\"section\">\n    <h2>Phrase d'accroche</h2>\n    <p>\"Motivé par l'impact que j'ai sur les jeunes, je suis prêt à relever les défis du développement pour améliorer leur vie.\"</p>\n  </div>\n\n  <div class=\"section\">\n    <h2>Compétences techniques valorisées</h2>\n    <ul>\n      <li>\n        <strong>Connaissance de la charcuterie</strong>: Expérience dans la gestion de stocks et la préparation de produits alimentaires, compétence essentielle pour une gestion efficace des opérations.\n      </li>\n      <li>\n        <strong>Surveillance et encadrement</strong>: Compétence en gestion de groupes et en résolution de conflits, permettant de maintenir un environnement serein et productif.\n      </li>\n      <li>\n        <strong>HTML/CSS</strong>: Maîtrise des langages de programmation web, permettant de créer des sites web efficaces et accessibles.\n      </li>\n    </ul>\n  </div>\n\n  <div class=\"section\">\n    <h2>Qualités professionnelles valorisées</h2>\n    <ul>\n      <li>\n        <strong>Motivation</strong>: Mon désir de voir les jeunes grandir et se développer est une force motrice qui me pousse à travailler avec enthousiasme et détermination.\n      </li>\n      <li>\n        <strong>Travail en équipe</strong>: Mon expérience en collectif et mon succès dans la résolution de problèmes en équipe démontrent ma capacité à collaborer efficacement avec les autres.\n      </li>\n      <li>\n        <strong>Flexibilité</strong>: Mon adaptation à de nouveaux défis et mon ouverture à de nouvelles idées démontrent ma capacité à évoluer et à s'adapter dans un environnement en constante évolution.\n      </li>\n    </ul>\n  </div>\n</div>\n\n</body>\n</html>\n```\n\n**Points importants:**\n\n* **Structure HTML:**  Le code est structuré avec des balises HTML appropriées (h1, h2, h3, ul, li, p) pour une bonne organisation du contenu.\n* **CSS:** Le style CSS est intégré directement dans le document HTML. Il utilise des classes pour définir des styles (container, section) et aligne le contenu de manière centrée.\n* **Accessibilité:** Le code utilise des balises sémantiques et un style clair pour améliorer l'accessibilité aux personnes ayant des handicaps.\n* **Validité W3C:** Le code HTML et CSS est valide selon les normes W3C. Vous pouvez valider le code en utilisant les outils en ligne de W3C.\n\n**Conseils:**\n\n* Vous pouvez personnaliser le CSS pour modifier l'apparence de la page.\n* Pour un site web plus complet, vous pouvez ajouter des sections supplémentaires pour présenter vos expériences professionnelles et vos projets.\n* Pensez à ajouter des images et des liens pour rendre la page plus interactive.\n\n\n\n",
+    "model": "gemma2-9b-it",
+    "utmi": 171.06,
+    "estimatedCost": 0.00008,
+    "processingTime": 1.763
+  },
+  {
+    "timestamp": "2025-06-29T13:28:58.535Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:28:58.542Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:29:44.399Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:29:44.405Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:29:44.458Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5
+  },
+  {
+    "timestamp": "2025-06-29T13:29:45.787Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5
+  },
+  {
+    "timestamp": "2025-06-29T13:32:12.415Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:32:12.422Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:32:12.441Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5
+  },
+  {
+    "timestamp": "2025-06-29T13:35:47.902Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:35:47.909Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-06-29T13:35:48.310Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 0,
+    "totalCount": 0
   }
 ]

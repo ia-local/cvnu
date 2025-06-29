@@ -1,0 +1,1 @@
+Bonjour, je fais un test d'implémentation de mon CV, je m'appelle Michaël, j'ai trois ans d'expérience en informatique. Peux-tu me générer un CV structuré en HTML SCC s'il te plaît

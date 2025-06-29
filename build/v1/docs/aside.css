@@ -1,4 +1,4 @@
-/* public/cv.css - Refonte Complète de l'UI Inspirée WALLET PAI */
+/* public/style.css - Refonte Complète de l'UI Inspirée WALLET PAI */
 
 /* Variables CSS pour les Thèmes Clair et Sombre (Adaptées du WALLET PAI) */
 :root {
@@ -10,7 +10,7 @@
     --accent-color: #f59e0b; /* Jaune/Orange pour icônes et valeurs */
     --background-body: #f0f2f5; /* Arrière-plan général plus clair */
     --background-main-container: #ffffff; /* Fond du conteneur principal */
-    --background-dynamic-nav: #0b1017; /* Nouveau: Fond pour la nav latérale dynamique */
+    --background-dynamic-nav: #e2e8f0; /* Nouveau: Fond pour la nav latérale dynamique */
     --background-content-area: #ffffff; /* Fond de la zone de contenu */
     --background-card: #f7fafc; /* Fond des cartes */
     --background-subtle: #e2e8f0; /* Fond léger pour code/outputs */
@@ -232,7 +232,7 @@ body.dark-theme .theme-toggle .toggle-circle {
 /* LIGNE 2: CONTENEUR PRINCIPAL (Inspiré WALLET PAI) - Maintenant sous la navbar fixe */
 .main-container-wallet-pai {
     max-width: 100%; /* S'adapte à la largeur du body */
-    width: 85%; /* Largeur maximale pour le contenu principal */
+    width: 1200px; /* Largeur maximale pour le contenu principal */
     background-color: var(--background-main-container);
     border-radius: 1.5rem; /* Coins arrondis */
     box-shadow: 0 10px 30px var(--shadow-medium);
@@ -252,11 +252,11 @@ body.dark-theme .theme-toggle .toggle-circle {
     min-width: var(--dynamic-nav-width); /* Utilise la variable pour la largeur */
     display: flex;
     flex-direction: column;
-    border-radius: 1.5rem 0 0 1.5rem; /* Coins arrondis à gauche pour desktop */
+    border-radius: 1.5rem 1.5rem 0 0; /* Coins arrondis en haut pour mobile */
     transition: background-color 0.3s ease, color 0.3s ease;
     border-right: 1px solid var(--border-color); /* Séparateur visuel */
     /* Cache par défaut pour mobile, affiché en desktop */
-    display: none; /* Géré par @media query */
+    display: none;
 }
 
 body.dark-theme .dynamic-left-nav {
@@ -297,7 +297,7 @@ body.dark-theme .dynamic-left-nav {
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
     text-decoration: none;
-    color:var(--text-medium); /* Couleur du texte par défaut */
+    color: var(--text-dark); /* Couleur du texte par défaut */
     font-weight: 500;
 }
 body.dark-theme .dynamic-nav-list a {
@@ -330,7 +330,7 @@ body.dark-theme .dynamic-nav-list a {
     display: flex;
     flex-direction: column;
     transition: background-color 0.3s ease;
-    /* Enlève la border-radius à gauche car c'est géré par dynamic-left-nav sur desktop */
+    /* Enlève la border-radius à gauche car c'est géré par dynamic-left-nav */
     border-radius: 0 1.5rem 1.5rem 0; /* Coins arrondis à droite seulement pour desktop */
 }
 
@@ -444,14 +444,6 @@ body.dark-theme .dynamic-nav-list a {
     box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.2);
     outline: none;
 }
-/* Pour les divs de display comme userIdDisplay et cvnuAddressDisplay */
-.content-output-field.small-height {
-    min-height: 40px; /* Plus petit pour une seule ligne */
-    padding: 0.75rem 1.5rem;
-    display: flex;
-    align-items: center;
-}
-
 
 .button-row {
     display: flex;
@@ -496,12 +488,6 @@ body.dark-theme .dynamic-nav-list a {
     background-color: #cbd5e0; /* Gris plus clair pour désactivé */
     color: #4a5568;
 }
-.btn.btn-sm { /* Petit bouton pour les liens de compte */
-    padding: 0.4rem 0.8rem;
-    font-size: 0.8em;
-    border-radius: 0.3rem;
-}
-
 
 .download-btn {
     background-color: var(--secondary-color);
@@ -626,30 +612,6 @@ body.dark-theme .list-card-wallet li {
 .list-card-wallet li strong {
     color: var(--text-dark);
 }
-
-/* Styles pour les comptes liés dans la page Profil Utilisateur */
-.linked-accounts-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-.account-item {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    background-color: var(--background-subtle);
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    font-weight: 500;
-    color: var(--text-dark);
-}
-.account-item .fab {
-    font-size: 1.2em;
-    margin-right: 0.75rem;
-}
-.account-item .google-icon { color: #db4437; } /* Google Red */
-.account-item .paypal-icon { color: #003087; } /* PayPal Blue */
-
 
 /* --- Chatroom Section Specific Styles (Moved from Modal) --- */
 .chat-main-layout { /* This is the main card containing the chat UI */
@@ -1116,10 +1078,23 @@ body.dark-theme .list-card-wallet li {
         border-radius: 1.5rem; /* Tous les coins arrondis sur mobile, car pas de sidebar */
     }
 
-    /* Styles d'ancienne sidebar supprimés car remplacés par dynamic-left-nav */
-    /* .sidebar-nav ul, .sidebar-nav li, .sidebar-nav a, .sidebar-nav a .fas */
-    /* ont été remplacés par .dynamic-nav-list, .dynamic-nav-list li, etc. */
-
+    .sidebar-nav ul { /* Supprimez ces styles s'ils ne sont plus pertinents après la suppression de la sidebar */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    .sidebar-nav li {
+        flex: 1 1 auto; /* Permet aux éléments de s'enrouler */
+        margin: 0.25rem;
+    }
+    .sidebar-nav a {
+        justify-content: center;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.9em;
+    }
+    .sidebar-nav a .fas {
+        margin-right: 0.5rem; /* Réduire l'espace avec l'icône */
+    }
     .content-area-wallet-pai {
         padding: 1rem; /* Réduire le padding du contenu principal */
     }

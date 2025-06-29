@@ -4,17 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CVNU | CV Numérique Universel & Monétisation de Compétences IA</title>
-    <!-- Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Police Inter pour un look moderne et professionnel -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Votre fichier CSS principal (sera compilé depuis cv.scss par le serveur) -->
-    <link rel="stylesheet" href="style.css">
-    <!-- Chart.js CDN pour les graphiques (si nécessaire pour le dashboard, sinon peut être retiré) -->
+    <link rel="stylesheet" href="cv.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <!-- NOUVELLE NAVBAR INTELLIGENTE FIXÉE AU TOP -->
     <nav id="mainNavbar" class="smart-navbar-top-fixed">
         <div class="navbar-brand">
             <h1 class="app-title-navbar"><i class="fas fa-id-card-alt"></i> CVNU</h1>
@@ -24,7 +19,6 @@
             <a href="#home" class="nav-link active" data-page="home">Accueil</a>
             <a href="#dashboard" class="nav-link" data-page="dashboard">Dashboard UTMi</a>
             <a href="#user-profile" class="nav-link" data-page="user-profile">Profil Utilisateur</a>
-            <!-- NOUVEAU LIEN: Gestion CV -->
             <a href="#cv-management" class="nav-link" data-page="cv-management">Gestion CV</a>
             <a href="#chatroom" class="nav-link" data-page="chatroom">Chatroom IA</a>
             <a href="#workspace" class="nav-link" data-page="workspace">Workspace</a>
@@ -38,7 +32,6 @@
                 <button id="navbarSearchBtn" class="navbar-search-btn"><i class="fas fa-search"></i></button>
             </div>
 
-            <!-- Exemple de composant modal CMS-like -->
             <button id="openCmsModalBtn" class="btn btn-navbar"><i class="fas fa-cogs"></i> Gérer Contenu</button>
 
             <div id="themeToggle" class="theme-toggle" title="Basculer le thème clair/sombre">
@@ -47,21 +40,15 @@
         </div>
     </nav>
 
-    <!-- Conteneur principal - Le padding-top du body sera ajusté en CSS pour éviter le chevauchement -->
     <div class="main-container-wallet-pai">
-        <!-- NOUVEAU: Conteneur pour la navigation latérale dynamique -->
         <div id="dynamic-left-nav" class="dynamic-left-nav">
-            <!-- Ce contenu sera généré dynamiquement par JavaScript -->
             <h3 class="dynamic-nav-title"><i class="fas fa-bars"></i> Menu Thématique</h3>
             <ul id="dynamic-nav-list" class="dynamic-nav-list">
-                <!-- Les liens dynamiques apparaîtront ici -->
                 <li class="placeholder-text">Sélectionnez une section...</li>
             </ul>
         </div>
 
-        <!-- LIGNE 2: CONTENU PRINCIPAL (MAIN - Zone de contenu des pages) -->
         <main class="content-area-wallet-pai" role="main">
-            <!-- PAGE 1: ACCUEIL -->
             <section id="home-page" class="content-section active" data-page="home" aria-labelledby="home-heading">
                 <h2 id="home-heading" class="page-main-title"><i class="fas fa-info-circle"></i> Bienvenue sur CVNU</h2>
                 <p class="page-main-intro">Découvrez comment CVNU transforme vos interactions IA en valeur professionnelle tangible.</p>
@@ -91,7 +78,6 @@
                 </article>
             </section>
 
-            <!-- PAGE 2: DASHBOARD UTMi -->
             <section id="dashboard-page" class="content-section" data-page="dashboard" aria-labelledby="dashboard-heading">
                 <h2 id="dashboard-heading" class="page-main-title"><i class="fas fa-chart-line"></i> Dashboard UTMi</h2>
                 <p class="page-main-intro">Visualisez les statistiques de vos interactions IA et la valeur générée en Unités Temporelles Monétisables (UTMi).</p>
@@ -170,7 +156,6 @@
                 </article>
             </section>
 
-            <!-- PAGE 3: PROFIL UTILISATEUR (informations génériques, potentiellement blockchain) -->
             <section id="user-profile-page" class="content-section" data-page="user-profile" aria-labelledby="profile-heading">
                 <h2 id="profile-heading" class="page-main-title"><i class="fas fa-user-circle"></i> Votre Profil Utilisateur</h2>
                 <p class="page-main-intro">Gérez vos informations de compte, les accès, et visualisez votre identité numérique liée à la blockchain CVNU.</p>
@@ -201,8 +186,7 @@
                             <i class="fab fa-paypal paypal-icon"></i> PayPal
                             <button class="btn btn-secondary btn-sm ml-auto">Lier</button>
                         </div>
-                        <!-- Ajoutez d'autres comptes liés ici -->
-                    </div>
+                        </div>
                 </article>
 
                 <article class="card">
@@ -212,7 +196,6 @@
                 </article>
             </section>
 
-            <!-- NOUVELLE PAGE 4: GESTION DU CV (Contient l'ancien contenu du profil utilisateur lié au CV) -->
             <section id="cv-management-page" class="content-section" data-page="cv-management" aria-labelledby="cv-management-heading">
                 <h2 id="cv-management-heading" class="page-main-title"><i class="fas fa-address-card"></i> Gestion du CV & Monétisation</h2>
                 <p class="page-main-intro">Générez et valorisez votre CV professionnel basé sur vos interactions IA et vos compétences. Explorez la monétisation de vos compétences grâce à des coefficients de valeur unitaires.</p>
@@ -240,7 +223,6 @@ Compétences:
                         <div class="button-row">
                             <button id="generateCvBtn" class="btn btn-primary"><i class="fas fa-magic"></i> Générer le CV</button>
                             <button id="clearCvInputBtn" class="btn btn-secondary"><i class="fas fa-eraser"></i> Effacer</button>
-                            <button id="editCvBtn" class="btn btn-secondary" style="display:none;"><i class="fas fa-edit"></i> Modifier le CV</button> <!-- NOUVEAU BOUTON -->
                         </div>
                         <h3 class="card-subtitle mt-20"><i class="fas fa-code"></i> Aperçu du CV (HTML)</h3>
                         <div id="cv-output" class="content-output-field custom-scrollbar">
@@ -263,7 +245,6 @@ Compétences:
                 </article>
             </section>
 
-            <!-- PAGE 5: CHATROOM IA -->
             <section id="chatroom-page" class="content-section" data-page="chatroom" aria-labelledby="chatroom-heading">
                 <h2 id="chatroom-heading" class="page-main-title"><i class="fas fa-comment-dots"></i> Chatroom IA</h2>
                 <p class="page-main-intro">Discutez en direct avec votre assistant IA personnel. Idéal pour des sessions de brainstorming ou des conversations étendues sur un sujet.</p>
@@ -275,20 +256,17 @@ Compétences:
                     </div>
 
                     <div class="chat-content-layout">
-                        <!-- Liste des conversations -->
                         <div class="conversation-list-container">
                             <h3 class="card-subtitle"><i class="fas fa-list"></i> Vos Conversations</h3>
                             <ul id="conversation-list" class="conversation-list custom-scrollbar">
                                 <p class="placeholder-text">Aucune conversation. Cliquez sur "Nouvelle" pour commencer.</p>
                             </ul>
-                            <!-- Pagination pour les conversations du chat -->
                             <div class="pagination-controls" id="conversation-pagination">
                                 <button class="btn btn-icon" data-page-action="prev" disabled><i class="fas fa-chevron-left"></i></button>
                                 <span id="current-page-info">Page 1/1</span>
                                 <button class="btn btn-icon" data-page-action="next" disabled><i class="fas fa-chevron-right"></i></button>
                             </div>
                         </div>
-                        <!-- Fenêtre de chat active -->
                         <div class="chat-window-container">
                             <h3 class="card-subtitle"><i class="fas fa-comment-dots"></i> Fenêtre de Chat <span id="current-conversation-id" class="conversation-id-display">(Sélectionnez une conversation)</span></h3>
                             <div id="chat-window" class="chat-container custom-scrollbar">
@@ -301,7 +279,6 @@ Compétences:
                         </div>
                     </div>
 
-                    <!-- Section de résumé du CV après conversation, si nécessaire -->
                     <article id="modalCvSummarySection" class="card-light" style="display: none;">
                         <h3 class="card-title"><i class="fas fa-file-invoice"></i> Résumé de Conversation pour le CV</h3>
                         <div id="modalCvSummaryOutput" class="content-output custom-scrollbar">
@@ -312,7 +289,6 @@ Compétences:
                 </div>
             </section>
 
-            <!-- PAGE 6: WORKSPACE -->
             <section id="workspace-page" class="content-section" data-page="workspace" aria-labelledby="workspace-heading">
                 <h2 id="workspace-heading" class="page-main-title"><i class="fas fa-briefcase"></i> Mon Espace de Travail</h2>
                 <p class="page-main-intro">Cet espace est dédié à vos outils et projets. Vous pouvez l'adapter à vos besoins spécifiques.</p>
@@ -339,7 +315,6 @@ Compétences:
                 </article>
             </section>
 
-            <!-- PAGE 7: DOCUMENTATION -->
             <section id="documentation-page" class="content-section" data-page="documentation" aria-labelledby="documentation-heading">
                 <h2 id="documentation-heading" class="page-main-title"><i class="fas fa-book-open"></i> Documentation</h2>
                 <p class="page-main-intro">Accédez à la documentation complète de CVNU pour maîtriser toutes ses fonctionnalités.</p>
@@ -364,7 +339,6 @@ Compétences:
                 </article>
             </section>
 
-            <!-- PAGE 8: CONTACT -->
             <section id="contact-page" class="content-section" data-page="contact" aria-labelledby="contact-heading">
                 <h2 id="contact-heading" class="page-main-title"><i class="fas fa-headset"></i> Contactez-nous</h2>
                 <p class="page-main-intro">Vous avez des questions, des suggestions ou besoin d'assistance ? N'hésitez pas à nous contacter.</p>
@@ -388,16 +362,14 @@ Compétences:
         </main>
     </div>
 
-    <!-- LIGNE 3: FOOTER (Pied de page de l'application) -->
     <footer class="app-footer">
-        <p>&copy; 2025 CVNU. Tous droits réservés.</p>
+        <p>© 2025 CVNU. Tous droits réservés.</p>
         <p>Développé avec <i class="fas fa-heart" style="color: #e74c3c;"></i> pour l'innovation dans la gestion de carrière.</p>
         <div class="footer-links">
             <a href="#privacy" class="footer-link">Politique de Confidentialité</a>
             <a href="#terms" class="footer-link">Conditions d'Utilisation</a>
             <a href="#contact" class="footer-link">Contact</a>
         </div>
-        <!-- Liens Réseaux Sociaux -->
         <div class="social-links mt-4">
             <a href="https://facebook.com/cvnu" target="_blank" class="social-icon" title="Facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="https://twitter.com/cvnu" target="_blank" class="social-icon" title="Twitter"><i class="fab fa-twitter"></i></a>
@@ -406,7 +378,6 @@ Compétences:
         </div>
     </footer>
 
-    <!-- Modal Générique pour Alertes et Confirmations (reste en dehors de la structure principale) -->
     <div id="genericAppModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -424,10 +395,8 @@ Compétences:
         </div>
     </div>
 
-    <!-- Message de statut global (ex: "Envoi en cours...", "Erreur...") -->
     <div id="globalStatusMessage" class="status-message" role="status" aria-live="polite"></div>
 
-    <!-- Vos fichiers JavaScript. L'ordre est important ! -->
     <script type="module" src="modal.js"></script>
     <script type="module" src="pagination.js"></script>
     <script type="module" src="cv.js"></script>
