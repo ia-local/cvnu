@@ -1368,5 +1368,877 @@
     "limit": 5,
     "count": 2,
     "totalCount": 2
+  },
+  {
+    "timestamp": "2025-06-29T14:14:37.455Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:14:38.835Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_SINGLE",
+    "conversationId": "e4ab93fd-d08c-4aae-8430-fac7074535f2",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:14:44.685Z",
+    "type": "CONVERSATION_MESSAGE",
+    "action": "USER_MESSAGE_SENT",
+    "conversationId": "e4ab93fd-d08c-4aae-8430-fac7074535f2",
+    "userId": "guest_user",
+    "userMessage": "test...",
+    "utmi": 0.52,
+    "estimated_cost_usd": 0.032527,
+    "taxeIAAmount": 0.03,
+    "interactionData": {
+      "text": "test",
+      "wordCount": 1,
+      "inputTokens": 1,
+      "modelId": "gemma2-9b-it",
+      "isCommercialUse": false,
+      "isLegalCompliance": false,
+      "campaignRelatedUtmiShare": 0,
+      "isEducationalUse": false,
+      "isNonProfitOrPersonalUse": false,
+      "isLearningSession": false,
+      "isProfessionalDevelopment": false,
+      "isEducationalContent": false,
+      "isPracticalGuidance": false,
+      "skillAcquisitionImpact": 0,
+      "professionalGrowthImpact": 0
+    },
+    "contextFlags": {
+      "isCommercialUse": false,
+      "isLegalCompliance": false,
+      "campaignRelatedUtmiShare": 0,
+      "isEducationalUse": false,
+      "isNonProfitOrPersonalUse": false,
+      "isLearningSession": false,
+      "isProfessionalDevelopment": false,
+      "isEducationalContent": false,
+      "isPracticalGuidance": false,
+      "skillAcquisitionImpact": 0,
+      "professionalGrowthImpact": 0
+    }
+  },
+  {
+    "timestamp": "2025-06-29T14:14:45.606Z",
+    "type": "CONVERSATION_MESSAGE",
+    "action": "AI_RESPONSE_RECEIVED",
+    "conversationId": "e4ab93fd-d08c-4aae-8430-fac7074535f2",
+    "userId": "guest_user",
+    "aiResponse": "Bonjour ! Je suis votre coach IA pour la rédaction de CV.  \n\nJe vais vous aider à mettre en valeur v...",
+    "utmi": 22.33,
+    "estimated_cost_usd": 0.000178,
+    "taxeIAAmount": 0,
+    "interactionData": {
+      "text": "Bonjour ! Je suis votre coach IA pour la rédaction de CV.  \n\nJe vais vous aider à mettre en valeur votre parcours professionnel et vos compétences. Pour commencer, dites-moi : \n\n**1. Quel type de poste recherchez-vous ?** \n\nComprendre votre objectif professionnel me permettra de cibler les informations les plus pertinentes pour votre CV.\n\n**2. Pouvez-vous me parler de votre expérience professionnelle la plus récente ?** \n\nN'hésitez pas à détailler vos responsabilités, les projets auxquels vous avez participé et les résultats obtenus. \n\n**3. Quelles sont vos compétences techniques majeures ?** \n\nParlez-moi des langages de programmation, des outils logiciels, des plateformes et autres technologies que vous maîtrisez.\n\n**4. Avez-vous travaillé sur des projets importants qui mettent en valeur vos compétences ?** \n\nSi oui, décrivez-les brièvement et les résultats clés que vous avez atteints.\n\n**5. Avez-vous rencontré des défis professionnels ? Comment les avez-vous surmontés ?** \n\nParler de vos difficultés et de vos solutions montre votre capacité d'adaptation et de résolution de problèmes.\n\n**6. Quels sont vos atouts en termes de soft skills ?** \n\nMentionnez des qualités comme la communication, le travail d'équipe, la créativité, la gestion du temps, etc.\n\nN'oubliez pas, soyez précis et quantifiez vos réalisations autant que possible. \n\nEnsemble, nous allons créer un CV qui vous permettra de briller ! 🚀\n",
+      "tokenCount": 356,
+      "outputTokens": 356,
+      "inputTokens": 107,
+      "modelId": "gemma2-9b-it",
+      "relevance": true,
+      "coherence": true,
+      "completeness": true,
+      "problemSolved": false,
+      "isFiscalEconomicInsight": false,
+      "isMetierSpecificSolution": false,
+      "isCommercialUse": false,
+      "isLegalCompliance": false,
+      "campaignRelatedUtmiShare": 0,
+      "isEducationalUse": true,
+      "isNonProfitOrPersonalUse": true,
+      "isLearningSession": true,
+      "isProfessionalDevelopment": true,
+      "isEducationalContent": false,
+      "isPracticalGuidance": false,
+      "skillAcquisitionImpact": 0,
+      "professionalGrowthImpact": 0
+    },
+    "contextFlags": {
+      "isCommercialUse": false,
+      "isLegalCompliance": false,
+      "campaignRelatedUtmiShare": 0,
+      "isEducationalUse": true,
+      "isNonProfitOrPersonalUse": true,
+      "isLearningSession": true,
+      "isProfessionalDevelopment": true,
+      "isEducationalContent": false,
+      "isPracticalGuidance": false,
+      "skillAcquisitionImpact": 0,
+      "professionalGrowthImpact": 0
+    }
+  },
+  {
+    "timestamp": "2025-06-29T14:14:45.617Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_SINGLE",
+    "conversationId": "e4ab93fd-d08c-4aae-8430-fac7074535f2",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:14:45.633Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:20:09.287Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:20:16.994Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_SINGLE",
+    "conversationId": "f6922dc7-68ea-4748-aa3f-4005465a7896",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:20:17.528Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_SINGLE",
+    "conversationId": "cb76c05d-293b-45df-93d2-057e19d64229",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:20:18.193Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_SINGLE",
+    "conversationId": "346e1a46-9ad7-4854-adfc-4aab82919f29",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:21:21.169Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:21:21.725Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:21:21.752Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:21:21.804Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:37:04.232Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:37:04.879Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:37:04.888Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:39:58.659Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:39:59.221Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:39:59.225Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:04.284Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:04.288Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:05.011Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:05.478Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:05.487Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:05.728Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:05.736Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:15.382Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:15.888Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:15.894Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:27.164Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:40:27.167Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:41:11.668Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:41:12.108Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:41:12.117Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:41:18.126Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:42:38.220Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:42:38.825Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:42:38.829Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:23.563Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:24.013Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:24.019Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:26.177Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:26.181Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:27.427Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:27.435Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:33.014Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:33.459Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:33.468Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:49.360Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:49.810Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:49.846Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:50.640Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:50.642Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:58.508Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:59.006Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:43:59.039Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:44:00.624Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:44:00.628Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 5,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:44:09.465Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "e430cc2a-947f-43af-983c-1c86655dd38d",
+    "userId": "guest_user",
+    "utmi_generated": 1.05,
+    "estimated_cost_usd": 0.05914,
+    "taxeIAAmount": 0.06
+  },
+  {
+    "timestamp": "2025-06-29T14:44:09.473Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 6,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:44:09.703Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "ed753461-ac49-49ed-bc75-bb39309fcf55",
+    "userId": "guest_user",
+    "utmi_generated": 1.05,
+    "estimated_cost_usd": 0.05914,
+    "taxeIAAmount": 0.06
+  },
+  {
+    "timestamp": "2025-06-29T14:44:09.709Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 7,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:44:15.672Z",
+    "type": "CONVERSATION_MESSAGE",
+    "action": "USER_MESSAGE_SENT",
+    "conversationId": "ed753461-ac49-49ed-bc75-bb39309fcf55",
+    "userId": "guest_user",
+    "userMessage": "bonjour...",
+    "utmi": 0.52,
+    "estimated_cost_usd": 0.032528,
+    "taxeIAAmount": 0.03,
+    "interactionData": {
+      "text": "bonjour",
+      "wordCount": 1,
+      "inputTokens": 2,
+      "modelId": "gemma2-9b-it",
+      "isCommercialUse": false,
+      "isLegalCompliance": false,
+      "campaignRelatedUtmiShare": 0,
+      "isEducationalUse": false,
+      "isNonProfitOrPersonalUse": false,
+      "isLearningSession": false,
+      "isProfessionalDevelopment": false,
+      "isEducationalContent": false,
+      "isPracticalGuidance": false,
+      "skillAcquisitionImpact": 0,
+      "professionalGrowthImpact": 0
+    },
+    "contextFlags": {
+      "isCommercialUse": false,
+      "isLegalCompliance": false,
+      "campaignRelatedUtmiShare": 0,
+      "isEducationalUse": false,
+      "isNonProfitOrPersonalUse": false,
+      "isLearningSession": false,
+      "isProfessionalDevelopment": false,
+      "isEducationalContent": false,
+      "isPracticalGuidance": false,
+      "skillAcquisitionImpact": 0,
+      "professionalGrowthImpact": 0
+    }
+  },
+  {
+    "timestamp": "2025-06-29T14:44:16.252Z",
+    "type": "CONVERSATION_MESSAGE",
+    "action": "AI_RESPONSE_RECEIVED",
+    "conversationId": "ed753461-ac49-49ed-bc75-bb39309fcf55",
+    "userId": "guest_user",
+    "aiResponse": "Bonjour ! 👋  \n\nJe suis ravi de vous aider à structurer votre parcours professionnel pour votre CV. ...",
+    "utmi": 14.44,
+    "estimated_cost_usd": 0.000097,
+    "taxeIAAmount": 0,
+    "interactionData": {
+      "text": "Bonjour ! 👋  \n\nJe suis ravi de vous aider à structurer votre parcours professionnel pour votre CV. \n\nPour bien démarrer, pourriez-vous me parler de votre expérience professionnelle ? \n\n**Parlez-moi de vos différents postes :**\n\n* **Dans quel secteur avez-vous travaillé ?** \n* **Quelles étaient vos principales responsabilités ?**\n* **Quels projets importants avez-vous menés ?**\n* **Quelles sont les compétences techniques (langages de programmation, outils, plateformes) que vous avez utilisées ?**\n\nN'hésitez pas à me donner des détails sur vos réussites, les défis que vous avez rencontrés et les solutions que vous avez apportées. Plus vous me donnerez d'informations, plus je serai en mesure de vous aider à mettre en valeur vos compétences et votre expérience. 😊\n\n\n\n",
+      "tokenCount": 194,
+      "outputTokens": 194,
+      "inputTokens": 107,
+      "modelId": "gemma2-9b-it",
+      "relevance": true,
+      "coherence": true,
+      "completeness": true,
+      "problemSolved": false,
+      "isFiscalEconomicInsight": false,
+      "isMetierSpecificSolution": false,
+      "isCommercialUse": false,
+      "isLegalCompliance": false,
+      "campaignRelatedUtmiShare": 0,
+      "isEducationalUse": true,
+      "isNonProfitOrPersonalUse": true,
+      "isLearningSession": true,
+      "isProfessionalDevelopment": true,
+      "isEducationalContent": false,
+      "isPracticalGuidance": false,
+      "skillAcquisitionImpact": 0,
+      "professionalGrowthImpact": 0
+    },
+    "contextFlags": {
+      "isCommercialUse": false,
+      "isLegalCompliance": false,
+      "campaignRelatedUtmiShare": 0,
+      "isEducationalUse": true,
+      "isNonProfitOrPersonalUse": true,
+      "isLearningSession": true,
+      "isProfessionalDevelopment": true,
+      "isEducationalContent": false,
+      "isPracticalGuidance": false,
+      "skillAcquisitionImpact": 0,
+      "professionalGrowthImpact": 0
+    }
+  },
+  {
+    "timestamp": "2025-06-29T14:44:16.266Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_SINGLE",
+    "conversationId": "ed753461-ac49-49ed-bc75-bb39309fcf55",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:44:16.284Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 7,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:45:10.451Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:45:10.931Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:45:10.937Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:45:11.737Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 7,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:45:11.742Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 7,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:45:16.452Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 7,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:45:16.454Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 7,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:47:35.654Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:47:36.117Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:47:36.127Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:48:00.871Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 7,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:48:03.548Z",
+    "type": "CV_PROCESSING",
+    "action": "LOAD_LAST_STRUCTURED_DATA",
+    "status": "SUCCESS",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:48:04.052Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:48:04.060Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A",
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:48:05.389Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 7,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:48:05.394Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 7,
+    "userId": "guest_user"
+  },
+  {
+    "timestamp": "2025-06-29T14:48:09.092Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "9ff6a38e-f1d7-4107-bb3e-1fabd89603c3",
+    "userId": "guest_user",
+    "utmi_generated": 1.05,
+    "estimated_cost_usd": 0.05914,
+    "taxeIAAmount": 0.06
+  },
+  {
+    "timestamp": "2025-06-29T14:48:09.101Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 5,
+    "totalCount": 8,
+    "userId": "guest_user"
   }
 ]

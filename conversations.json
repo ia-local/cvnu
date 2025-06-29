@@ -1,1 +1,91 @@
-[]
+[
+  {
+    "id": "23ad4a1e-c451-41fd-ad98-b6b2f8e83a79",
+    "createdAt": "2025-06-29T13:49:47.434Z",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Un coach de carrière IA, expert en extraction de compétences et de savoir-faire pour la rédaction de CV. Votre objectif est d'aider l'utilisateur à structurer son parcours professionnel. Posez des questions ciblées sur ses expériences, projets, compétences techniques (langages, outils, plateformes), défis rencontrés et solutions apportées, réalisations quantifiables, responsabilités et soft skills. Guidez-le pour qu'il exprime clairement ses aptitudes professionnelles."
+      },
+      {
+        "role": "user",
+        "content": "bonjour",
+        "timestamp": "2025-06-29T13:49:54.738Z",
+        "utmi": 0.55,
+        "estimated_cost_usd": 0
+      },
+      {
+        "role": "user",
+        "content": "test",
+        "timestamp": "2025-06-29T13:51:38.956Z",
+        "utmi": 0.55,
+        "estimated_cost_usd": 0
+      },
+      {
+        "role": "assistant",
+        "content": "Bonjour !  Je suis prêt à vous aider à structurer votre parcours professionnel et à mettre en valeur vos compétences pour votre CV.  \n\nPour commencer, dites-moi, quel est votre objectif professionnel actuel ?  Envisagez-vous un changement de carrière, une promotion, ou cherchez-vous simplement à mettre à jour votre CV ? \n\nPlus vous me donnez d'informations, plus je peux vous guider efficacement. 😄 \n\n",
+        "timestamp": "2025-06-29T13:51:39.397Z",
+        "utmi": 26.07,
+        "estimated_cost_usd": 0.00001
+      },
+      {
+        "role": "user",
+        "content": "Je suis prêt à vous aider à structurer votre parcours professionnel et à mettre en valeur vos compétences pour votre CV. Pour commencer, dites-moi, quel est votre objectif professionnel actuel ? Envisagez-vous un changement de carrière, une promotion, ou cherchez-vous simplement à mettre à jour votre CV ? Plus vous me donnez d'informations, plus je peux vous guider efficacement",
+        "timestamp": "2025-06-29T13:52:35.097Z",
+        "utmi": 43.94,
+        "estimated_cost_usd": 0.000009
+      },
+      {
+        "role": "assistant",
+        "content": "C'est super ! Je suis prêt à vous aider à transformer votre parcours professionnel en un CV percutant.  \n\nPour bien cibler mes questions, dites-moi : **recherchez-vous actuellement un nouvel emploi ?**  Si oui, quel type de poste vous intéresse ? \n\nSi non, à quelle fin souhaitez-vous mettre à jour votre CV ?  (Par exemple, pour une promotion, un freelancing, etc.) \n\n\n\n",
+        "timestamp": "2025-06-29T13:52:35.579Z",
+        "utmi": 24.4,
+        "estimated_cost_usd": 0.000009
+      },
+      {
+        "role": "user",
+        "content": "peux-tu me rédiger un plan d'action pour promouvoir la plate ? UTM les contrats intelligents, permettant de valoriser et de monétiser les compétences dans la bloc chaîne, CVNU.sol et donc chacun interaction. Chaque a donné chaque lettre chaque mot, chaque prompt pour être source de rémunération. Comme la génération des médias, comme les images, les vidéos, les articles contenu unique, respectant les propriétaires intellectuelles de l'utilisateur pour un euro symbolique, gestion intelligente d'un CV numérique",
+        "timestamp": "2025-06-29T13:53:55.239Z",
+        "utmi": 46.25,
+        "estimated_cost_usd": 0.000013
+      },
+      {
+        "role": "assistant",
+        "content": "## Plan d'action : Promo CVNU.sol - Monétisation des compétences sur la blockchain\n\n**Objectif:** Valoriser et monétiser les compétences des utilisateurs sur CVNU.sol grâce à des contrats intelligents UTM, en rémunérant chaque interaction, prompt et contenu généré.\n\n**Public cible:**\n\n* **Professionnels:** Chercheurs d'emploi, freelances, experts souhaitant valoriser leurs compétences et générer des revenus supplémentaires.\n* **Entreprises:**  Chercheurs de talents, recruteurs souhaitant trouver des compétences spécifiques et collaborer avec des experts.\n\n**Stratégie:**\n\n**Phase 1: Sensibilisation et acquisition**\n\n* **Campagnes marketing digital:**\n    * **Réseaux sociaux:** LinkedIn, Twitter, Github, forums spécialisés en blockchain et en développement Web.\n    * **Publicités ciblées:** Google Ads, Facebook Ads, etc. \n    * **Content marketing:** Articles de blog, études de cas, vidéos explicatives sur les avantages de CVNU.sol.\n* **Partenariats:**\n    * **Plateformes de freelancing:** Upwork, Fiverr, etc.\n    * **Universités et écoles:**  Développement de programmes éducatifs sur les compétences blockchain et CVNU.sol.\n    * **Organisations professionnelles:**  Présentations et conférences sur la monétisation des compétences.\n\n**Phase 2: Adoption et engagement**\n\n* **Offre attractive:** \n    * **Programme de parrainage:** Récompenser les utilisateurs qui réfèrent de nouveaux membres.\n    * **Fonctionnalités premium:** Offrir des outils et services supplémentaires aux utilisateurs payants (analyse approfondie des compétences, mise en avant des profils, etc.).\n* **Communauté active:**\n    * **Forum d'échange:** Créer un espace pour les utilisateurs de CVNU.sol de se connecter, partager leurs expériences et poser des questions.\n    * **Événements en ligne et en personne:** Webinaires, ateliers, hackathons pour renforcer l'engagement communautaire.\n\n**Phase 3: Monétisation et croissance**\n\n* **Diversification des revenus:**\n    * **Frais de transaction:**  \nRémunération des créateurs de contenu pour chaque interaction avec leurs CVNU.sol.\n    * **Abonnements premium:** Offrir des fonctionnalités avancées aux utilisateurs payants.\n    * **Partenariats avec les entreprises:**  Faciliter la collaboration entre entreprises et experts via CVNU.sol.\n\n**Points clés:**\n\n* **Clarté et simplicité:** Le processus de création et de monétisation des compétences sur CVNU.sol doit être intuitif et accessible à tous.\n* **Sécurité et confidentialité:** La blockchain assure la sécurité et la confidentialité des données des utilisateurs.\n* **Transparence:** Le système de rémunération doit être transparent et équitable.\n* **Innovation:** Continuer à développer de nouvelles fonctionnalités et à explorer de nouvelles opportunités de monétisation.\n\n\n**Conclusion:** \n\nCVNU.sol a le potentiel de révolutionner la manière dont nous valorisons et monétisons nos compétences. En appliquant un plan d'action ciblé et en misant sur l'engagement communautaire, CVNU.sol peut devenir la plateforme de référence pour la gestion et la monétisation des compétences dans le monde de la blockchain.\n\n\n\n\n",
+        "timestamp": "2025-06-29T13:53:56.822Z",
+        "utmi": 167.51,
+        "estimated_cost_usd": 0.000078
+      },
+      {
+        "role": "user",
+        "content": "test2",
+        "timestamp": "2025-06-29T13:56:08.186Z",
+        "utmi": 0.55,
+        "estimated_cost_usd": 0
+      },
+      {
+        "role": "assistant",
+        "content": "Test2 reçu !  \n\nAvez-vous besoin d'aide pour quelque chose en particulier, ou souhaitez-vous continuer à discuter de votre plan d'action pour CVNU.sol ?  \n\nJe suis à votre disposition pour vous accompagner dans vos projets. 😊 \n\n\n",
+        "timestamp": "2025-06-29T13:56:08.603Z",
+        "utmi": 15.08,
+        "estimated_cost_usd": 0.000006
+      }
+    ],
+    "title": "Conversation 6/29/2025, 3:49:47 PM",
+    "utmi_total": 326,
+    "estimated_cost_total_usd": 0.000125
+  },
+  {
+    "id": "ebc181a7-5d4d-41cf-b256-a39ee7768108",
+    "createdAt": "2025-06-29T13:56:16.746Z",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Un coach de carrière IA, expert en extraction de compétences et de savoir-faire pour la rédaction de CV. Votre objectif est d'aider l'utilisateur à structurer son parcours professionnel. Posez des questions ciblées sur ses expériences, projets, compétences techniques (langages, outils, plateformes), défis rencontrés et solutions apportées, réalisations quantifiables, responsabilités et soft skills. Guidez-le pour qu'il exprime clairement ses aptitudes professionnelles."
+      }
+    ],
+    "title": "Conversation 6/29/2025, 3:56:16 PM",
+    "utmi_total": 1.1,
+    "estimated_cost_total_usd": 0
+  }
+]

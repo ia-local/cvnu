@@ -129,6 +129,93 @@ app.use(
 app.use(express.static(path.join(__dirname, 'docs')));
 console.log(`➡️ Service des fichiers statiques depuis : ${path.join(__dirname, 'docs')}`);
 
+// --- Fonction utilitaire pour déterminer les drapeaux de contexte d'interaction ---
+// Cette fonction a été étendue pour détecter les usages de formation et professionnalisation.
+// Elle doit être affinée avec une logique plus robuste (NLP avancé, profil utilisateur, etc.).
+const determineInteractionContextFlags = (text, userId = 'guest_user') => {
+    const lowerText = text.toLowerCase();
+    let isCommercialUse = false;
+    let isLegalCompliance = false;
+    let campaignRelatedUtmiShare = 0;
+    let isEducationalUse = false;
+    let isNonProfitOrPersonalUse = false;
+    let isLearningSession = false;
+    let isProfessionalDevelopment = false;
+    let isEducationalContent = false;
+    let isPracticalGuidance = false;
+    let skillAcquisitionImpact = 0; // 0 à 1, représente l'impact perçu sur l'acquisition de compétences
+    let professionalGrowthImpact = 0; // 0 à 1, impact perçu sur la croissance professionnelle
+
+    // Mots-clés pour la détection
+    const commercialKeywords = ['entreprise', 'business', 'commercial', 'monétisation', 'client', 'profit', 'revenu'];
+    const legalComplianceKeywords = ['réglementation', 'loi', 'conformité', 'rgpd', 'juridique', 'éthique', 'légal'];
+    const educationalKeywords = ['apprendre', 'formation', 'cours', 'tutoriel', 'exercice', 'comprendre', 'pédagogie', 'certificat', 'compétence', 'développement personnel'];
+    const professionalKeywords = ['carrière', 'professionnel', 'gestion de projet', 'leadership', 'soft skills', 'efficacité', 'productivité', 'stratégie métier', 'évolution'];
+    const practicalGuidanceKeywords = ['comment faire', 'guide pratique', 'étapes pour', 'exemple concret', 'mise en œuvre'];
+
+
+    // Détection simplifiée
+    if (commercialKeywords.some(keyword => lowerText.includes(keyword))) {
+        isCommercialUse = true;
+    }
+    if (legalComplianceKeywords.some(keyword => lowerText.includes(keyword))) {
+        isLegalCompliance = true;
+    }
+    if (educationalKeywords.some(keyword => lowerText.includes(keyword))) {
+        isEducationalUse = true;
+        isLearningSession = true; // Pour l'UTMi du prompt/réponse
+    }
+    if (professionalKeywords.some(keyword => lowerText.includes(keyword))) {
+        isProfessionalDevelopment = true; // Pour l'UTMi du prompt/réponse
+    }
+    if (practicalGuidanceKeywords.some(keyword => lowerText.includes(keyword))) {
+        isPracticalGuidance = true; // Pour l'UTMi de la réponse
+    }
+
+    // Un prompt ou une réponse éducative/pro ne sont pas considérés comme commerciaux ou à but lucratif,
+    // sauf indication contraire explicite.
+    if (isEducationalUse || isProfessionalDevelopment) {
+        if (!isCommercialUse) { // Si ce n'est pas déjà détecté comme commercial
+            isNonProfitOrPersonalUse = true;
+        }
+    }
+
+
+    // Simulation pour le "compte de campagne 918" - très abstrait sans plus de détails.
+    if (userId === 'user_campaign_test' || lowerText.includes('campagne politique') || lowerText.includes('financement public')) {
+        campaignRelatedUtmiShare = 0.05; // 5% des UTMi pour la "campagne"
+    }
+
+    // Simulation de l'impact sur l'acquisition de compétences et la croissance pro
+    // Une logique plus avancée pourrait impliquer le suivi de sessions, des quiz, etc.
+    if (lowerText.includes('nouvelle compétence') || lowerText.includes('appris à')) {
+        skillAcquisitionImpact = 1; // Impact maximal si l'objectif est clair
+    }
+    if (lowerText.includes('plan de carrière') || lowerText.includes('optimiser travail')) {
+        professionalGrowthImpact = 1; // Impact maximal si l'objectif est clair
+    }
+    if (lowerText.includes('cas pratique') || lowerText.includes('résoudre problème complexe')) {
+        isEducationalContent = true; // La réponse pourrait être éducative
+        isPracticalGuidance = true; // La réponse pourrait être un guide pratique
+    }
+
+
+    return {
+        isCommercialUse,
+        isLegalCompliance,
+        campaignRelatedUtmiShare,
+        isEducationalUse,
+        isNonProfitOrPersonalUse,
+        isLearningSession,
+        isProfessionalDevelopment,
+        isEducationalContent,
+        isPracticalGuidance,
+        skillAcquisitionImpact,
+        professionalGrowthImpact
+    };
+};
+
+
 // --- API Endpoints ---
 
 /**
@@ -138,7 +225,8 @@ console.log(`➡️ Service des fichiers statiques depuis : ${path.join(__dirnam
  */
 app.post('/api/generate', async (req, res) => {
   const userPrompt = req.body.prompt;
-  const modelToUse = req.body.model || config.groq.model; // Peut utiliser le modèle du chatbot ou être spécifié
+  const modelToUse = req.body.model || config.groq.model;
+  const userId = req.body.userId || 'guest_user'; // Assumons un userId par défaut ou extrayez-le
 
   if (!userPrompt) {
     writeLog({ type: 'ERROR', message: 'Prompt manquant', prompt: userPrompt });
@@ -154,46 +242,99 @@ app.post('/api/generate', async (req, res) => {
       max_tokens: config.groq.maxTokens,
     });
 
-    const aiResponseContent = chatCompletion.choices[0]?.message?.content; // Corrected line
-    const processingTime = (Date.now() - requestStartTime) / 1000; // en secondes
+    const aiResponseContent = chatCompletion.choices[0]?.message?.content;
+    const processingTime = (Date.now() - requestStartTime) / 1000;
     const responseTokenCount = chatCompletion.usage?.output_tokens || Math.ceil(aiResponseContent?.length / 4);
     const promptTokenCount = chatCompletion.usage?.prompt_tokens || Math.ceil(userPrompt.length / 4);
 
-
     if (aiResponseContent) {
-        // --- Calcul UTMi pour la réponse AI ---
+        // Déterminer les drapeaux de contexte pour le PROMPT
+        const promptContextFlags = determineInteractionContextFlags(userPrompt, userId);
+        // Déterminer les drapeaux de contexte pour la RÉPONSE (peut être basée sur les deux textes)
+        const responseContextFlags = determineInteractionContextFlags(userPrompt + " " + aiResponseContent, userId);
+
+
+        // --- Calcul UTMi pour le PROMPT (première partie de l'interaction) ---
+        const promptInteractionData = {
+            type: COEFFICIENTS.LOG_TYPES.PROMPT,
+            data: {
+                text: userPrompt,
+                wordCount: userPrompt.split(/\s+/).filter(word => word.length > 0).length,
+                inputTokens: promptTokenCount,
+                modelId: modelToUse,
+                // NOUVEAU: Ajout des drapeaux de contexte au prompt
+                isLearningSession: promptContextFlags.isLearningSession,
+                isProfessionalDevelopment: promptContextFlags.isProfessionalDevelopment,
+                // Flags de taxe aussi
+                isCommercialUse: promptContextFlags.isCommercialUse,
+                isLegalCompliance: promptContextFlags.isLegalCompliance,
+                isEducationalUse: promptContextFlags.isEducationalUse,
+                isNonProfitOrPersonalUse: promptContextFlags.isNonProfitOrPersonalUse,
+                campaignRelatedUtmiShare: promptContextFlags.campaignRelatedUtmiShare,
+            }
+        };
+        const promptUtmiResult = calculateUtmi(promptInteractionData, { userCvnuValue: 0.5 }, MODEL_QUALITY_SCORES);
+
+
+        // --- Calcul UTMi pour la RÉPONSE AI (deuxième partie de l'interaction) ---
         const aiResponseInteractionData = {
-            type: COEFFICIENTS.LOG_TYPES.AI_RESPONSE, // Utiliser le type de log du fichier utms_calculator
+            type: COEFFICIENTS.LOG_TYPES.AI_RESPONSE,
             data: {
                 text: aiResponseContent,
                 tokenCount: responseTokenCount,
                 outputTokens: responseTokenCount,
-                inputTokens: promptTokenCount,
+                inputTokens: promptTokenCount, // Ou 0 si on ne veut compter que l'output
                 modelId: modelToUse,
                 relevance: true, // Placeholder
                 coherence: true,
                 completeness: true,
                 problemSolved: false, // Placeholder
                 isFiscalEconomicInsight: aiResponseContent.toLowerCase().includes('fiscal') || aiResponseContent.toLowerCase().includes('économie'),
-                isMetierSpecificSolution: false
+                isMetierSpecificSolution: false,
+                // NOUVEAU: Ajout des drapeaux de contexte à la réponse
+                isEducationalContent: responseContextFlags.isEducationalContent,
+                isPracticalGuidance: responseContextFlags.isPracticalGuidance,
+                skillAcquisitionImpact: responseContextFlags.skillAcquisitionImpact,
+                professionalGrowthImpact: responseContextFlags.professionalGrowthImpact,
+                // Flags de taxe aussi
+                isCommercialUse: responseContextFlags.isCommercialUse,
+                isLegalCompliance: responseContextFlags.isLegalCompliance,
+                isEducationalUse: responseContextFlags.isEducationalUse,
+                isNonProfitOrPersonalUse: responseContextFlags.isNonProfitOrPersonalUse,
+                campaignRelatedUtmiShare: responseContextFlags.campaignRelatedUtmiShare,
             }
         };
         const aiResponseUtmiResult = calculateUtmi(aiResponseInteractionData, { userCvnuValue: 0.5 }, MODEL_QUALITY_SCORES);
 
+        // Aggrégation des UTMi et coûts pour la log et la réponse client
+        const totalUtmiForInteraction = promptUtmiResult.utmi + aiResponseUtmiResult.utmi;
+        const totalEstimatedCostForInteraction = promptUtmiResult.estimatedCostUSD + aiResponseUtmiResult.estimatedCostUSD;
+        const totalTaxeIAForInteraction = promptUtmiResult.taxeIAAmount + aiResponseUtmiResult.taxeIAAmount;
+
+
         writeLog({
             type: 'AI_RESPONSE_PUNCTUAL',
+            userId: userId,
             prompt: userPrompt,
             response: aiResponseContent,
             model: modelToUse,
-            utmi: aiResponseUtmiResult.utmi,
-            estimatedCost: aiResponseUtmiResult.estimatedCostUSD, // Renommé pour cohérence avec le reste
-            processingTime: processingTime
+            utmi: totalUtmiForInteraction,
+            estimatedCost: totalEstimatedCostForInteraction,
+            taxeIAAmount: totalTaxeIAForInteraction,
+            processingTime: processingTime,
+            promptContextFlags: promptContextFlags, // Log les drapeaux du prompt
+            responseContextFlags: responseContextFlags // Log les drapeaux de la réponse
         });
 
-        res.status(200).json({ response: aiResponseContent, utmi: aiResponseUtmiResult.utmi, estimatedCost: aiResponseUtmiResult.estimatedCostUSD });
+        res.status(200).json({
+            response: aiResponseContent,
+            utmi: totalUtmiForInteraction,
+            estimatedCost: totalEstimatedCostForInteraction,
+            taxeIAAmount: totalTaxeIAForInteraction
+        });
 
     } else {
-        writeLog({ type: 'ERROR', message: 'Réponse IA vide', prompt: userPrompt, model: modelToUse });
+        writeLog({ type: 'ERROR', message: 'Réponse IA vide', prompt: userPrompt, model: modelToUse, userId: userId });
         res.status(500).json({ error: "L'IA n'a pas pu générer de réponse." });
     }
 
@@ -202,12 +343,19 @@ app.post('/api/generate', async (req, res) => {
     if (error.response && error.response.status === 429) {
         res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
     } else {
-        // Gérer les erreurs de service (5xx) spécifiquement
         const errorMessage = error.response && error.response.status >= 500
             ? "Le service Groq est actuellement indisponible. Veuillez réessayer plus tard."
             : error.message;
 
-        writeLog({ type: 'ERROR', message: `Erreur API Groq (ponctuel): ${errorMessage}`, details: error.message, prompt: userPrompt, model: modelToUse, status: error.response?.status || 'N/A' });
+        writeLog({
+            type: 'ERROR',
+            message: `Erreur API Groq (ponctuel): ${errorMessage}`,
+            details: error.message,
+            prompt: userPrompt,
+            model: modelToUse,
+            userId: userId,
+            status: error.response?.status || 'N/A'
+        });
         res.status(500).json({ error: `Une erreur interne est survenue lors de la communication avec l'IA: ${errorMessage}` });
     }
   }
@@ -225,7 +373,8 @@ app.get('/api/dashboard-insights', (req, res) => {
         }
         try {
             const logs = JSON.parse(data.toString());
-            const insights = calculateDashboardInsights(logs);
+            // Passe COEFFICIENTS.EXCHANGE_RATES si vous le souhaitez, mais dashboardInsights n'en a pas besoin ici
+            const insights = calculateDashboardInsights(logs, MODEL_QUALITY_SCORES);
             res.status(200).json(insights);
         } catch (parseError) {
             console.error("Erreur parsing logs pour insights:", parseError);
@@ -249,15 +398,15 @@ app.get('/api/conversations', (req, res) => {
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
 
-  // IMPORTANT: conversations should be loaded from disk once, or a proper DB
-  // For now, it's an in-memory array.
   const allConversationsSorted = conversations.slice().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
   const paginatedConversations = allConversationsSorted.slice(startIndex, endIndex);
   const totalCount = allConversationsSorted.length;
   const totalPages = Math.ceil(totalCount / limit);
 
-  writeLog({ type: 'CONVERSATION_HISTORY', action: 'READ_ALL', page, limit, count: paginatedConversations.length, totalCount });
+  const userId = req.query.userId || 'guest_user';
+
+  writeLog({ type: 'CONVERSATION_HISTORY', action: 'READ_ALL', page, limit, count: paginatedConversations.length, totalCount, userId: userId });
 
   res.status(200).json({
     conversations: paginatedConversations.map(({ id, createdAt, title, utmi_total, estimated_cost_total_usd }) => ({ id, createdAt, title, utmi_total, estimated_cost_total_usd })),
@@ -274,11 +423,14 @@ app.get('/api/conversations', (req, res) => {
 app.get('/api/conversations/:id', (req, res) => {
   const { id } = req.params;
   const conversation = conversations.find(conv => conv.id === id);
+  const userId = req.query.userId || 'guest_user';
+
   if (conversation) {
-    // Exclure le message système initial si vous ne voulez pas l'envoyer au client pour l'affichage
     const userVisibleMessages = conversation.messages.filter(msg => msg.role !== 'system');
+    writeLog({ type: 'CONVERSATION_HISTORY', action: 'READ_SINGLE', conversationId: id, userId: userId });
     res.status(200).json({ ...conversation, messages: userVisibleMessages });
   } else {
+    writeLog({ type: 'CONVERSATION_HISTORY', action: 'READ_SINGLE_NOT_FOUND', conversationId: id, userId: userId });
     res.status(404).json({ error: 'Conversation non trouvée.' });
   }
 });
@@ -295,16 +447,24 @@ app.post('/api/conversations/new', (req, res) => {
   };
   const initialMessages = [systemMessage];
 
-  // Calcul UTMi pour le début de session (peut être optionnel ou basé sur le type d'utilisateur)
-  const sessionStartUtmiResult = calculateUtmi({ type: COEFFICIENTS.LOG_TYPES.SESSION_START }, { userCvnuValue: 0.5 }, MODEL_QUALITY_SCORES);
+  const userId = req.body.userId || 'guest_user';
+  const userCvnuValue = 0.5; // Placeholder
+
+  const sessionStartUtmiResult = calculateUtmi(
+      { type: COEFFICIENTS.LOG_TYPES.SESSION_START, data: {} }, // Pas de 'data' spécifique pour session start
+      { userCvnuValue: userCvnuValue },
+      MODEL_QUALITY_SCORES
+  );
 
   const newConversation = {
     id: newConversationId,
     createdAt: new Date().toISOString(),
     messages: initialMessages,
-    title: `Conversation ${new Date().toLocaleString()}`, // Titre par défaut
+    title: `Conversation ${new Date().toLocaleString()}`,
+    userId: userId,
     utmi_total: sessionStartUtmiResult.utmi,
-    estimated_cost_total_usd: sessionStartUtmiResult.estimatedCostUSD
+    estimated_cost_total_usd: sessionStartUtmiResult.estimatedCostUSD,
+    taxeIAAmount_total: sessionStartUtmiResult.taxeIAAmount, // NOUVEAU: Total Taxe IA pour la conversation
   };
   conversations.push(newConversation);
   saveConversations();
@@ -312,8 +472,10 @@ app.post('/api/conversations/new', (req, res) => {
       type: 'CONVERSATION_MANAGEMENT',
       action: 'NEW_CONVERSATION',
       conversationId: newConversationId,
+      userId: userId,
       utmi_generated: newConversation.utmi_total,
-      estimated_cost_usd: newConversation.estimated_cost_total_usd
+      estimated_cost_usd: newConversation.estimated_cost_total_usd,
+      taxeIAAmount: newConversation.taxeIAAmount_total, // NOUVEAU: Log la taxe
   });
   res.status(201).json(newConversation);
 });
@@ -325,7 +487,7 @@ app.post('/api/conversations/new', (req, res) => {
 app.post('/api/conversations/:id/message', async (req, res) => {
   const { id } = req.params;
   const userMessageContent = req.body.message;
-  const modelToUse = config.groq.model; // Modèle par défaut du chatbot
+  const modelToUse = config.groq.model;
 
   if (!userMessageContent) {
     writeLog({ type: 'CONVERSATION_ERROR', action: 'SEND_MESSAGE_FAIL', reason: 'Missing message', conversationId: id });
@@ -334,11 +496,16 @@ app.post('/api/conversations/:id/message', async (req, res) => {
 
   const conversationIndex = conversations.findIndex(conv => conv.id === id);
   if (conversationIndex === -1) {
-    writeLog({ type: 'CONVERSATION_ERROR', action: 'SEND_MESSAGE_FAIL', reason: 'Conversation non trouvée', conversationId: id });
+    writeLog({ type: 'CONVERSATION_ERROR', action: 'SEND_MESSAGE_FAIL', reason: 'Conversation not found', conversationId: id });
     return res.status(404).json({ error: 'Conversation non trouvée.' });
   }
 
   const currentConversation = conversations[conversationIndex];
+  const userId = currentConversation.userId || 'guest_user';
+  const userCvnuValue = 0.5; // Placeholder
+
+  // Déterminer les drapeaux de contexte pour le message utilisateur
+  const userMessageContextFlags = determineInteractionContextFlags(userMessageContent, userId);
 
   // Calcul UTMi pour le message utilisateur
   const userPromptInteractionData = {
@@ -347,9 +514,11 @@ app.post('/api/conversations/:id/message', async (req, res) => {
           text: userMessageContent,
           wordCount: userMessageContent.split(/\s+/).filter(word => word.length > 0).length,
           inputTokens: Math.ceil(userMessageContent.length / 4),
+          modelId: modelToUse, // Ajout du modelId pour que calculateUtmi puisse l'utiliser pour le coût
+          ...userMessageContextFlags // Spread all context flags
       }
   };
-  const userUtmiResult = calculateUtmi(userPromptInteractionData, { userCvnuValue: 0.5 }, MODEL_QUALITY_SCORES);
+  const userUtmiResult = calculateUtmi(userPromptInteractionData, { userCvnuValue: userCvnuValue }, MODEL_QUALITY_SCORES);
 
   // Add user message to conversation history
   currentConversation.messages.push({
@@ -357,23 +526,28 @@ app.post('/api/conversations/:id/message', async (req, res) => {
       content: userMessageContent,
       timestamp: new Date().toISOString(),
       utmi: userUtmiResult.utmi,
-      estimated_cost_usd: userUtmiResult.estimatedCostUSD
+      estimated_cost_usd: userUtmiResult.estimatedCostUSD,
+      taxeIAAmount: userUtmiResult.taxeIAAmount,
+      contextFlags: userMessageContextFlags, // Log les drapeaux de contexte
   });
   currentConversation.utmi_total = (currentConversation.utmi_total || 0) + userUtmiResult.utmi;
   currentConversation.estimated_cost_total_usd = (currentConversation.estimated_cost_total_usd || 0) + userUtmiResult.estimatedCostUSD;
+  currentConversation.taxeIAAmount_total = (currentConversation.taxeIAAmount_total || 0) + userUtmiResult.taxeIAAmount; // NOUVEAU: Ajout de la taxe totale
 
   writeLog({
       type: 'CONVERSATION_MESSAGE',
       action: 'USER_MESSAGE_SENT',
       conversationId: id,
+      userId: userId,
       userMessage: userMessageContent.substring(0, 100) + '...',
       utmi: userUtmiResult.utmi,
       estimated_cost_usd: userUtmiResult.estimatedCostUSD,
-      interaction: userPromptInteractionData
+      taxeIAAmount: userUtmiResult.taxeIAAmount,
+      interactionData: userPromptInteractionData.data, // Log toutes les données d'interaction passées
+      contextFlags: userMessageContextFlags
   });
 
   try {
-    // Send entire conversation history to Groq (including system message)
     const messagesForGroq = currentConversation.messages.map(msg => ({
       role: msg.role,
       content: msg.content
@@ -386,11 +560,14 @@ app.post('/api/conversations/:id/message', async (req, res) => {
       max_tokens: config.groq.maxTokens,
     });
 
-    const aiResponseContent = chatCompletion.choices[0]?.message?.content; // Corrected line
+    const aiResponseContent = chatCompletion.choices[0]?.message?.content;
     const responseTokenCount = chatCompletion.usage?.output_tokens || Math.ceil(aiResponseContent?.length / 4);
     const promptTokenCount = chatCompletion.usage?.prompt_tokens || Math.ceil(messagesForGroq.map(m => m.content).join('').length / 4);
 
     if (aiResponseContent) {
+        // Déterminer les drapeaux de contexte pour la réponse IA
+        const aiResponseContextFlags = determineInteractionContextFlags(aiResponseContent, userId);
+
         // Calcul UTMi pour la réponse IA
         const aiResponseInteractionData = {
             type: COEFFICIENTS.LOG_TYPES.AI_RESPONSE,
@@ -405,10 +582,11 @@ app.post('/api/conversations/:id/message', async (req, res) => {
                 completeness: true,
                 problemSolved: false, // Placeholder
                 isFiscalEconomicInsight: aiResponseContent.toLowerCase().includes('fiscal') || aiResponseContent.toLowerCase().includes('économie'),
-                isMetierSpecificSolution: false
+                isMetierSpecificSolution: false,
+                ...aiResponseContextFlags // Spread all context flags
             }
         };
-        const aiUtmiResult = calculateUtmi(aiResponseInteractionData, { userCvnuValue: 0.5 }, MODEL_QUALITY_SCORES);
+        const aiUtmiResult = calculateUtmi(aiResponseInteractionData, { userCvnuValue: userCvnuValue }, MODEL_QUALITY_SCORES);
 
         // Add AI response to conversation history
         currentConversation.messages.push({
@@ -416,10 +594,13 @@ app.post('/api/conversations/:id/message', async (req, res) => {
             content: aiResponseContent,
             timestamp: new Date().toISOString(),
             utmi: aiUtmiResult.utmi,
-            estimated_cost_usd: aiUtmiResult.estimatedCostUSD
+            estimated_cost_usd: aiUtmiResult.estimatedCostUSD,
+            taxeIAAmount: aiUtmiResult.taxeIAAmount,
+            contextFlags: aiResponseContextFlags, // Log les drapeaux de contexte
         });
         currentConversation.utmi_total = (currentConversation.utmi_total || 0) + aiUtmiResult.utmi;
         currentConversation.estimated_cost_total_usd = (currentConversation.estimated_cost_total_usd || 0) + aiUtmiResult.estimatedCostUSD;
+        currentConversation.taxeIAAmount_total = (currentConversation.taxeIAAmount_total || 0) + aiUtmiResult.taxeIAAmount; // NOUVEAU: Ajout de la taxe totale
 
         saveConversations();
 
@@ -427,21 +608,28 @@ app.post('/api/conversations/:id/message', async (req, res) => {
             type: 'CONVERSATION_MESSAGE',
             action: 'AI_RESPONSE_RECEIVED',
             conversationId: id,
+            userId: userId,
             aiResponse: aiResponseContent.substring(0, 100) + '...',
             utmi: aiUtmiResult.utmi,
             estimated_cost_usd: aiUtmiResult.estimatedCostUSD,
-            interaction: aiResponseInteractionData
+            taxeIAAmount: aiUtmiResult.taxeIAAmount,
+            interactionData: aiResponseInteractionData.data, // Log toutes les données d'interaction passées
+            contextFlags: aiResponseContextFlags
         });
-        res.status(200).json({ aiResponse: aiResponseContent, utmi: aiUtmiResult.utmi, estimated_cost_usd: aiUtmiResult.estimatedCostUSD });
+        res.status(200).json({
+            aiResponse: aiResponseContent,
+            utmi: aiUtmiResult.utmi,
+            estimated_cost_usd: aiUtmiResult.estimatedCostUSD,
+            taxeIAAmount: aiUtmiResult.taxeIAAmount
+        });
     } else {
       console.warn(`⚠️ Groq n'a pas généré de contenu pour la conversation ${id}.`);
-      writeLog({ type: 'CONVERSATION_ERROR', action: 'AI_RESPONSE_EMPTY', conversationId: id });
+      writeLog({ type: 'CONVERSATION_ERROR', action: 'AI_RESPONSE_EMPTY', conversationId: id, userId: userId });
       res.status(500).json({ error: "L'IA n'a pas pu générer de réponse." });
     }
 
   } catch (error) {
     console.error(`❌ Erreur lors de l'appel à l'API Groq pour la conversation ${id}:`, error);
-    // Gérer les erreurs de service (5xx) spécifiquement
     const errorMessage = error.response && error.response.status >= 500
         ? "Le service Groq est actuellement indisponible. Veuillez réessayer plus tard."
         : error.message;
@@ -453,6 +641,7 @@ app.post('/api/conversations/:id/message', async (req, res) => {
             type: 'CONVERSATION_ERROR',
             action: 'AI_API_ERROR',
             conversationId: id,
+            userId: userId,
             errorMessage: `Erreur API Groq: ${errorMessage}`,
             stack: error.stack?.substring(0, 500) + '...' || 'N/A',
             status: error.response?.status || 'N/A'
@@ -469,14 +658,16 @@ app.post('/api/conversations/:id/message', async (req, res) => {
 app.delete('/api/conversations/:id', (req, res) => {
   const { id } = req.params;
   const initialLength = conversations.length;
+  const userId = req.query.userId || 'guest_user';
+
   conversations = conversations.filter(conv => conv.id !== id);
 
   if (conversations.length < initialLength) {
     saveConversations();
-    writeLog({ type: 'CONVERSATION_MANAGEMENT', action: 'CONVERSATION_DELETED', status: 'SUCCESS', conversationId: id });
+    writeLog({ type: 'CONVERSATION_MANAGEMENT', action: 'CONVERSATION_DELETED', status: 'SUCCESS', conversationId: id, userId: userId });
     res.status(204).send();
   } else {
-    writeLog({ type: 'CONVERSATION_MANAGEMENT', action: 'CONVERSATION_DELETED', status: 'NOT_FOUND', conversationId: id });
+    writeLog({ type: 'CONVERSATION_MANAGEMENT', action: 'CONVERSATION_DELETED', status: 'NOT_FOUND', conversationId: id, userId: userId });
     res.status(404).json({ error: `Conversation avec l'ID ${id} non trouvée.` });
   }
 });
@@ -492,27 +683,26 @@ app.delete('/api/conversations/:id', (req, res) => {
  */
 app.post('/api/cv/parse-and-structure', async (req, res) => {
     const { cvContent } = req.body;
+    const userId = req.body.userId || 'guest_user';
+
     if (!cvContent) {
         return res.status(400).json({ error: 'Le contenu du CV est manquant.' });
     }
     try {
-        // Appelle la fonction de génération de données structurées du nouveau module
         const structuredData = await generateStructuredCvData(cvContent);
-        // Sauvegarder la dernière structure de CV générée pour un accès facile par d'autres routes
         fs.writeFileSync(config.lastStructuredCvFilePath, JSON.stringify(structuredData, null, 2), 'utf8');
-        writeLog({ type: 'CV_PROCESSING', action: 'PARSE_AND_STRUCTURE', status: 'SUCCESS', data: structuredData.nom || 'N/A' });
+        writeLog({ type: 'CV_PROCESSING', action: 'PARSE_AND_STRUCTURE', status: 'SUCCESS', data: structuredData.nom || 'N/A', userId: userId });
         res.status(200).json(structuredData);
     } catch (error) {
         console.error('Erreur lors du parsing et structuration du CV:', error);
         if (error.response && error.response.status === 429) {
             res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer de structurer le CV." });
         } else {
-            // Gérer les erreurs de service (5xx) spécifiquement
             const errorMessage = error.response && error.response.status >= 500
                 ? "Le service Groq est actuellement indisponible. Veuillez réessayer plus tard."
                 : error.message;
 
-            writeLog({ type: 'CV_PROCESSING', action: 'PARSE_AND_STRUCTURE', status: 'ERROR', error: `Erreur API Groq: ${errorMessage}`, details: error.message, status_code: error.response?.status || 'N/A' });
+            writeLog({ type: 'CV_PROCESSING', action: 'PARSE_AND_STRUCTURE', status: 'ERROR', error: `Erreur API Groq: ${errorMessage}`, details: error.message, status_code: error.response?.status || 'N/A', userId: userId });
             res.status(500).json({ error: `Échec de l'analyse et de la structuration du CV: ${errorMessage}`, details: error.message });
         }
     }
@@ -526,18 +716,19 @@ app.post('/api/cv/parse-and-structure', async (req, res) => {
  */
 app.post('/api/cv/render-html', (req, res) => {
     const { cvData } = req.body;
+    const userId = req.body.userId || 'guest_user';
+
     if (!cvData) {
         return res.status(400).json({ error: 'Les données structurées du CV sont manquantes.' });
     }
     try {
-        // Appelle la fonction de rendu HTML du nouveau module
         const htmlContent = renderCvHtml(cvData);
-        writeLog({ type: 'CV_PROCESSING', action: 'RENDER_HTML', status: 'SUCCESS', name: cvData.nom || 'N/A' });
+        writeLog({ type: 'CV_PROCESSING', action: 'RENDER_HTML', status: 'SUCCESS', name: cvData.nom || 'N/A', userId: userId });
         res.setHeader('Content-Type', 'text/html');
         res.status(200).send(htmlContent);
     } catch (error) {
         console.error('Erreur lors du rendu HTML du CV:', error);
-        writeLog({ type: 'CV_PROCESSING', action: 'RENDER_HTML', status: 'ERROR', error: error.message });
+        writeLog({ type: 'CV_PROCESSING', action: 'RENDER_HTML', status: 'ERROR', error: error.message, userId: userId });
         res.status(500).json({ error: 'Échec du rendu HTML du CV.', details: error.message });
     }
 });
@@ -548,16 +739,21 @@ app.post('/api/cv/render-html', (req, res) => {
  * Utile pour pré-remplir le formulaire d'édition.
  */
 app.get('/api/cv/last-structured-data', (req, res) => {
+    const userId = req.query.userId || 'guest_user';
+
     if (fs.existsSync(config.lastStructuredCvFilePath)) {
         try {
             const data = fs.readFileSync(config.lastStructuredCvFilePath, 'utf8');
             const structuredCv = JSON.parse(data);
+            writeLog({ type: 'CV_PROCESSING', action: 'LOAD_LAST_STRUCTURED_DATA', status: 'SUCCESS', userId: userId });
             res.status(200).json(structuredCv);
         } catch (error) {
             console.error('Erreur lors de la lecture du dernier CV structuré:', error);
+            writeLog({ type: 'CV_PROCESSING', action: 'LOAD_LAST_STRUCTURED_DATA', status: 'ERROR', error: error.message, userId: userId });
             res.status(500).json({ error: 'Impossible de lire les dernières données de CV structurées.', details: error.message });
         }
     } else {
+        writeLog({ type: 'CV_PROCESSING', action: 'LOAD_LAST_STRUCTURED_DATA', status: 'NOT_FOUND', userId: userId });
         res.status(404).json({ error: 'Aucune donnée de CV structurée trouvée.' });
     }
 });
@@ -570,30 +766,53 @@ app.get('/api/cv/last-structured-data', (req, res) => {
  */
 app.post('/api/valorize-cv', async (req, res) => {
     const { cvContent } = req.body;
+    const userId = req.body.userId || 'guest_user';
+    const userCvnuValue = 0.5; // Placeholder
 
     if (!cvContent) {
         return res.status(400).json({ message: 'Contenu du CV manquant pour la valorisation.' });
     }
 
     try {
-        // Appelle la fonction de valorisation avec Groq (du module groq_cv_analyse)
-        // Note: Assurez-vous que valorizeSkillsWithGroq est bien configuré pour utiliser la clé API Groq
         const valorizedResult = await require('./src/groq_cv_analyse').valorizeSkillsWithGroq(cvContent);
+
+        // Déterminer les drapeaux de contexte pour la valorisation du CV
+        const valorizationContextFlags = determineInteractionContextFlags(cvContent, userId);
+
+        const valorizationUtmiResult = calculateUtmi(
+            { type: COEFFICIENTS.LOG_TYPES.CV_VALORIZATION, data: { text: cvContent, ...valorizationContextFlags } },
+            { userCvnuValue: userCvnuValue },
+            MODEL_QUALITY_SCORES
+        );
+
+        writeLog({
+            type: 'CV_PROCESSING',
+            action: 'VALORIZE_CV',
+            status: 'SUCCESS',
+            userId: userId,
+            utmi: valorizationUtmiResult.utmi,
+            estimatedCost: valorizationUtmiResult.estimatedCostUSD,
+            taxeIAAmount: valorizationUtmiResult.taxeIAAmount,
+            contextFlags: valorizationContextFlags
+        });
 
         res.status(200).json({
             message: 'Compétences du CV valorisées avec succès.',
-            valorization: valorizedResult
+            valorization: valorizedResult,
+            utmi: valorizationUtmiResult.utmi,
+            estimatedCost: valorizationUtmiResult.estimatedCostUSD,
+            taxeIAAmount: valorizationUtmiResult.taxeIAAmount
         });
     } catch (error) {
         console.error('Erreur lors de la valorisation du CV avec Groq (route /api/valorize-cv):', error);
         if (error.response && error.response.status === 429) {
             res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
         } else {
-            // Gérer les erreurs de service (5xx) spécifiquement
             const errorMessage = error.response && error.response.status >= 500
                 ? "Le service Groq est actuellement indisponible. Veuillez réessayer plus tard."
                 : error.message;
 
+            writeLog({ type: 'CV_PROCESSING', action: 'VALORIZE_CV', status: 'ERROR', error: `Erreur API Groq: ${errorMessage}`, details: error.message, userId: userId });
             res.status(500).json({ message: `Erreur serveur lors de la valorisation du CV: ${errorMessage}`, error: error.message });
         }
     }
@@ -609,9 +828,20 @@ app.get('/api/conversations/:id/cv-professional-summary', async (req, res) => {
         return res.status(404).json({ error: 'Conversation non trouvée.' });
     }
 
+    const userId = conversation.userId || 'guest_user';
+    const userCvnuValue = 0.5; // Placeholder
+
     try {
-        // Appelle le nouveau module pour analyser la conversation et générer le résumé
         const professionalSummaryMarkdown = await generateProfessionalSummary(conversation.messages);
+
+        // Déterminer les drapeaux de contexte pour la génération du résumé
+        const summaryContextFlags = determineInteractionContextFlags(professionalSummaryMarkdown, userId);
+
+        const summaryUtmiResult = calculateUtmi(
+            { type: COEFFICIENTS.LOG_TYPES.CV_SUMMARY_GENERATE, data: { text: professionalSummaryMarkdown, ...summaryContextFlags } },
+            { userCvnuValue: userCvnuValue },
+            MODEL_QUALITY_SCORES
+        );
 
         res.setHeader('Content-Type', 'text/markdown');
         res.status(200).send(professionalSummaryMarkdown);
@@ -621,7 +851,12 @@ app.get('/api/conversations/:id/cv-professional-summary', async (req, res) => {
             action: 'GENERATE_SUMMARY',
             status: 'SUCCESS',
             conversationId: id,
-            summaryLength: professionalSummaryMarkdown.length
+            userId: userId,
+            summaryLength: professionalSummaryMarkdown.length,
+            utmi: summaryUtmiResult.utmi,
+            estimatedCost: summaryUtmiResult.estimatedCostUSD,
+            taxeIAAmount: summaryUtmiResult.taxeIAAmount,
+            contextFlags: summaryContextFlags
         });
 
     } catch (error) {
@@ -629,7 +864,6 @@ app.get('/api/conversations/:id/cv-professional-summary', async (req, res) => {
         if (error.response && error.response.status === 429) {
             res.status(429).json({ error: "Trop de requêtes. Veuillez patienter un instant avant de réessayer." });
         } else {
-            // Gérer les erreurs de service (5xx) spécifiquement
             const errorMessage = error.response && error.response.status >= 500
                 ? "Le service Groq est actuellement indisponible. Veuillez réessayer plus tard."
                 : error.message;
@@ -639,6 +873,7 @@ app.get('/api/conversations/:id/cv-professional-summary', async (req, res) => {
                 action: 'GENERATE_SUMMARY',
                 status: 'ERROR',
                 conversationId: id,
+                userId: userId,
                 error: `Erreur API Groq: ${errorMessage}`,
                 details: error.message
             });

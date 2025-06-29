@@ -1,13 +1,6 @@
 // public/pagination.js
 
-// DOM elements
-const conversationListElement = document.getElementById('conversation-list');
-const prevPageBtn = document.querySelector('#conversation-pagination button[data-page-action="prev"]');
-const nextPageBtn = document.querySelector('#conversation-pagination button[data-page-action="next"]');
-const currentPageInfoSpan = document.getElementById('current-page-info');
-
-// State variables
-let allConversations = { conversations: [], totalCount: 0 }; // Initialize with empty array and count
+// DOM elements will now be passed to the functions, not globally retrieved
 let currentPage = 1;
 let itemsPerPage = 5; // Default value, can be overridden
 
@@ -18,33 +11,41 @@ let fetchConversationsCallback = null;
 let activeConversationId = null; // Track the currently active conversation
 
 /**
- * Initializes pagination controls with necessary callbacks.
+ * Initializes pagination controls with necessary callbacks and DOM elements.
+ * @param {HTMLElement} prevBtn - The previous page button element.
+ * @param {HTMLElement} nextBtn - The next page button element.
+ * @param {HTMLElement} currentPageInfoEl - The element displaying current page info.
  * @param {function} fetchConversationsCb - Callback to fetch conversations for a given page.
  * @param {function} selectConversationCb - Callback to select a conversation.
  * @param {function} deleteConversationCb - Callback to delete a conversation.
  */
-export function initPaginationControls(fetchConversationsCb, selectConversationCb, deleteConversationCb) {
+export function initPaginationControls(prevBtn, nextBtn, currentPageInfoEl, fetchConversationsCb, selectConversationCb, deleteConversationCb) {
     fetchConversationsCallback = fetchConversationsCb;
     selectConversationCallback = selectConversationCb;
     deleteConversationCallback = deleteConversationCb;
 
-    if (prevPageBtn) {
-        prevPageBtn.addEventListener('click', () => {
-            if (currentPage > 1) {
-                currentPage--;
-                fetchConversationsCallback(currentPage);
-            }
-        });
+    // Remove existing listeners to prevent duplicates if init is called multiple times
+    if (prevBtn) {
+        prevBtn.removeEventListener('click', handlePrevClick);
+        prevBtn.addEventListener('click', handlePrevClick);
+    }
+    if (nextBtn) {
+        nextBtn.removeEventListener('click', handleNextClick);
+        nextBtn.addEventListener('click', handleNextClick);
     }
 
-    if (nextPageBtn) {
-        const totalPages = Math.ceil(allConversations.totalCount / itemsPerPage);
-        nextPageBtn.addEventListener('click', () => {
-            if (currentPage < totalPages) {
-                currentPage++;
-                fetchConversationsCallback(currentPage);
-            }
-        });
+    function handlePrevClick() {
+        if (currentPage > 1) {
+            currentPage--;
+            fetchConversationsCallback(currentPage);
+        }
+    }
+
+    function handleNextClick() {
+        // totalPages is calculated dynamically inside renderChatConversationList,
+        // so we don't need it here. The button will be disabled if on last page.
+        currentPage++; // Increment first, then fetch. fetch will adjust if out of bounds.
+        fetchConversationsCallback(currentPage);
     }
 }
 
@@ -54,7 +55,7 @@ export function initPaginationControls(fetchConversationsCb, selectConversationC
  */
 export function setActiveConversationId(id) {
     activeConversationId = id;
-    renderChatConversationList(selectConversationCallback, deleteConversationCallback); // Re-render to apply active state
+    // No direct re-render here, the call will come from cv.js's fetchConversations
 }
 
 
@@ -65,49 +66,49 @@ export function setActiveConversationId(id) {
  * @param {number} page - Current page number.
  * @param {number} perPage - Number of items per page.
  */
+let currentConversationsData = { conversations: [], totalCount: 0 };
 export function setConversations(conversationsData, totalCount, page, perPage) {
-    allConversations.conversations = conversationsData; // Store current page's data
-    allConversations.totalCount = totalCount; // Store total count
+    currentConversationsData.conversations = conversationsData; // Store current page's data
+    currentConversationsData.totalCount = totalCount; // Store total count
     currentPage = page;
     itemsPerPage = perPage;
 }
 
 /**
- * Renders the conversation list based on the current `allConversations` data.
+ * Renders the chat conversation list into a specified target element.
  * This function should be called after `setConversations`.
+ * @param {HTMLElement} targetListElement - The <ul> element where conversations should be rendered.
+ * @param {HTMLElement} prevBtn - The previous page button element.
+ * @param {HTMLElement} nextBtn - The next page button element.
+ * @param {HTMLElement} currentPageInfoEl - The element displaying current page info.
  * @param {function} selectCb - The callback function to execute when a conversation is selected.
  * @param {function} deleteCb - The callback function to execute when a conversation is deleted.
  */
-export function renderChatConversationList(selectCb, deleteCb) {
-    if (!conversationListElement) return;
-
-    conversationListElement.innerHTML = '';
-    if (!allConversations.conversations || allConversations.conversations.length === 0) {
-        conversationListElement.innerHTML = '<p class="placeholder-text">Aucune conversation. Cliquez sur "Nouvelle" pour commencer.</p>';
-        if (currentPageInfoSpan) currentPageInfoSpan.textContent = 'Page 0/0';
-        if (prevPageBtn) prevPageBtn.disabled = true;
-        if (nextPageBtn) nextPageBtn.disabled = true;
-        // Also ensure pagination controls are visible or hidden appropriately
-        const paginationControls = document.getElementById('conversation-pagination');
-        if (paginationControls) {
-            paginationControls.style.display = 'none'; // Hide if no conversations
-        }
+export function renderChatConversationList(targetListElement, prevBtn, nextBtn, currentPageInfoEl, selectCb, deleteCb) {
+    if (!targetListElement) {
+        console.error("Target list element is null in renderChatConversationList.");
         return;
     }
 
-    // Ensure pagination controls are visible if there are conversations
-    const paginationControls = document.getElementById('conversation-pagination');
-    if (paginationControls) {
-        paginationControls.style.display = 'flex'; // Show if conversations exist
+    targetListElement.innerHTML = '';
+    const conversations = currentConversationsData.conversations;
+    const totalCount = currentConversationsData.totalCount;
+    const totalPages = Math.ceil(totalCount / itemsPerPage);
+
+    if (!conversations || conversations.length === 0) {
+        targetListElement.innerHTML = '<li class="placeholder-text">Aucune conversation. Cliquez sur "Nouvelle" pour commencer.</li>';
+        if (currentPageInfoEl) currentPageInfoEl.textContent = 'Page 0/0';
+        if (prevBtn) prevBtn.disabled = true;
+        if (nextBtn) nextBtn.disabled = true;
+        return;
     }
 
-
-    allConversations.conversations.forEach(conv => {
+    conversations.forEach(conv => {
         const li = document.createElement('li');
         li.className = `conversation-item ${conv.id === activeConversationId ? 'active' : ''}`;
         li.dataset.id = conv.id;
         li.innerHTML = `
-            <span>${conv.title || `Conversation ${conv.createdAt ? new Date(conv.createdAt).toLocaleString() : conv.id.substring(0, 4) + '...'}`}</span>
+            <span>${conv.title || `Conversation ${new Date(conv.createdAt).toLocaleString()}`}</span>
             <button class="delete-conversation-btn" data-id="${conv.id}" title="Supprimer la conversation"><i class="fas fa-trash-alt"></i></button>
         `;
         li.addEventListener('click', (e) => {
@@ -124,12 +125,11 @@ export function renderChatConversationList(selectCb, deleteCb) {
                 deleteCb(e.currentTarget.dataset.id);
             });
         }
-        conversationListElement.appendChild(li);
+        targetListElement.appendChild(li);
     });
 
     // Update pagination controls display
-    const totalPages = Math.ceil(allConversations.totalCount / itemsPerPage);
-    if (currentPageInfoSpan) currentPageInfoSpan.textContent = `Page ${currentPage}/${totalPages}`;
-    if (prevPageBtn) prevPageBtn.disabled = (currentPage <= 1);
-    if (nextPageBtn) nextPageBtn.disabled = (currentPage >= totalPages);
+    if (currentPageInfoEl) currentPageInfoEl.textContent = `Page ${currentPage}/${totalPages}`;
+    if (prevBtn) prevBtn.disabled = (currentPage <= 1);
+    if (nextBtn) nextBtn.disabled = (currentPage >= totalPages);
 }

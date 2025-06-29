@@ -5,19 +5,58 @@ const genericModalTitle = document.getElementById('genericModalTitle');
 const genericModalBody = document.getElementById('genericModalBody');
 const genericModalFooter = document.getElementById('genericModalFooter');
 
-// Références aux boutons (déclarées globalement, mais initialisées lors de DOMContentLoaded dans cv.js)
 let genericCloseModalBtn, genericModalConfirmBtn, genericModalCancelBtn, genericModalOkBtn;
 
 let resolveModalPromise; // Function to resolve the promise when modal is closed
+let currentModalType; // To keep track of the active modal type for correct resolution on close
 
-// Initialisation des éléments DOM de la modale une fois le DOM chargé
+// Event handlers that will be attached once
+function handleCloseModalClick() {
+    hideModal(currentModalType === 'confirm' ? false : undefined);
+}
+
+function handleOkBtnClick() {
+    hideModal(undefined);
+}
+
+function handleConfirmBtnClick() {
+    hideModal(true);
+}
+
+function handleCancelBtnClick() {
+    hideModal(false);
+}
+
+// Initialisation des éléments DOM de la modale et attachement des listeners une seule fois
 document.addEventListener('DOMContentLoaded', () => {
     genericCloseModalBtn = document.getElementById('genericCloseModalBtn');
     genericModalConfirmBtn = document.getElementById('genericModalConfirmBtn');
     genericModalCancelBtn = document.getElementById('genericModalCancelBtn');
     genericModalOkBtn = document.getElementById('genericModalOkBtn');
-});
 
+    // Attach event listeners permanently
+    if (genericCloseModalBtn) {
+        genericCloseModalBtn.addEventListener('click', handleCloseModalClick);
+    }
+    if (genericModalOkBtn) {
+        genericModalOkBtn.addEventListener('click', handleOkBtnClick);
+    }
+    if (genericModalConfirmBtn) {
+        genericModalConfirmBtn.addEventListener('click', handleConfirmBtnClick);
+    }
+    if (genericModalCancelBtn) {
+        genericModalCancelBtn.addEventListener('click', handleCancelBtnClick);
+    }
+
+    // Close modal when clicking outside (backdrop)
+    if (genericAppModal) {
+        genericAppModal.addEventListener('click', (e) => {
+            if (e.target === genericAppModal) { // Check if the click was directly on the backdrop
+                hideModal(currentModalType === 'confirm' ? false : undefined);
+            }
+        });
+    }
+});
 
 /**
  * Shows a generic modal with customizable content and buttons.
@@ -30,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
 export function showModal(title, bodyHtml, type = 'alert', maxWidth = '500px') {
     return new Promise((resolve) => {
         resolveModalPromise = resolve; // Store resolve function for later use
+        currentModalType = type; // Store current modal type
 
         if (genericModalTitle) genericModalTitle.innerHTML = title;
         if (genericModalBody) genericModalBody.innerHTML = bodyHtml;
@@ -37,46 +77,17 @@ export function showModal(title, bodyHtml, type = 'alert', maxWidth = '500px') {
             genericAppModal.querySelector('.modal-content').style.maxWidth = maxWidth; // Set max-width
         }
 
-
         // Reset button visibility
         if (genericModalConfirmBtn) genericModalConfirmBtn.style.display = 'none';
         if (genericModalCancelBtn) genericModalCancelBtn.style.display = 'none';
         if (genericModalOkBtn) genericModalOkBtn.style.display = 'none';
 
-        // Remove existing event listeners to prevent multiple bindings
-        // IMPORTANT: Always check if the element exists before trying to add/remove listeners
-        const cleanListeners = (btn, handler) => {
-            if (btn) {
-                btn.removeEventListener('click', handler);
-            }
-        };
-
-        // Remove all potential handlers before adding new ones
-        cleanListeners(genericCloseModalBtn, () => hideModal(type === 'confirm' ? false : undefined));
-        cleanListeners(genericModalOkBtn, () => hideModal(undefined));
-        cleanListeners(genericModalConfirmBtn, () => hideModal(true));
-        cleanListeners(genericModalCancelBtn, () => hideModal(false));
-
-        // Configure and add new event listeners based on type
+        // Configure button visibility based on type
         if (type === 'confirm') {
-            if (genericModalConfirmBtn) {
-                genericModalConfirmBtn.style.display = 'inline-block';
-                genericModalConfirmBtn.addEventListener('click', () => hideModal(true));
-            }
-            if (genericModalCancelBtn) {
-                genericModalCancelBtn.style.display = 'inline-block';
-                genericModalCancelBtn.addEventListener('click', () => hideModal(false));
-            }
+            if (genericModalConfirmBtn) genericModalConfirmBtn.style.display = 'inline-block';
+            if (genericModalCancelBtn) genericModalCancelBtn.style.display = 'inline-block';
         } else { // 'alert' or 'info'
-            if (genericModalOkBtn) {
-                genericModalOkBtn.style.display = 'inline-block';
-                genericModalOkBtn.addEventListener('click', () => hideModal(undefined));
-            }
-        }
-
-        // Add close button listener
-        if (genericCloseModalBtn) {
-            genericCloseModalBtn.addEventListener('click', () => hideModal(type === 'confirm' ? false : undefined));
+            if (genericModalOkBtn) genericModalOkBtn.style.display = 'inline-block';
         }
 
         // Show the modal
@@ -93,5 +104,6 @@ function hideModal(result) {
     if (resolveModalPromise) {
         resolveModalPromise(result);
         resolveModalPromise = null; // Clear the stored resolve function
+        currentModalType = null; // Clear the modal type
     }
 }
