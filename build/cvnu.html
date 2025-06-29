@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVNU | Générateur & Assistant IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="ux.css">
+    <!-- Icônes pour une meilleure UX -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header class="app-header">
+        <h1 class="app-title"><i class="fas fa-magic"></i> CVNU | Votre Carrière Augmentée par l'IA</h1>
+        <p class="app-tagline">Développez et valorisez votre profil professionnel grâce à des interactions intelligentes.</p>
+        <div class="header-actions">
+            <a href="#" id="openAboutModal" class="btn btn-secondary"><i class="fas fa-info-circle"></i> À Propos</a>
+            <!-- Le bouton de téléchargement de la documentation sera ici si souhaité, sinon il est retiré -->
+        </div>
+    </header>
+
+    <main class="main-content-grid">
+        <!-- Section 1: Dashboard UTMi (mise en haut pour la visibilité) -->
+        <section class="card dashboard-section">
+            <h2 class="card-title"><i class="fas fa-chart-line"></i> Tableau de Bord UTMi</h2>
+            <p class="card-intro">Quantifiez la valeur de vos interactions IA et suivez l'évolution de vos compétences.</p>
+            <div class="dashboard-grid">
+                <div class="dashboard-item metric-card">
+                    <h3>Total UTMi Générés</h3>
+                    <p id="totalUtmi" class="metric-value">Chargement...</p>
+                    <span class="metric-unit">EUR</span>
+                </div>
+                <div class="dashboard-item metric-card">
+                    <h3>Coût Total Estimé</h3>
+                    <p id="totalEstimatedCostUSD" class="metric-value">Chargement...</p>
+                    <span class="metric-unit">USD</span>
+                </div>
+                <div class="dashboard-item metric-card">
+                    <h3>Interactions Totales</h3>
+                    <p id="totalInteractionCount" class="metric-value">Chargement...</p>
+                </div>
+                <div class="dashboard-item metric-card">
+                    <h3>UTMi / Interaction</h3>
+                    <p id="averageUtmiPerInteraction" class="metric-value">Chargement...</p>
+                    <span class="metric-unit">EUR</span>
+                </div>
+                <div class="dashboard-item metric-card">
+                    <h3>Ratio UTMi / Coût</h3>
+                    <p id="totalUtmiPerCostRatio" class="metric-value">Chargement...</p>
+                </div>
+            </div>
+
+            <div class="dashboard-details">
+                <div class="dashboard-item list-card">
+                    <h3>UTMi par Type</h3>
+                    <ul id="utmiByType">Chargement...</ul>
+                </div>
+                <div class="dashboard-item list-card">
+                    <h3>UTMi par Modèle</h3>
+                    <ul id="utmiByModel">Chargement...</ul>
+                </div>
+                <div class="dashboard-item list-card">
+                    <h3>Ratio UTMi/Coût par Modèle</h3>
+                    <ul id="utmiPerCostRatioByModel">Chargement...</ul>
+                </div>
+                <div class="dashboard-item list-card">
+                    <h3>UTMi par Axe Cognitif</h3>
+                    <ul id="utmiByCognitiveAxis">Chargement...</ul>
+                </div>
+                <div class="dashboard-item list-card">
+                    <h3>UTMi par Thématique</h3>
+                    <ul>
+                        <li>Marketing: <span id="thematicUtmiMarketing">Chargement...</span> EUR</li>
+                        <li>Affiliation: <span id="thematicUtmiAffiliation">Chargement...</span> EUR</li>
+                        <li>Fiscal/Économique: <span id="thematicUtmiFiscalEconomic">Chargement...</span> EUR</li>
+                    </ul>
+                </div>
+                <div class="dashboard-item list-card">
+                    <h3>Top 5 Thèmes de Valeur</h3>
+                    <ul id="mostValuableTopics">Chargement...</ul>
+                </div>
+                <div class="dashboard-item list-card">
+                    <h3>Top 5 Activités Courantes</h3>
+                    <ul id="mostCommonActivities">Chargement...</ul>
+                </div>
+                <div class="dashboard-item list-card">
+                    <h3>Taux de Change Actuels (vs EUR)</h3>
+                    <ul id="exchangeRates">Chargement...</ul>
+                </div>
+            </div>
+            <button id="refreshDashboardBtn" class="btn btn-primary refresh-btn"><i class="fas fa-sync-alt"></i> Actualiser les Insights</button>
+        </section>
+
+        <!-- Section 2: Assistant IA Conversationnel (Chatbot) -->
+        <section class="card chat-section-main">
+            <h2 class="card-title"><i class="fas fa-comments"></i> Assistant IA Conversationnel</h2>
+            <p class="card-intro">Discutez avec votre coach IA pour révéler et structurer vos compétences professionnelles.</p>
+
+            <div class="chat-controls">
+                <button id="startNewConversationBtn" class="btn btn-secondary"><i class="fas fa-plus-circle"></i> Nouvelle Conversation</button>
+                <button id="generateCvSummaryBtn" class="btn btn-secondary" style="display:none;"><i class="fas fa-file-alt"></i> Générer Résumé CV (Markdown)</button>
+            </div>
+
+            <div class="chat-layout">
+                <div class="conversation-list-container">
+                    <h3><i class="fas fa-list"></i> Vos Conversations</h3>
+                    <ul id="conversation-list" class="conversation-list">
+                        <!-- Conversations will be loaded here -->
+                    </ul>
+                    <!-- Pagination for conversations -->
+                    <div class="pagination-controls" id="conversation-pagination">
+                        <button class="btn btn-icon" data-page-action="prev" disabled><i class="fas fa-chevron-left"></i></button>
+                        <span id="current-page-info">Page 1/1</span>
+                        <button class="btn btn-icon" data-page-action="next" disabled><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="chat-window-container">
+                    <h3><i class="fas fa-comment-dots"></i> Fenêtre de Chat <span id="current-conversation-id" class="conversation-id-display">(Sélectionnez une conversation)</span></h3>
+                    <div id="chat-window" class="chat-container custom-scrollbar">
+                        <!-- Chat messages will appear here -->
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Tapez votre message..." disabled>
+                        <button id="send-chat-btn" class="btn btn-primary" disabled><i class="fas fa-paper-plane"></i> Envoyer</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Résumé CV généré depuis le chat -->
+            <div id="cvSummarySection" style="display:none;">
+                <h3 class="card-subtitle"><i class="fas fa-file-invoice"></i> Résumé Professionnel de la Conversation (Markdown)</h3>
+                <div id="cvSummaryOutput" class="content-output custom-scrollbar">
+                    <p class="placeholder-text">Le résumé de votre conversation apparaîtra ici.</p>
+                </div>
+                <button id="downloadChatCvSummaryBtn" class="btn btn-secondary download-btn" style="display:none;"><i class="fas fa-download"></i> Télécharger le Résumé</button>
+            </div>
+        </section>
+
+        <!-- Section 3: Générateur de CV depuis un Texte -->
+        <section class="card cv-generator-section-main">
+            <h2 class="card-title"><i class="fas fa-id-card-alt"></i> Générateur de CV depuis un Texte</h2>
+            <p class="card-intro">Collez une conversation historique pour générer un CV et en valoriser les compétences.</p>
+
+            <div class="input-group">
+                <label for="conversationInput">Conversation Historique (Markdown) :</label>
+                <textarea id="conversationInput" rows="10" placeholder="Collez ici le contenu Markdown de votre conversation avec l'IA.
+Exemple:
+
+# Conversation Chabotes - Utilisateur (ID: conv_001)
+## Date: 2025-06-28 14:30
+
+### Échange 1
+**Utilisateur:** J'ai résolu le bug de l'API Stripe en mettant à jour Node.js.
+**Chabotes (IA):** Bonne initiative !
+
+### Échange 2
+**Utilisateur:** J'ai documenté la solution et automatisé le déploiement.
+**Chabotes (IA):** Proactif et efficace.
+"></textarea>
+                <button id="analyzeAndGenerateBtn" class="btn btn-primary"><i class="fas fa-robot"></i> Analyser le Texte & Générer le CV</button>
+            </div>
+
+            <div class="output-group">
+                <h3 class="card-subtitle"><i class="fas fa-file-lines"></i> CV Généré</h3>
+                <div id="cvDisplay" class="content-output custom-scrollbar">
+                    <p class="placeholder-text">Votre CV HTML sera généré ici après l'analyse.</p>
+                </div>
+                <button id="downloadGeneratedCvBtn" class="btn btn-secondary download-btn" style="display:none;"><i class="fas fa-download"></i> Télécharger le CV HTML</button>
+                <button id="valorizeCvBtn" class="btn btn-primary mt-10" disabled><i class="fas fa-award"></i> Valoriser les Compétences (via Groq)</button>
+            </div>
+
+            <div class="output-group">
+                <h3 class="card-subtitle"><i class="fas fa-lightbulb"></i> Valorisation des Compétences par l'IA</h3>
+                <div id="valorizationDisplay" class="content-output custom-scrollbar">
+                    <p class="placeholder-text">La valorisation des compétences apparaîtra ici après l'analyse Groq.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Interaction IA Ponctuelle -->
+        <section class="card punctual-ia-section-main">
+            <h2 class="card-title"><i class="fas fa-brain"></i> Interaction IA Ponctuelle</h2>
+            <p class="card-intro">Obtenez une réponse rapide de l'IA pour des requêtes non conversationnelles.</p>
+
+            <div class="input-group">
+                <label for="prompt-input">Votre Requête :</label>
+                <textarea id="prompt-input" rows="5" placeholder="Entrez votre requête pour l'IA ici..."></textarea>
+                <button id="generateResponseBtn" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Générer une Réponse</button>
+            </div>
+
+            <div class="output-group">
+                <h3 class="card-subtitle"><i class="fas fa-comment-alt"></i> Réponse de l'IA</h3>
+                <div id="ia-response-output" class="content-output custom-scrollbar">
+                    <p class="placeholder-text">La réponse de l'IA apparaîtra ici.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Structure -->
+    <div id="appModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Titre de la Modale</h3>
+                <button class="close-modal-btn" id="closeModalBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <p>Contenu de la modale.</p>
+            </div>
+            <div class="modal-footer" id="modalFooter">
+                <button id="modalConfirmBtn" class="btn btn-primary" style="display:none;">Confirmer</button>
+                <button id="modalCancelBtn" class="btn btn-secondary" style="display:none;">Annuler</button>
+                <button id="modalOkBtn" class="btn btn-primary" style="display:none;">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Message (for global notifications) -->
+    <div id="globalStatusMessage" class="status-message" style="display:none;"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

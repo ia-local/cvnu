@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Générateur de CV et Assistant IA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            width: 100%;
+            max-width: 1200px;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            color: #ecf0f1;
+            margin-bottom: 10px;
+        }
+        /* Style pour le bouton de téléchargement directement dans le header */
+        .download-doc-container {
+            margin-top: 20px;
+        }
+        .download-doc-button {
+            background-color: #5cb85c; /* Vert pour le téléchargement */
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none; /* Enlève le soulignement du lien */
+            font-size: 0.9em;
+            display: inline-block; /* Pour appliquer padding et margin correctement */
+            transition: background-color 0.3s ease;
+        }
+        .download-doc-button:hover {
+            background-color: #4cae4c;
+        }
+
+        .main-container { /* Renommé pour éviter conflit avec .container du CV */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin-bottom: 30px;
+            justify-content: center; /* Centrer les blocs */
+        }
+        .container { /* Conteneur de base pour les sections */
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            box-sizing: border-box;
+            flex: 1 1 45%; /* Permet aux sections de prendre environ la moitié de la largeur */
+            min-width: 400px; /* Largeur minimale pour éviter trop de compression */
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex: 1 1 100%; /* Prend toute la largeur sur les petits écrans */
+            }
+        }
+
+        .container h2 {
+            color: #2980b9;
+            margin-top: 0;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            text-align: center; /* Centrer les titres des sections */
+        }
+        textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1em;
+            resize: vertical;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        button.secondary {
+            background-color: #007bff;
+        }
+        button.secondary:hover {
+            background-color: #0056b3;
+        }
+        .cv-output, .valorization-output, .console-output {
+            background-color: #fdfdfd;
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            min-height: 150px;
+            border-radius: 5px;
+            margin-top: 15px;
+            overflow-x: auto;
+            white-space: pre-wrap; /* Pour afficher le Markdown correctement */
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .status-message {
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            width: 100%;
+            max-width: 1200px;
+            box-sizing: border-box; /* S'assurer que le padding ne déborde pas */
+        }
+        .status-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .status-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        /* Styles spécifiques au chat */
+        .chat-area {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .chat-section {
+            display: flex;
+            margin-top: 15px;
+            gap: 15px;
+        }
+        .chat-list-container, .chat-window-container {
+            flex: 1;
+        }
+        .chat-window-container {
+            flex: 2; /* Plus de place pour la fenêtre de chat */
+        }
+        .chat-container {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            height: 400px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            background-color: #fdfdff;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 70%;
+            word-wrap: break-word; /* Gérer les longs mots */
+        }
+        .chat-message.user {
+            background-color: #dcf8c6;
+            align-self: flex-end;
+        }
+        .chat-message.assistant {
+            background-color: #e0e0e0;
+            align-self: flex-start;
+        }
+        .chat-input-area {
+            display: flex;
+            margin-top: 10px;
+        }
+        .chat-input-area input {
+            flex-grow: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .chat-input-area button {
+            margin-left: 10px;
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .chat-input-area button:hover {
+            background-color: #0056b3;
+        }
+        .conversation-list {
+            list-style: none;
+            padding: 0;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            margin-top: 0; /* Ajusté */
+        }
+        .conversation-list li {
+            padding: 10px;
+            border-bottom: 1px dashed #eee;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .conversation-list li:hover {
+            background-color: #f0f0f0;
+        }
+        .conversation-list li.active {
+            background-color: #e6f7ff;
+            font-weight: bold;
+        }
+        .conversation-list li:last-child {
+            border-bottom: none;
+        }
+        .delete-conversation-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        .delete-conversation-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Styles pour l'Interaction IA Ponctuelle (Section 3) */
+        .punctual-ia-section h3 {
+            color: #34495e;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Générateur de CV et Assistant IA</h1>
+        <p>Développez votre profil professionnel à partir de vos interactions intelligentes.</p>
+        <!-- Option de téléchargement pour la documentation -->
+        <div class="download-doc-container">
+            <a href="README_CVNU.md" download="README_CVNU.md" class="download-doc-button">
+                Télécharger la Documentation Complète (README.md)
+            </a>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <!-- Section Générateur de CV (Originale et principale) -->
+        <div class="container cv-generator-section">
+            <h2>1. Génération de CV depuis un Texte</h2>
+            <section class="input-section">
+                <h3>Entrez une Conversation Historique (Markdown)</h3>
+                <textarea id="conversationInput" rows="15" placeholder="Collez ici le contenu Markdown de votre conversation avec l'IA.
+Exemple:
+
+# Conversation Chabotes - Utilisateur (ID: conv_001)
+## Date: 2025-06-28 14:30
+
+### Échange 1
+**Utilisateur:** J'ai résolu le bug de l'API Stripe en mettant à jour Node.js.
+**Chabotes (IA):** Bonne initiative !
+
+### Échange 2
+**Utilisateur:** J'ai documenté la solution et automatisé le déploiement.
+**Chabotes (IA):** Proactif et efficace.
+"></textarea>
+                <button id="analyzeAndGenerateBtn">Analyser le Texte & Générer le CV</button>
+            </section>
+
+            <section class="cv-section">
+                <h3>CV Généré</h3>
+                <div id="cvDisplay" class="cv-output">
+                    <p>Votre CV sera généré ici après l'analyse du texte collé.</p>
+                </div>
+                <button id="valorizeCvBtn" disabled>2. Valoriser les Compétences du CV (via Groq)</button>
+            </section>
+
+            <section class="valorization-section">
+                <h3>Valorisation des Compétences par l'IA</h3>
+                <div id="valorizationDisplay" class="valorization-output">
+                    <p>La valorisation des compétences apparaîtra ici après l'étape 2.</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Section Assistant IA Conversationnel (Ajoutée) -->
+        <div class="container chat-area">
+            <h2>2. Assistant IA Conversationnel</h2>
+            <button onclick="startNewConversation()" class="secondary">Nouvelle Conversation</button>
+
+            <div class="chat-section">
+                <div class="chat-list-container">
+                    <h3>Vos Conversations</h3>
+                    <ul id="conversation-list" class="conversation-list">
+                        <!-- Les conversations seront chargées ici -->
+                    </ul>
+                </div>
+                <div class="chat-window-container">
+                    <h3>Fenêtre de Chat <span id="current-conversation-id" style="font-size: 0.8em; color: #666;">(Sélectionnez une conversation)</span></h3>
+                    <div id="chat-window" class="chat-container">
+                        <!-- Les messages de chat apparaîtront ici -->
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input" placeholder="Tapez votre message..." disabled>
+                        <button id="send-chat-btn" onclick="sendMessage()" disabled>Envoyer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Interaction IA Ponctuelle (Ajoutée) -->
+        <div class="container punctual-ia-section">
+            <h2>3. Interaction IA Ponctuelle</h2>
+            <textarea id="prompt-input" rows="5" placeholder="Entrez votre requête pour l'IA ici..."></textarea>
+            <button onclick="generateResponse()">Générer une réponse</button>
+            <h3>Réponse de l'IA (Ponctuelle) :</h3>
+            <div class="console-output" id="ia-response-output">
+                <!-- La réponse ponctuelle de l'IA apparaîtra ici -->
+            </div>
+        </div>
+
+    </div>
+
+    <div id="statusMessage" class="status-message"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+[
+  {
+    "timestamp": "2025-06-29T10:21:10.647Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:21:19.677Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:21:21.893Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:21:28.758Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:21:30.746Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "d97a15d6-b0a7-43fb-af24-d590708cef3b",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T10:21:30.749Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  },
+  {
+    "timestamp": "2025-06-29T10:22:43.711Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 1
+  }
+]

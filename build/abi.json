@@ -1,0 +1,64 @@
+{
+  "abi": [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getCVNU",
+      "outputs": [
+        {
+          "name": "cvnu",
+          "type": "address"
+        }
+      ],
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "skill",
+          "type": "string"
+        }
+      ],
+      "name": "addSkill",
+      "outputs": [],
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "experience",
+          "type": "string"
+        }
+      ],
+      "name": "addExperience",
+      "outputs": [],
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_googleOAuthToken",
+          "type": "string"
+        }
+      ],
+      "name": "googleOAuthLogin",
+      "outputs": [],
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_paypalSandboxToken",
+          "type": "string"
+        }
+      ],
+      "name": "paypalSandboxLogin",
+      "outputs": [],
+      "type": "function"
+    }
+  ]
+}

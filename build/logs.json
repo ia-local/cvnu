@@ -1,0 +1,421 @@
+[
+  {
+    "timestamp": "2025-06-29T08:03:08.500Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "status": "SUCCESS",
+    "conversationId": "ed73ea33-4b94-4a54-8b3e-2ed2f20f36e0"
+  },
+  {
+    "timestamp": "2025-06-29T08:03:11.798Z",
+    "type": "CONVERSATIONAL_INTERACTION",
+    "conversationId": "ed73ea33-4b94-4a54-8b3e-2ed2f20f36e0",
+    "userMessage": "test",
+    "aiResponse": "Bonjour ! Je suis votre coach de carrière IA, prêt à vous aider à structurer votre parcours professionnel pour un CV impactant. \n\nPour commencer, pouvez-vous me parler de votre expérience professionnelle ? \n\n**Parlez-moi de vos postes les plus récents en commençant par celui le plus récent.**  Pour chaque poste, j'aimerais savoir :\n\n* **Quel était votre rôle et vos principales responsabilités ?**\n* **Quelles étaient les tâches quotidiennes que vous accomplissiez ?**\n* **Quels outils, plateformes ou logiciels utilisez-vous dans ce rôle ?**\n* **Quels sont les défis que vous avez rencontrés et comment les avez-vous surmontés ?**\n* **Quelles sont vos réalisations les plus marquantes dans ce poste ? Pouvez-vous quantifier vos succès (ex: augmentation des ventes de X%, réduction des coûts de Y%, etc.) ?**\n\nN'hésitez pas à me donner des détails précis et des exemples concrets. Plus vous serez précis, plus je pourrai vous aider à mettre en valeur vos compétences et vos réussites. \n\nEnsemble, nous allons construire un CV qui reflète votre potentiel et vous aidera à atteindre vos objectifs professionnels. \n\n\n\n",
+    "model": "gemma2-9b-it",
+    "processingTime": 0.802,
+    "utmi": 0
+  },
+  {
+    "timestamp": "2025-06-29T08:04:12.540Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "status": "SUCCESS",
+    "conversationId": "a861add7-f9cd-41a5-8765-bde106564c36"
+  },
+  {
+    "timestamp": "2025-06-29T08:04:16.112Z",
+    "type": "CONVERSATIONAL_INTERACTION",
+    "conversationId": "a861add7-f9cd-41a5-8765-bde106564c36",
+    "userMessage": "test",
+    "aiResponse": "Bonjour ! Je suis votre coach de carrière IA, prêt à vous aider à mettre en valeur vos compétences et votre savoir-faire pour la rédaction d'un CV impactant. \n\nPour commencer, parlez-moi un peu de vous. \n\n**Commençons par votre parcours professionnel :**\n\n* **Quelles sont vos expériences professionnelles les plus marquantes ?** \n* **Dans quel type de poste avez-vous excelé ?**\n* **Quelles étaient vos principales responsabilités dans chaque rôle ?**\n* **Pouvez-vous me donner un exemple d'un défi que vous avez rencontré et de la solution que vous avez apportée ?**\n* **Quelles sont vos réalisations les plus significatives, et pouvez-vous les quantifier (ex : augmentation des ventes de X%, réduction des coûts de Y%) ?**\n\n**Passons maintenant à vos compétences :**\n\n* **Quelles sont vos compétences techniques les plus développées (langages de programmation, outils logiciels, plateformes) ?**\n* **Quels sont les logiciels et outils que vous maîtrisez ?**\n* **Avez-vous des compétences en matière de communication, de travail en équipe, de résolution de problèmes, de leadership ?**\n\n**Enfin, parlez-moi de vos projets personnels et professionnels :**\n\n* **Avez-vous participé à des projets personnels ou professionnels qui mettent en valeur vos compétences ?**\n* **Avez-vous des certifications ou des formations qui pourraient être pertinentes ?**\n\nN'hésitez pas à être précis dans vos réponses et à donner des exemples concrets pour illustrer vos compétences et vos expériences. \n\nEnsemble, nous allons construire un CV qui vous permettra de vous démarquer et d'obtenir le poste de vos rêves ! 😊 \n\n\n\n",
+    "model": "gemma2-9b-it",
+    "processingTime": 0.958,
+    "utmi": 0
+  },
+  {
+    "timestamp": "2025-06-29T08:04:30.224Z",
+    "type": "PUNCTUAL_INTERACTION",
+    "prompt": "IA: Bonjour ! Je suis votre coach de carrière IA, prêt à vous aider à mettre en valeur vos compétences et votre savoir-faire pour la rédaction d'un CV impactant. Pour commencer, parlez-moi un peu de vous. **Commençons par votre parcours professionnel :** * **Quelles sont vos expériences professionnelles les plus marquantes ?** * **Dans quel type de poste avez-vous excelé ?** * **Quelles étaient vos principales responsabilités dans chaque rôle ?** * **Pouvez-vous me donner un exemple d'un défi que vous avez rencontré et de la solution que vous avez apportée ?** * **Quelles sont vos réalisations les plus significatives, et pouvez-vous les quantifier (ex : augmentation des ventes de X%, réduction des coûts de Y%) ?** **Passons maintenant à vos compétences :** * **Quelles sont vos compétences techniques les plus développées (langages de programmation, outils logiciels, plateformes) ?** * **Quels sont les logiciels et outils que vous maîtrisez ?** * **Avez-vous des compétences en matière de communication, de travail en équipe, de résolution de problèmes, de leadership ?** **Enfin, parlez-moi de vos projets personnels et professionnels :** * **Avez-vous participé à des projets personnels ou professionnels qui mettent en valeur vos compétences ?** * **Avez-vous des certifications ou des formations qui pourraient être pertinentes ?** N'hésitez pas à être précis dans vos réponses et à donner des exemples concrets pour illustrer vos compétences et vos expériences. Ensemble, nous allons construire un CV qui vous permettra de vous démarquer et d'obtenir le poste de vos rêves ! 😊",
+    "response": "Bonjour ! Merci beaucoup pour votre aide. J'ai hâte de travailler avec vous pour construire un CV impactful. \n\nVoici quelques informations sur moi pour commencer :\n\n**Parcours professionnel :**\n\n* **Expérience la plus marquante :** J'ai travaillé pendant 3 ans chez une entreprise de développement logiciel en tant que développeur web. J'ai eu la responsabilité de concevoir et de développer des sites web e-commerce performants et ergonomiques.\n\n* **Type de poste où j'ai excellé :** J'ai toujours apprécié les postes où je pouvais utiliser ma créativité et mes compétences techniques pour résoudre des problèmes et créer des solutions innovantes.\n\n* **Responsabilités principales :** Dans mon rôle précédent, j'étais responsable de :\n    * La conception et la mise en œuvre de sites web responsive\n    * La rédaction de code clean et performant (HTML, CSS, Javascript, PHP)\n    * L'intégration de CMS (WordPress, Drupal)\n    * Le suivi des projets et la communication avec les clients\n\n* **Défi et solution :** Un défi que j'ai rencontré lors d'un projet était la réalisation d'un site web e-commerce performant avec un budget limité. J'ai solutionné ce problème en utilisant des outils open-source et en optimisant le code pour maximiser les performances.\n\n* **Réalisations :** J'ai contribué à la création de plusieurs sites web e-commerce qui ont généré une augmentation significative des ventes pour nos clients. \n\n**Compétences :**\n\n* **Techniques :** HTML, CSS, Javascript, PHP, MySQL, Git\n* **Logiciels :** WordPress, Drupal, Adobe Creative Suite (Photoshop, Illustrator)\n* **Autres :** Communication, travail en équipe, résolution de problèmes, capacité d'adaptation, créativité.\n\n**Projets personnels et professionnels :**\n\n* J'ai développé un site web personnel pour présenter mes projets et mes compétences.\n* Je suis actif dans une communauté open-source de développeurs web.\n\n**Certifications et formations :**\n\n* Certificat de développeur web Full Stack\n\nN'hésitez pas à me poser d'autres questions pour que je puisse vous fournir plus d'informations. J'ai hâte de collaborer avec vous pour créer un CV qui met en valeur mes compétences et mon expérience.\n\n\n\n",
+    "model": "gemma2-9b-it",
+    "processingTime": 1.17,
+    "utmi": 0
+  },
+  {
+    "timestamp": "2025-06-29T08:07:43.462Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "id": "pasted_conv_2025-06-29T08-07-48-948Z",
+    "date": "2025-06-29T08:07:48.950Z",
+    "rawMarkdownPath": "/Volumes/devOps/projets/cvnu/conversations_pasted_raw/conversation_pasted_2025-06-29T08-07-48-948Z.md",
+    "analysis": {
+      "conversation_summary": "L'utilisateur a résolu un bug critique lié à l'intégration d'une API (Stripe) en mettant à jour Node.js, puis a documenté la solution et automatisé le déploiement.",
+      "identified_skills": [
+        "Débogage (API Stripe)",
+        "Mise à jour de dépendances (Node.js)",
+        "Configuration de hooks d'API",
+        "Automatisation de déploiement",
+        "Documentation technique (Wiki interne)"
+      ],
+      "soft_skills_demonstrated": [
+        "Résolution de problèmes complexes",
+        "Proactivité",
+        "Autonomie",
+        "Orientation vers l'amélioration continue",
+        "Rigueur (documentation)"
+      ],
+      "key_topics": [
+        "Problème d'intégration API",
+        "Solution technique Node.js",
+        "Optimisation des processus",
+        "Documentation"
+      ],
+      "potential_projects": [
+        "Résolution et optimisation de l'intégration du module de paiement Stripe : Diagnostic, mise à jour de Node.js, reconfiguration des hooks, documentation et automatisation du déploiement pour assurer la stabilité du site."
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-29T08:08:19.400Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "{\n  \"catch_phrase\": \"Transformant les interactions professionnelles en solutions efficaces, grâce à mon expertise en débogage et en automatisation.\",\n  \"valorized_technical_skills\": [\n    {\n      \"skill\": \"Débogage (API Stripe)\",\n      \"valorization\": \"Importance de la résolution de problèmes complexes pour garantir la stabilité des systèmes et la satisfaction des clients.\"\n    },\n    {\n      \"skill\": \"Mise à jour de dépendances (Node.js)\",\n      \"valorization\": \"Nécessité de maintenir les dépendances à jour pour éviter les erreurs et les vulnérabilités de sécurité.\"\n    },\n    {\n      \"skill\": \"Configuration de hooks d'API\",\n      \"valorization\": \"Crucialité de la configuration correcte des hooks pour assurer la communication efficace entre les systèmes.\"\n    },\n    {\n      \"skill\": \"Automatisation de déploiement\",\n      \"valorization\": \"Importance de l'automatisation pour réduire les temps de mise en production et améliorer la productivité.\"\n    },\n    {\n      \"skill\": \"Documentation technique (Wiki interne)\",\n      \"valorization\": \"Nécessité de documenter les processus et les solutions pour faciliter la compréhension et la maintenance des systèmes.\"\n    }\n  ],\n  \"professional_attributes\": [\n    {\n      \"attribute\": \"Résolution de problèmes complexes\",\n      \"justification\": \"Cela démontre ma capacité à analyser les problèmes et à trouver des solutions efficaces, même dans des situations complexes.\"\n    },\n    {\n      \"attribute\": \"Proactivité\",\n      \"justification\": \"Cela montre ma capacité à anticiper et à résoudre les problèmes avant qu'ils ne se produisent, ce qui est essentiel pour une équipe de développement.\"\n    },\n    {\n      \"attribute\": \"Autonomie\",\n      \"justification\": \"Cela démontre ma capacité à travailler indépendamment et à prendre des décisions éclairées, ce qui est essentiel pour un développeur.\"\n    },\n    {\n      \"attribute\": \"Orientation vers l'amélioration continue\",\n      \"justification\": \"Cela montre ma capacité à s'adapter et à apprendre de mes erreurs, ce qui est essentiel pour rester à jour avec les dernières tendances et les technologies.\"\n    },\n    {\n      \"attribute\": \"Rigueur (documentation)\",\n      \"justification\": \"Cela démontre ma capacité à maintenir des standards élevés de qualité et de précision dans mes travaux, ce qui est essentiel pour une équipe de développement.\"\n    }\n  ]\n}",
+    "response": "This is a great start to a professional profile! It clearly outlines your skills, technical expertise, and key attributes. \n\nHere's a breakdown of its strengths and some suggestions for improvement:\n\n**Strengths:**\n\n* **Compelling Catch Phrase:**  \"Transformant les interactions professionnelles en solutions efficaces, grâce à mon expertise en débogage et en automatisation.\" is concise, impactful, and accurately reflects your areas of expertise.\n* **Specific Technical Skills:**  Listing specific skills like \"Débogage (API Stripe)\" and \"Mise à jour de dépendances (Node.js)\" demonstrates your practical experience and technical depth.\n* **Valued Skill Explanation:**  Providing a brief justification for each skill's importance (\"Crucialité de la configuration correcte des hooks...\") adds context and helps the reader understand your thought process.\n* **Professional Attributes:** Highlighting attributes like \"Résolution de problèmes complexes,\" \"Proactivité,\" and \"Autonomie\" adds a human touch and showcases your soft skills, which are equally important in professional settings.\n* **Justification for Attributes:**  Providing justifications for each attribute strengthens your claims and provides concrete examples of how you demonstrate these qualities.\n\n**Suggestions for Improvement:**\n\n* **Quantify Achievements:**  Whenever possible, quantify your accomplishments. For example, instead of \"Débogage (API Stripe),\" you could say \"Débogué et résolu plus de 100 erreurs critiques dans l'API Stripe, améliorant la stabilité du système de paiement de 20%.\"\n* **Tailor to Target Audience:**  Consider the specific audience you're trying to reach (e.g., potential employers, clients). Adjust your language and skills listed to align with their needs and expectations.\n* **Add Projects/Experiences:**  Including brief descriptions of relevant projects or work experiences would further demonstrate your skills and accomplishments.\n* **Include a Call to Action:**  Encourage readers to connect with you by adding a call to action at the end, such as \"Let's discuss how I can help you achieve your goals.\"\n\n**Overall:** This profile is well-structured and informative. By incorporating the suggestions above, you can make it even more compelling and effective in showcasing your strengths and value.\n\n\n",
+    "model": "gemma2-9b-it",
+    "utmi": 125.37,
+    "estimatedCost": 0.000058,
+    "processingTime": 1.111
+  },
+  {
+    "timestamp": "2025-06-29T08:15:12.930Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:16:17.625Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:16:31.436Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:16:52.393Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:17:16.843Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:18:15.222Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:25:06.282Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:28:59.202Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:29:03.207Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:35:07.497Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:36:02.274Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:36:10.244Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:36:14.478Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:49:20.513Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:49:30.358Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:49:54.881Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "test",
+    "response": "Please provide me with something to test!  \n\nFor example, you could ask me to:\n\n* **Answer a question:** \"What is the capital of France?\"\n* **Generate text:** \"Write a short story about a talking cat.\"\n* **Translate something:** \"Translate 'hello world' into Spanish.\"\n* **Summarize text:** \"Summarize the plot of the movie Inception.\"\n* **Code something:** \"Write a Python function to print 'Hello, world!'\"\n\n\nI'm ready for your challenge! 😄\n\n",
+    "model": "gemma2-9b-it",
+    "utmi": 19.47,
+    "estimatedCost": 0.000011,
+    "processingTime": 0.598
+  },
+  {
+    "timestamp": "2025-06-29T08:51:54.454Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:52:21.395Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:52:47.351Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:56:06.415Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:56:29.092Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:56:50.083Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "test",
+    "response": "Hello! 👋 \n\nWhat can I do for you? 🤔 \n\nPlease tell me what you'd like to test. For example, you could ask me to:\n\n* **Answer a question:** \"What is the capital of France?\"\n* **Generate some text:** \"Write a short poem about spring.\"\n* **Translate something:** \"Translate 'hello world' into Spanish.\"\n* **Summarize a piece of text:** \"Summarize the plot of the movie Inception.\"\n\n\nLet me know! 😊\n\n",
+    "model": "gemma2-9b-it",
+    "utmi": 17.38,
+    "estimatedCost": 0.00001,
+    "processingTime": 0.535
+  },
+  {
+    "timestamp": "2025-06-29T08:56:54.343Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:57:15.194Z",
+    "type": "CV_GENERATION_FROM_CHAT",
+    "action": "GENERATE_SUMMARY",
+    "status": "SUCCESS",
+    "conversationId": "ed73ea33-4b94-4a54-8b3e-2ed2f20f36e0",
+    "summaryLength": 364
+  },
+  {
+    "timestamp": "2025-06-29T08:57:30.826Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T08:57:42.322Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "Bonjour ! Je suis votre coach de carrière IA, prêt à vous aider à mettre en valeur vos compétences et votre savoir-faire pour la rédaction d'un CV impactant. Pour commencer, parlez-moi un peu de vous. **Commençons par votre parcours professionnel :** * **Quelles sont vos expériences professionnelles les plus marquantes ?** * **Dans quel type de poste avez-vous excelé ?** * **Quelles étaient vos principales responsabilités dans chaque rôle ?** * **Pouvez-vous me donner un exemple d'un défi que vous avez rencontré et de la solution que vous avez apportée ?** * **Quelles sont vos réalisations les plus significatives, et pouvez-vous les quantifier (ex : augmentation des ventes de X%, réduction des coûts de Y%) ?** **Passons maintenant à vos compétences :** * **Quelles sont vos compétences techniques les plus développées (langages de programmation, outils logiciels, plateformes) ?** * **Quels sont les logiciels et outils que vous maîtrisez ?** * **Avez-vous des compétences en matière de communication, de travail en équipe, de résolution de problèmes, de leadership ?** **Enfin, parlez-moi de vos projets personnels et professionnels :** * **Avez-vous participé à des projets personnels ou professionnels qui mettent en valeur vos compétences ?** * **Avez-vous des certifications ou des formations qui pourraient être pertinentes ?** N'hésitez pas à être précis dans vos réponses et à donner des exemples concrets pour illustrer vos compétences et vos expériences. Ensemble, nous allons construire un CV qui vous permettra de vous démarquer et d'obtenir le poste de vos rêves ! 😊",
+    "response": "Bonjour ! C'est avec enthousiasme que je me lance dans cette aventure de mise en valeur de mon profil. \n\n**Parcours professionnel :**\n\n* **Expérience la plus marquante:**  J'ai travaillé sur un projet de développement d'un chatbot pour une entreprise de services clients. J'ai été responsable de la conception de l'interface utilisateur, de la programmation des dialogues et de l'intégration avec le système de gestion des tickets. Ce projet a été un succès, réduisant le temps de réponse des clients de 20% et améliorant la satisfaction globale.\n* **Type de poste où j'excelle:** Je suis passionné par les projets impliquant l'intelligence artificielle et le développement logiciel. J'aime travailler en équipe et contribuer à la création de solutions innovantes.\n* **Responsabilités:** \n\n    * Conception et développement d'applications web et mobiles\n    * Intégration de systèmes et de APIs\n    * Tests et débogage de logiciels\n    * Documentation technique\n    * Collaboration avec des équipes multidisciplinaires\n\n* **Défi et solution:** Lors du développement du chatbot, nous avons rencontré le défi de créer des dialogues naturels et pertinents pour une variété de scénarios. Nous avons résolu ce problème en utilisant des techniques d'apprentissage automatique pour entraîner le modèle de conversation sur un grand corpus de données textuelles.\n* **Réalisations quantifiées:** \n\n    * Réduction de 20% du temps de réponse des clients grâce au chatbot.\n    * Augmentation de 15% de la satisfaction client grâce à l'amélioration de l'expérience de service.\n\n**Compétences:**\n\n* **Techniques:** Python, Java, JavaScript, SQL, Machine Learning, Deep Learning\n* **Logiciels et outils:** Git, Docker, AWS, TensorFlow, PyTorch\n* **Autres:** Communication écrite et orale, travail en équipe, résolution de problèmes, pensée critique, adaptation au changement\n\n**Projets et formations:**\n\n* Participation à un hackathon de l'IA où j'ai développé une application de reconnaissance d'images.\n* Certification en Machine Learning auprès de [Nom de l'organisme].\n\nJe suis convaincu que mon expérience, mes compétences et ma passion pour l'IA me permettent de contribuer significativement à votre entreprise. Je suis impatient de discuter plus en détail de mes qualifications et de savoir comment je peux mettre mes talents à votre service.\n\n\n\n",
+    "model": "gemma2-9b-it",
+    "utmi": 127.04,
+    "estimatedCost": 0.000058,
+    "processingTime": 1.182
+  },
+  {
+    "id": "pasted_conv_2025-06-29T08-57-58-302Z",
+    "date": "2025-06-29T08:57:58.305Z",
+    "rawMarkdownPath": "/Volumes/devOps/projets/cvnu/conversations_pasted_raw/conversation_pasted_2025-06-29T08-57-58-302Z.md",
+    "analysis": {
+      "conversation_summary": "L'utilisateur a résolu un bug critique lié à l'intégration d'une API (Stripe) en mettant à jour Node.js, puis a documenté la solution et automatisé le déploiement.",
+      "identified_skills": [
+        "Débogage (API Stripe)",
+        "Mise à jour de dépendances (Node.js)",
+        "Configuration de hooks d'API",
+        "Automatisation de déploiement",
+        "Documentation technique (Wiki interne)"
+      ],
+      "soft_skills_demonstrated": [
+        "Résolution de problèmes complexes",
+        "Proactivité",
+        "Autonomie",
+        "Orientation vers l'amélioration continue",
+        "Rigueur (documentation)"
+      ],
+      "key_topics": [
+        "Problème d'intégration API",
+        "Solution technique Node.js",
+        "Optimisation des processus",
+        "Documentation"
+      ],
+      "potential_projects": [
+        "Résolution et optimisation de l'intégration du module de paiement Stripe : Diagnostic, mise à jour de Node.js, reconfiguration des hooks, documentation et automatisation du déploiement pour assurer la stabilité du site."
+      ]
+    }
+  },
+  {
+    "timestamp": "2025-06-29T09:01:54.989Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T09:34:57.917Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T09:35:54.736Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T09:40:10.243Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 2
+  },
+  {
+    "timestamp": "2025-06-29T09:40:15.640Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "0a545c21-b3c1-4201-b887-10303d36c29e",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-06-29T09:40:15.648Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:40:30.961Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:40:35.194Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:40:36.337Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:40:37.387Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:40:38.157Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:40:42.847Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:41:27.302Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:41:35.554Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:49:34.135Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:50:13.664Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:54:36.246Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:54:41.465Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:55:17.478Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T09:59:41.154Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  },
+  {
+    "timestamp": "2025-06-29T10:00:06.280Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "count": 3
+  }
+]
