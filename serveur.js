@@ -121,8 +121,8 @@ app.use(cors());
 app.use(express.json()); // For parsing JSON request bodies
 
 // Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
-console.log(`➡️ Service des fichiers statiques depuis : ${path.join(__dirname, 'public')}`);
+app.use(express.static(path.join(__dirname, 'docs')));
+console.log(`➡️ Service des fichiers statiques depuis : ${path.join(__dirname, 'docs')}`);
 
 // --- API Endpoints ---
 
