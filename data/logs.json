@@ -1368,5 +1368,288 @@
     "limit": 5,
     "count": 2,
     "totalCount": 2
+  },
+  {
+    "timestamp": "2025-07-09T08:33:35.424Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:33:35.430Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:33:36.998Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:33:37.003Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:33:52.689Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "Synthèse de Valorisation\n\n            \nMessage: Compétences du CV valorisées avec succès.\n\n\n            \nValorisation Détaillée:\n\n\n            \n{\n  \"catch_phrase\": \"Transformant les données en connaissances pour améliorer les décisions\",\n  \"valorized_technical_skills\": [\n    {\n      \"skill\": \"Data Analysis\",\n      \"valorization\": \"Avoir des compétences en analyse de données permet de comprendre les tendances et les patterns, ce qui est essentiel pour prendre des décisions éclairées et améliorer les performances.\"\n    },\n    {\n      \"skill\": \"Python Programming\",\n      \"valorization\": \"Python est un langage de programmation populaire et flexible qui permet de créer des applications et des outils pour analyser et traiter les données.\"\n    },\n    {\n      \"skill\": \"SQL\",\n      \"valorization\": \"Les compétences en SQL permettent de manipuler et d'analyser les bases de données, ce qui est essentiel pour les analyses de données et les rapports.\"\n    },\n    {\n      \"skill\": \"Data Visualization\",\n      \"valorization\": \"Avoir des compétences en visualisation de données permet de présenter les résultats de l'analyse de manière claire et concise, ce qui facilite la compréhension et la prise de décision.\"\n    }\n  ],\n  \"professional_attributes\": [\n    {\n      \"attribute\": \"Communication\",\n      \"justification\": \"La communication est essentielle pour présenter les résultats de l'analyse et les recommandations aux décideurs, ainsi que pour travailler en équipe et partager les connaissances.\"\n    },\n    {\n      \"attribute\": \"Problem-solving\",\n      \"justification\": \"Les compétences en résolution de problèmes sont essentielles pour identifier les défis et les opportunités, ainsi que pour trouver des solutions créatives et efficaces.\"\n    }\n  ]\n}",
+    "response": "## Synthèse de Valorisation :  \"Transformant les données en connaissances pour améliorer les décisions\"\n\nCe résumé met en avant les compétences techniques et les attributs professionnels clés du candidat, démontrant sa capacité à transformer les données en connaissances actionnables pour l'amélioration des décisions. \n\n**Compétences techniques valorisées:**\n\n* **Analyse de données:** \n    * Permet de comprendre les tendances et les schémas, facilitant la prise de décisions éclairées et l'amélioration des performances.\n* **Python Programming:** \n    * Langage flexible permettant de créer des applications et des outils spécifiques pour l'analyse et le traitement des données.\n* **SQL:** \n    * Permet de manipuler et d'analyser les bases de données, indispensable pour les analyses de données et la création de rapports.\n* **Visualisation de données:** \n    * Permet de présenter les résultats de l'analyse de manière claire et concise, facilitant la compréhension et la prise de décision.\n\n**Attributs professionnels valorisés:**\n\n* **Communication:** \n    * Essentiel pour présenter les résultats de l'analyse et les recommandations de manière efficace aux décideurs, et pour collaborer en équipe.\n* **Résolution de problèmes:** \n    * Permet de repérer les défis et les opportunités, et de trouver des solutions créatives et efficaces.\n\n**En conclusion,** ce résumé met en lumière une combinaison précieuse de compétences techniques et d'attributs professionnels qui rendent le candidat idéal pour des rôles impliquant l'analyse de données et la prise de décision basée sur les données.\n\n\n",
+    "model": "gemma2-9b-it",
+    "utmi": 74.54,
+    "estimatedCost": 0.00004,
+    "processingTime": 0.947
+  },
+  {
+    "timestamp": "2025-07-09T08:33:57.647Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 2,
+    "totalCount": 2
+  },
+  {
+    "timestamp": "2025-07-09T08:34:00.161Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 2,
+    "totalCount": 2
+  },
+  {
+    "timestamp": "2025-07-09T08:37:23.826Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:37:23.834Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:37:23.948Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 2,
+    "totalCount": 2
+  },
+  {
+    "timestamp": "2025-07-09T08:41:02.681Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:41:02.688Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:41:06.384Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 2,
+    "totalCount": 2
+  },
+  {
+    "timestamp": "2025-07-09T08:44:08.317Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:44:08.327Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:44:09.861Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:44:09.864Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:44:35.834Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "Synthèse de Valorisation\n\n            \nMessage: Compétences du CV valorisées avec succès.\n\n\n            \nValorisation Détaillée:\n\n\n            \n{\n  \"catch_phrase\": \"Transformant les données en opportunités, une par une.\",\n  \"valorized_technical_skills\": [\n    {\n      \"skill\": \"Data Analysis\",\n      \"valorization\": \"Compétence essentielle pour interpréter et présenter les résultats de recherche et d'expérimentation, ainsi que pour définir des stratégies efficaces.\"\n    },\n    {\n      \"skill\": \"SQL\",\n      \"valorization\": \"Langage de programmation de base pour la manipulation et l'analyse des données, permettant d'accéder et de gérer des bases de données complexes.\"\n    },\n    {\n      \"skill\": \"Python\",\n      \"valorization\": \"Langage de programmation populaire pour le traitement de données, l'apprentissage automatique et la visualisation, permettant de créer des applications et des outils personnalisés.\"\n    }\n  ],\n  \"professional_attributes\": [\n    {\n      \"attribute\": \"Communication\",\n      \"justification\": \"Importante pour présenter les résultats de recherche et d'expérimentation à des audiences variées, ainsi que pour collaborer avec des équipes diverses et multiples.\"\n    },\n    {\n      \"attribute\": \"Problem-solving\",\n      \"justification\": \"Essentiel pour identifier et résoudre les problèmes complexes liés à l'analyse de données et à la prise de décision.\"\n    },\n    {\n      \"attribute\": \"Collaboration\",\n      \"justification\": \"Crucial pour travailler en équipe et partager les connaissances et les compétences pour atteindre des objectifs communs.\"\n    }\n  ]\n}",
+    "response": "## Synthèse de Valorisation :\n\nCe document met en valeur les compétences techniques et les attributs professionnels mentionnés dans un CV. \n\n**Slogan :** \"Transformant les données en opportunités, une par une.\" \n\nCe slogan encapsule efficacement la capacité du candidat à utiliser les données pour créer des résultats concrets et positifs. \n\n**Compétences Techniques Valorées:**\n\n* **Data Analysis:** Cette compétence est présentée comme **essentielle** pour interpréter les résultats de recherches et d'expérimentations, et pour développer des stratégies efficaces. \n* **SQL:** La maîtrise de SQL est soulignée en tant que **langage de base** pour la manipulation et l'analyse de données, permettant une gestion efficace de bases de données complexes.\n* **Python:** Python est décrit comme un **langage populaire** pour le traitement de données, l'apprentissage automatique et la visualisation, permettant la création d'applications et d'outils personnalisés.\n\n**Attributs Professionnels Valorisés:**\n\n* **Communication:** La communication est considérée comme **importante** pour présenter les résultats de recherche à différents publics et pour collaborer efficacement avec des équipes diversifiées.\n* **Problem-solving:** La capacité à **identifier et résoudre des problèmes complexes** liés à l'analyse de données et à la prise de décision est considérée comme **essentielle**.\n* **Collaboration:** Le travail en équipe et le partage des connaissances sont présentés comme **cruciaux** pour atteindre des objectifs communs. \n\n\n**Conclusion:**\n\nCette synthèse de valorisation met en lumière les compétences clés et les attributs professionnels du candidat, démontrant sa capacité à analyser des données, à résoudre des problèmes et à collaborer efficacement. L'utilisation de justifications claires et concises permet de  rendre la valorisation plus convaincante et de démontrer le véritable potentiel du candidat.\n\n\n",
+    "model": "gemma2-9b-it",
+    "utmi": 88.62,
+    "estimatedCost": 0.000048,
+    "processingTime": 1.022
+  },
+  {
+    "timestamp": "2025-07-09T08:45:42.717Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T08:45:42.728Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T09:07:37.063Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T09:07:37.067Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T09:07:41.396Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T09:07:41.403Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T09:07:43.421Z",
+    "type": "CV_PROCESSING",
+    "action": "PARSE_AND_STRUCTURE",
+    "status": "SUCCESS",
+    "data": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T09:07:43.428Z",
+    "type": "CV_PROCESSING",
+    "action": "RENDER_HTML",
+    "status": "SUCCESS",
+    "name": "N/A"
+  },
+  {
+    "timestamp": "2025-07-09T09:08:10.373Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 2,
+    "totalCount": 2
+  },
+  {
+    "timestamp": "2025-07-09T09:08:14.114Z",
+    "type": "CONVERSATION_MANAGEMENT",
+    "action": "NEW_CONVERSATION",
+    "conversationId": "b046b797-9125-459a-ac42-8f3ba5310b3a",
+    "utmi_generated": 1.1,
+    "estimated_cost_usd": 0
+  },
+  {
+    "timestamp": "2025-07-09T09:08:14.129Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 3,
+    "totalCount": 3
+  },
+  {
+    "timestamp": "2025-07-09T09:08:16.662Z",
+    "type": "CONVERSATION_MESSAGE",
+    "action": "USER_MESSAGE_SENT",
+    "conversationId": "b046b797-9125-459a-ac42-8f3ba5310b3a",
+    "userMessage": "test...",
+    "utmi": 0.55,
+    "estimated_cost_usd": 0,
+    "interaction": {
+      "type": "prompt",
+      "data": {
+        "text": "test",
+        "wordCount": 1,
+        "inputTokens": 1
+      }
+    }
+  },
+  {
+    "timestamp": "2025-07-09T09:08:17.214Z",
+    "type": "CONVERSATION_MESSAGE",
+    "action": "AI_RESPONSE_RECEIVED",
+    "conversationId": "b046b797-9125-459a-ac42-8f3ba5310b3a",
+    "aiResponse": "Bonjour ! Je suis votre coach de carrière IA, prêt à vous aider à mettre en valeur votre parcours pr...",
+    "utmi": 29.86,
+    "estimated_cost_usd": 0.000014,
+    "interaction": {
+      "type": "ai_response",
+      "data": {
+        "text": "Bonjour ! Je suis votre coach de carrière IA, prêt à vous aider à mettre en valeur votre parcours professionnel dans votre CV. \n\nPour commencer, dites-moi un peu sur vous : **Quel est votre domaine d'expertise ?** Par exemple, êtes-vous développeur web, gestionnaire de projet, rédacteur, etc. ? \n\nCette information me permettra de poser des questions plus précises et vous guider efficacement. \n\nN'hésitez pas à être précis et détaillé dans vos réponses, plus vous me donnerez d'informations, plus je pourrai vous aider à structurer votre CV de manière percutante. 😉 \n\n",
+        "tokenCount": 143,
+        "outputTokens": 143,
+        "inputTokens": 107,
+        "modelId": "gemma2-9b-it",
+        "relevance": true,
+        "coherence": true,
+        "completeness": true,
+        "problemSolved": false,
+        "isFiscalEconomicInsight": false,
+        "isMetierSpecificSolution": false
+      }
+    }
+  },
+  {
+    "timestamp": "2025-07-09T09:08:17.249Z",
+    "type": "CONVERSATION_HISTORY",
+    "action": "READ_ALL",
+    "page": 1,
+    "limit": 5,
+    "count": 3,
+    "totalCount": 3
+  },
+  {
+    "timestamp": "2025-07-09T09:08:30.221Z",
+    "type": "AI_RESPONSE_PUNCTUAL",
+    "prompt": "test",
+    "response": "Please provide me with something to test! \n\nFor example, you could ask me to:\n\n* **Answer a question:** \"What is the capital of France?\"\n* **Generate text:** \"Write a short poem about a cat.\"\n* **Translate something:** \"Translate 'Hello, world!' into Spanish.\"\n* **Summarize text:** \"Summarize the plot of the movie 'Inception'.\"\n\n\nI'm ready for your challenge! 😊  \n",
+    "model": "gemma2-9b-it",
+    "utmi": 15.99,
+    "estimatedCost": 0.000009,
+    "processingTime": 0.572
   }
 ]
