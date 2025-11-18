@@ -1,0 +1,64 @@
+
+.ia-panel {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.question-panel {
+    border-left: 5px solid #dc3545; /* Rouge pour l'opposition */
+    background-color: #fff0f0;
+}
+
+.answer-panel {
+    border-left: 5px solid #28a745; /* Vert pour la défense PRCR */
+    background-color: #f0fff0;
+}
+
+.solution-card {
+    border: 1px solid #007bff;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #eaf3ff;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+}
+
+.solution-card small {
+    margin-top: 5px;
+    color: #444;
+}
+
+.faq-card {
+    border-color: #ffc107;
+    background-color: #fff8e1;
+    position: relative;
+    padding-top: 20px;
+}
+
+.rank-badge {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #ffc107;
+    color: #333;
+    padding: 3px 8px;
+    border-top-left-radius: 5px;
+    font-weight: bold;
+    font-size: 0.7em;
+}
+
+.llama-actions {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.llama-actions li {
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23007bff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E") no-repeat left center;
+    padding-left: 25px;
+    line-height: 1.8;
+}

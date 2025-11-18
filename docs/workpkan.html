@@ -6,7 +6,9 @@
     <title>Dashboard CVNU - Graphiques</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.umd.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -147,6 +149,12 @@
             const themeToggle = document.getElementById('theme-toggle');
             const body = document.body;
 
+            // Déclaration et initialisation des variables de graphique à null
+            let utmiChart = null;
+            let costChart = null;
+            let ganttChart = null;
+            let departmentChart = null;
+
             // --- Dark Mode Toggle ---
             const applyTheme = (isDark) => {
                 if (isDark) {
@@ -174,15 +182,6 @@
                 localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
                 applyTheme(isDarkMode);
             });
-
-            // --- Chart.js Configuration Defaults (for dark mode support) ---
-            Chart.defaults.color = body.classList.contains('dark-mode') ? '#e2e8f0' : '#1a202c';
-            Chart.defaults.borderColor = body.classList.contains('dark-mode') ? '#4a5568' : '#edf2f7';
-            Chart.defaults.plugins.tooltip.backgroundColor = body.classList.contains('dark-mode') ? '#1a202c' : 'rgba(0,0,0,0.8)';
-            Chart.defaults.plugins.tooltip.titleColor = body.classList.contains('dark-mode') ? '#e2e8f0' : '#fff';
-            Chart.defaults.plugins.tooltip.bodyColor = body.classList.contains('dark-mode') ? '#cbd5e0' : '#fff';
-            Chart.defaults.plugins.legend.labels.color = body.classList.contains('dark-mode') ? '#e2e8f0' : '#4a5568';
-
 
             // --- Fetch Data (Mocked for demonstration) ---
             async function fetchDashboardData() {
@@ -222,7 +221,7 @@
                 };
             }
 
-            let utmiChart, costChart, ganttChart, departmentChart;
+            let dashboardData = {}; // Declare dashboardData at a higher scope
 
             function drawCharts(isDarkMode) {
                 // Destroy existing charts to redraw with new theme settings
@@ -240,6 +239,16 @@
                     tooltipBodyColor: isDarkMode ? '#cbd5e0' : '#fff',
                     legendColor: isDarkMode ? '#e2e8f0' : '#4a5568'
                 };
+
+                // --- Chart.js Configuration Defaults (for dark mode support) ---
+                // Update global defaults for all charts based on theme
+                Chart.defaults.color = chartDefaults.fontColor;
+                Chart.defaults.borderColor = chartDefaults.borderColor;
+                Chart.defaults.plugins.tooltip.backgroundColor = chartDefaults.tooltipBg;
+                Chart.defaults.plugins.tooltip.titleColor = chartDefaults.tooltipTitleColor;
+                Chart.defaults.plugins.tooltip.bodyColor = chartDefaults.tooltipBodyColor;
+                Chart.defaults.plugins.legend.labels.color = chartDefaults.legendColor;
+
 
                 // --- Chart 1: UTMi Evolution (Line Chart) ---
                 const utmiCtx = document.getElementById('utmiEvolutionChart').getContext('2d');
@@ -264,12 +273,12 @@
                             title: {
                                 display: true,
                                 text: 'Évolution Mensuelle des UTMi Générés',
-                                color: chartDefaults.fontColor,
+                                color: chartDefaults.fontColor, // Use dynamic color
                                 font: { size: 16, weight: 'bold' }
                             },
                             legend: {
                                 labels: {
-                                    color: chartDefaults.legendColor
+                                    color: chartDefaults.legendColor // Use dynamic color
                                 }
                             },
                             tooltip: {
@@ -283,7 +292,7 @@
                                 type: 'time', // Requires chartjs-adapter-date-fns
                                 time: {
                                     unit: 'month',
-                                    tooltipFormat: 'MMM yyyy',
+                                    tooltipFormat: 'MMM.yyyy',
                                     displayFormats: {
                                         month: 'MMM yyyy'
                                     }
@@ -291,14 +300,14 @@
                                 title: {
                                     display: true,
                                     text: 'Mois',
-                                    color: chartDefaults.fontColor
+                                    color: chartDefaults.fontColor // Use dynamic color
                                 },
                                 ticks: {
-                                    color: chartDefaults.fontColor
+                                    color: chartDefaults.fontColor // Use dynamic color
                                 },
                                 grid: {
-                                    color: chartDefaults.gridColor,
-                                    borderColor: chartDefaults.borderColor
+                                    color: chartDefaults.gridColor, // Use dynamic color
+                                    borderColor: chartDefaults.borderColor // Use dynamic color
                                 }
                             },
                             y: {
@@ -306,14 +315,14 @@
                                 title: {
                                     display: true,
                                     text: 'UTMi',
-                                    color: chartDefaults.fontColor
+                                    color: chartDefaults.fontColor // Use dynamic color
                                 },
                                 ticks: {
-                                    color: chartDefaults.fontColor
+                                    color: chartDefaults.fontColor // Use dynamic color
                                 },
                                 grid: {
-                                    color: chartDefaults.gridColor,
-                                    borderColor: chartDefaults.borderColor
+                                    color: chartDefaults.gridColor, // Use dynamic color
+                                    borderColor: chartDefaults.borderColor // Use dynamic color
                                 }
                             }
                         }
@@ -340,13 +349,13 @@
                             title: {
                                 display: true,
                                 text: 'Répartition des Coûts par Catégorie',
-                                color: chartDefaults.fontColor,
+                                color: chartDefaults.fontColor, // Use dynamic color
                                 font: { size: 16, weight: 'bold' }
                             },
                             legend: {
                                 position: 'right',
                                 labels: {
-                                    color: chartDefaults.legendColor
+                                    color: chartDefaults.legendColor // Use dynamic color
                                 }
                             },
                             tooltip: {
@@ -359,8 +368,6 @@
                 });
 
                 // --- Chart 3: Project Progress (Gantt-like Bar Chart) ---
-                // Data needs to be structured for stacked horizontal bars
-                // Each task has a "start" point (invisible bar) and a "duration" (visible bar)
                 const ganttLabels = dashboardData.projectProgress.map(d => d.task);
                 const startPoints = dashboardData.projectProgress.map(d => d.start);
                 const durations = dashboardData.projectProgress.map(d => d.duration);
@@ -412,7 +419,7 @@
                             title: {
                                 display: true,
                                 text: 'Progression des Phases du Projet',
-                                color: chartDefaults.fontColor,
+                                color: chartDefaults.fontColor, // Use dynamic color
                                 font: { size: 16, weight: 'bold' }
                             },
                             legend: {
@@ -443,24 +450,24 @@
                                 title: {
                                     display: true,
                                     text: 'Temps (Unités Arbitraires)',
-                                    color: chartDefaults.fontColor
+                                    color: chartDefaults.fontColor // Use dynamic color
                                 },
                                 ticks: {
-                                    color: chartDefaults.fontColor
+                                    color: chartDefaults.fontColor // Use dynamic color
                                 },
                                 grid: {
-                                    color: chartDefaults.gridColor,
-                                    borderColor: chartDefaults.borderColor
+                                    color: chartDefaults.gridColor, // Use dynamic color
+                                    borderColor: chartDefaults.borderColor // Use dynamic color
                                 }
                             },
                             y: {
                                 stacked: true,
                                 ticks: {
-                                    color: chartDefaults.fontColor
+                                    color: chartDefaults.fontColor // Use dynamic color
                                 },
                                 grid: {
                                     display: false, // No horizontal grid lines for cleaner look
-                                    borderColor: chartDefaults.borderColor
+                                    borderColor: chartDefaults.borderColor // Use dynamic color
                                 }
                             }
                         }
@@ -500,13 +507,13 @@
                             title: {
                                 display: true,
                                 text: 'Performance par Département',
-                                color: chartDefaults.fontColor,
+                                color: chartDefaults.fontColor, // Use dynamic color
                                 font: { size: 16, weight: 'bold' }
                             },
                             legend: {
                                 display: false, // No legend needed for single dataset bar chart
                                 labels: {
-                                    color: chartDefaults.legendColor
+                                    color: chartDefaults.legendColor // Use dynamic color
                                 }
                             },
                             tooltip: {
@@ -518,11 +525,11 @@
                         scales: {
                             x: {
                                 ticks: {
-                                    color: chartDefaults.fontColor
+                                    color: chartDefaults.fontColor // Use dynamic color
                                 },
                                 grid: {
-                                    color: chartDefaults.gridColor,
-                                    borderColor: chartDefaults.borderColor
+                                    color: chartDefaults.gridColor, // Use dynamic color
+                                    borderColor: chartDefaults.borderColor // Use dynamic color
                                 }
                             },
                             y: {
@@ -531,14 +538,14 @@
                                 title: {
                                     display: true,
                                     text: 'Score',
-                                    color: chartDefaults.fontColor
+                                    color: chartDefaults.fontColor // Use dynamic color
                                 },
                                 ticks: {
-                                    color: chartDefaults.fontColor
+                                    color: chartDefaults.fontColor // Use dynamic color
                                 },
                                 grid: {
-                                    color: chartDefaults.gridColor,
-                                    borderColor: chartDefaults.borderColor
+                                    color: chartDefaults.gridColor, // Use dynamic color
+                                    borderColor: chartDefaults.borderColor // Use dynamic color
                                 }
                             }
                         }
@@ -547,9 +554,8 @@
             }
 
             // --- Initial Data Fetch and Chart Drawing ---
-            const dashboardData = await fetchDashboardData();
-            drawCharts(body.classList.contains('dark-mode')); // Initial draw based on current theme
-
+            dashboardData = await fetchDashboardData(); // Assign data to the higher-scoped variable
+            applyTheme(localStorage.getItem('theme') === 'dark'); // Call applyTheme to set initial theme and draw charts
         });
     </script>
 </body>

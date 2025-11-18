@@ -42,7 +42,7 @@ ${cvContent}
                     content: prompt,
                 },
             ],
-            model: "llama3-8b-8192", // Ou un modèle plus puissant si nécessaire (ex: llama3-70b-8192)
+            model: "llama-3.1-8b-instant", // Ou un modèle plus puissant si nécessaire (ex: llama3-70b-8192)
             temperature: 0.5, // Température plus basse pour des résultats plus précis et moins créatifs
             max_tokens: 1500, // Ajustez si le CV est très long
             response_format: { type: "json_object" }, // Demande un retour JSON

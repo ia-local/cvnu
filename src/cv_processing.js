@@ -33,7 +33,7 @@ async function generateStructuredCvData(rawCvText) {
     try {
         const chatCompletion = await groq.chat.completions.create({
             messages: [{ role: 'user', content: prompt }],
-            model: 'gemma2-9b-it', // Ou un modèle adapté pour la structuration de données
+            model: 'llama-3.1-8b-instant', // Ou un modèle adapté pour la structuration de données
             temperature: 0.2, // Température basse pour une sortie structurée et prévisible
             response_format: { type: "json_object" }, // IMPORTANT: Demander une réponse JSON
         });

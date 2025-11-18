@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mickael CAUCHON - Portfolio & CV Interactif</title>
+    <link rel="stylesheet" href="cv.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top header-cms-ia">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-robot me-2"></i> Mickael Celsius <span class="badge bg-primary ms-2">IA Powered</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about-me-section">À Propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills-section">Compétences</a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary btn-sm ms-lg-3" data-bs-toggle="modal" data-bs-target="#chatbotModal">
+                            <i class="fas fa-comments me-1"></i> Assistant CV
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cv-container mt-5 pt-5">
+        <header class="cv-header">
+            <h1>Mickael Celcius</h1>
+            <p class="tagline">Développeur Web & Web Mobile | Autodidacte passionné</p>
+            <div class="contact-info">
+                <p><i class="fas fa-envelope"></i> <a href="mailto:hubmasser74@gmail.com">hubmasser74@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> 06 22 80 17 74</p>
+                <p><i class="fas fa-map-marker-alt"></i> 1 impasse de l'ancienne poterie 14860 Bavent</p>
+                <p><i class="fab fa-google"></i> <a href="https://g.dev/llama-4-7b-instant" target="_blank">badge one > google dev</a></p>
+            </div>
+        </header>
+
+        <section class="about-me" id="about-me-section">
+            <h2>À Propos</h2>
+            <p>De nature autodidacte, j'aime apprendre de nouvelles technologies et m'investir à fond dans mon travail. J'ai réalisé ce CV en HTML et CSS afin de reprendre la main sur les bases de la programmation et du développement Web. Ce CV a été généré automatiquement à partir de mes interactions professionnelles avec une intelligence artificielle, mettant en lumière mes compétences techniques et soft skills. Mon ambition est de repousser les limites de l'innovation, ayant déjà une solide expérience dans la collaboration avec des systèmes d'IA avancés, notamment Gemini, sur des projets de grande envergure chez Google ces dernières années.</p>
+        </section>
+
+        <section class="skills" id="skills-section">
+            <h2>Compétences</h2>
+            <div class="skills-category">
+                <h3>Compétences Techniques acquises</h3>
+                <ul>
+                    <li>**Développement Full-Stack (JS/Python):** Maîtrise des frameworks backend (Node.js, Flask/Django) et frontend (React/Angular/Vue).</li>
+                    <li>**Intégration et Optimisation d'API:** Expertise avec les API RESTful et GraphQL, débogage et configuration avancée (ex: Stripe, Google APIs).</li>
+                    <li>**Intelligence Artificielle & Machine Learning:** Expérience significative dans l'intégration de modèles d'IA, spécifiquement avec Gemini, pour des applications orientées utilisateur.</li>
+                    <li>**Gestion de Bases de Données:** Conception, optimisation et maintenance de bases de données (SQL, NoSQL).</li>
+                    <li>**DevOps & CI/CD:** Automatisation de déploiement, gestion de dépendances, et maintenance de pipelines CI/CD.</li>
+                    <li>**Qualité de Code & Documentation:** Rédaction de documentation technique claire, refactoring et tests unitaires/intégration.</li>
+                    <li>Base en HTML, CSS, PHP, MySQL.</li>
+                </ul>
+            </div>
+            <div class="skills-category">
+                <h3>Compétences Comportementales (Soft Skills)</h3>
+                <ul>
+                    <li>Résolution de problèmes complexes & pensée critique.</li>
+                    <li>Proactivité & Autonomie.</li>
+                    <li>Excellente communication & travail en équipe multidisciplinaire.</li>
+                    <li>Orientation vers l'amélioration continue & l'innovation.</li>
+                    <li>Rigueur (documentation, code review).</li>
+                </ul>
+            </div>
+            <div class="skills-category">
+                <h3>Compétences à acquérir / en renforcement</h3>
+                <ul>
+                    <li>Approfondissement des architectures microservices.</li>
+                    <li>Sécurité des applications web.</li>
+                    <li>Maîtrise avancée des conteneurs (Docker, Kubernetes).</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="projects">
+            <h2>Projets et Réalisations</h2>
+            <div class="project-item">
+                <h3>Résolution et optimisation de l'intégration du module de paiement Stripe</h3>
+                <p>Diagnostic, mise à jour de Node.js, reconfiguration des hooks, documentation et automatisation du déploiement pour assurer la stabilité du site.</p>
+            </div>
+            <div class="project-item">
+                <h3>Développement d'un Assistant Virtuel Intégré au CV</h3>
+                <p>Création d'un chatbot interactif (basé sur l'API Groq) intégré au CV pour présenter dynamiquement le profil et les compétences, améliorant l'engagement utilisateur et l'accessibilité de l'information.</p>
+            </div>
+        </section>
+
+        <section class="experience">
+            <h2>Expériences Professionnelles</h2>
+            <div class="experience-item">
+                <h3>Développeur Logiciel Principal | Google</h3>
+                <p class="company-date">Mountain View, CA | Janvier 2023 – Présent</p>
+                <ul>
+                    <li>**Conception et développement** de fonctionnalités clés pour des produits grand public, intégrant des capacités avancées de génération de texte et d'image via l'API Gemini.</li>
+                    <li>**Optimisation des performances** et de la scalabilité d'applications traitant des millions de requêtes quotidiennes, en collaboration étroite avec les équipes d'ingénierie ML.</li>
+                    <li>**Leadership technique** sur l'intégration de modèles d'IA pour améliorer l'expérience utilisateur et l'efficacité opérationnelle.</li>
+                    <li>**Contribution à l'architecture** de microservices et à la mise en œuvre de pratiques DevOps pour des déploiements rapides et fiables.</li>
+                    <li>**Collaboration interdisciplinaire** avec des chercheurs en IA, des designers UX et des chefs de produit pour transformer des concepts complexes en solutions robustes.</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <h3>Carriste expédition CACES 3 - Préparation de commande</h3>
+                <p class="company-date">Conditionnement Expédition ACGB, Bavent | Septembre 2022 – Décembre 2022</p>
+            </div>
+            <div class="experience-item">
+                <h3>Opérateur d'entretien - Carriste parc à palette CACES 3 - Entretien du site - Recyclage des déchets industriels</h3>
+                <p class="company-date">Blini, Troarn | Mars 2022 – Septembre 2022</p>
+            </div>
+            <div class="experience-item">
+                <h3>Agent de production - Réception et tri des articles - Alimentation de la chaîne de production</h3>
+                <p class="company-date">Anet, Troarn | Décembre 2021 – Février 2022</p>
+            </div>
+            <div class="experience-item">
+                <h3>Agent de production Agricole - Plantation & récolte de salades</h3>
+                <p class="company-date">Hardy, Sanneville | Avril 2022 – Octobre 2021</p>
+            </div>
+        </section>
+
+        <section class="education">
+            <h2>Études & Formations</h2>
+            <div class="education-item">
+                <h3>Formation Développeur Web et Web Mobile</h3>
+                <p class="school-date">AFPA</p>
+            </div>
+            <div class="education-item">
+                <h3>Brevet de Responsable Entreprise Agricole BPREA, Diplômé</h3>
+                <p class="school-date">MFR Maltot | 2019 – 2020</p>
+            </div>
+            <div class="education-item">
+                <h3>BAFA Option Art du Spectacle</h3>
+                <p class="school-date">2008</p>
+            </div>
+            <div class="education-item">
+                <h3>Niveau Bac Technologique STI EN</h3>
+                <p class="school-date">Lycée Alexis de Tocqueville | 2007</p>
+            </div>
+        </section>
+
+        <section class="languages">
+            <h2>Langues</h2>
+            <ul>
+                <li>Français : Langue maternelle</li>
+                <li>Anglais : Reading, Writing, Speaking (avec un focus sur l'anglais technique pour l'IA)</li>
+            </ul>
+        </section>
+
+        <section class="interests">
+            <h2>Centres d'Intérêt</h2>
+            <ul>
+                <li>Informatique en général, veille technologique constante.</li>
+                <li>Intelligence Artificielle (LLMs, apprentissage profond, éthique de l'IA).</li>
+                <li>Art en général (cinéma, musique).</li>
+                <li>Politique démocratique.</li>
+            </ul>
+        </section>
+    </div>
+
+    <div class="modal fade" id="chatbotModal" tabindex="-1" aria-labelledby="chatbotModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="chatbotModalLabel">Assistant Présentateur de CV</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="chatbot-messages" class="mb-3" style="max-height: 300px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; border-radius: 5px;">
+                        </div>
+
+                    <div class="progress mb-3 d-none" id="chatbot-progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" id="user-input" class="form-control" placeholder="Posez une question sur mon CV..." aria-label="Votre message">
+                        <button class="btn btn-primary" type="button" id="send-button">Envoyer</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+    <script type="module" src="cv.js"></script>
+</body>
+</html>

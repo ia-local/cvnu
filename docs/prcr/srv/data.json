@@ -1,0 +1,123 @@
+{
+  "@context": "https://schema.org",
+  "@type": "GovernmentPolicy",
+  "name": "Programme du Revenu Citoyen et de la Régulation (PRCR) : CVNU & Taxe IA",
+  "description": "Un nouveau modèle économique circulaire basé sur la valorisation de l'engagement civique (CVNU) et le financement par l'affectation de recettes fiscales liées à l'automatisation (Taxe IA).",
+  "country": "France",
+  "legislativeStatus": "Proposed",
+  "policySector": "Économie Circulaire, Justice Sociale, Fiscalité",
+  "dateCreated": "2025-10-14",
+  "policyComponents": [
+    {
+      "@type": "MonetaryGrant",
+      "name": "Revenu Citoyen (RC) Progressif",
+      "identifier": "RC-CVNU-28J",
+      "description": "Revenu versé via Smart Contract à tout citoyen détenteur du CV Numérique Universel, calculé selon un niveau d'utilité.",
+      "minPaymentAmount": {
+        "@type": "MonetaryAmount",
+        "value": 550,
+        "unitText": "EUR",
+        "currency": "EUR",
+        "frequency": "P28D" 
+      },
+      "maxPaymentAmount": {
+        "@type": "MonetaryAmount",
+        "value": 5500,
+        "unitText": "EUR",
+        "currency": "EUR",
+        "frequency": "P1M" 
+      },
+      "paymentTrigger": "Détention et validation du CV Numérique Universel (CVNU) sur Smart Contract.",
+      "fundingMechanism": {
+        "@type": "FundingScheme",
+        "name": "Fonds du Revenu Citoyen (FRC)",
+        "source": "Taxe IA (affectation de recettes TVA)"
+      }
+    },
+    {
+      "@type": "System",
+      "name": "CV Numérique Universel (CVNU) - Compte de Valorisation",
+      "identifier": "CVNU-LEVEL",
+      "description": "Système de points personnels mesurant et valorisant l'engagement social, environnemental et numérique du citoyen.",
+      "calculationMethod": "Score pondéré (0 à 100 points) par cycles de 28 jours.",
+      "categories": [
+        {"name": "Citoyenne", "metric": "Bénévolat, participation civique"},
+        {"name": "Vertueuse", "metric": "Actions écologiques, transition énergétique"},
+        {"name": "Numérique", "metric": "Formation continue, inclusion numérique"},
+        {"name": "Utilitaire", "metric": "Services d'aide mutuelle, chantiers solidaires"}
+      ]
+    },
+    {
+      "@type": "TaxPolicy",
+      "name": "Taxe IA et Cartographie Fiscale",
+      "identifier": "TAXE-IA-CARTOGRAPHIE",
+      "description": "Affectation d'une partie des recettes de TVA générées par l'automatisation au Fonds du Revenu Citoyen (FRC).",
+      "taxType": "AffectedVAT",
+      "taxBasis": "Croissance de la Valeur Ajoutée attribuable à l'Intelligence Artificielle et à l'Automatisation.",
+      "fiscalIncentives": {
+        "name": "Cartographie Fiscale",
+        "description": "Ajustement de l'impôt sur le revenu avec un abattement ciblé pour les détenteurs d'un CVNU Level élevé, renforçant le pouvoir d'achat.",
+        "incentiveType": "TaxReduction"
+      }
+    },
+    {
+      "@type": "System",
+      "name": "TaxeAI/Cartographie Fiscale LEVEL (T-C LEVEL)",
+      "identifier": "TC-LEVEL",
+      "description": "Indicateur de performance fiscale et sociétale (gamification). Mesure l'efficacité de l'engagement CVNU sur la réduction de l'impôt et l'alignement sur l'économie circulaire.",
+      "calculationMethod": "Score pondéré (0-10) basé sur l'indice d'Abattement Fiscal réel et la performance de la catégorie Vertueuse.",
+      "levels": [
+        {"rank": 1, "label": "Bronze", "min_cvnu_impact": 0.1, "bonus_fiscal": 0},
+        {"rank": 5, "label": "Or", "min_cvnu_impact": 0.5, "bonus_fiscal": 0.05},
+        {"rank": 10, "label": "Platine", "min_cvnu_impact": 0.9, "bonus_fiscal": 0.1}
+      ]
+    },
+    {
+      "@type": "GovernmentPolicy",
+      "name": "Plan de Déploiement et de Généralisation du RC/CVNU",
+      "identifier": "DEPLOYMENT-PLAN",
+      "description": "Feuille de route en trois phases pour la mise en œuvre du Revenu Citoyen et du CVNU.",
+      "phases": [
+        {
+          "name": "Phase 1 : Preuve de Concept (POC) et Smart Contract (Année 1)",
+          "goal": "Validation de la faisabilité technique et du modèle de progressivité.",
+          "details": [
+            "Lancement du Smart Contract de Versement sur une blockchain d'État pilote.",
+            "Test du CVNU Level avec la seule catégorie 'Numérique' et 'Citoyenne' dans trois régions pilotes.",
+            "Début de la collecte des recettes via la 'Taxe IA' (Affectation TVA minimale)."
+          ]
+        },
+        {
+          "name": "Phase 2 : Montée en Charge et Intégration Fiscale (Années 2-3)",
+          "goal": "Intégration des grandes aides sociales et test de la Cartographie Fiscale.",
+          "details": [
+            "Généralisation du CVNU Level à toutes les catégories, y compris 'Vertueuse' et 'Utilitaire'.",
+            "Fusion du RSA et de la Prime d'Activité dans le Revenu Citoyen de Base (550€).",
+            "Déploiement du mécanisme de Cartographie Fiscale (abattements liés au CVNU Level)."
+          ]
+        },
+        {
+          "name": "Phase 3 : Généralisation et Finalisation (Années 4+)",
+          "goal": "Remplacement intégral de l'État-Providence obsolète par le modèle CVNU.",
+          "details": [
+            "Intégration des aides spécifiques restantes (dont AAH) en Primes Nécessité d'Usage (NU) sécurisées.",
+            "Augmentation progressive du taux d'affectation de la Taxe IA pour atteindre l'équilibre du Fonds du Revenu Citoyen (FRC).",
+            "Adoption généralisée du CVNU par 90% des citoyens et des Partenaires Oracles."
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Smart Contract de Versement",
+      "identifier": "SC-RC-ALLOCATOR",
+      "description": "Contrat intelligent garantissant le versement automatique, transparent et infalsifiable du Revenu Citoyen.",
+      "functionality": [
+        "Vérification automatique de l'identité du bénéficiaire (via CVNU et identifiant national).",
+        "Calcul dynamique du montant (Base + Prime CVNU Level).",
+        "Déclenchement du paiement en crypto-monnaie ou monnaie fiduciaire numérisée chaque 28 jours."
+      ],
+      "platform": "Blockchain d'État ou publique certifiée."
+    }
+  ]
+}

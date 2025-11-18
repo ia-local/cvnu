@@ -1,12 +1,72 @@
 {
-  "nom": "N/A",
-  "email": "N/A",
-  "telephone": "N/A",
-  "adresse": "N/A",
-  "resume": "N/A",
-  "experiences": [],
-  "formation": [],
-  "competences": [],
-  "langues": [],
+  "nom": "John Doe",
+  "email": "johndoe@example.com",
+  "telephone": "06 12 34 56 78",
+  "adresse": "123, rue de la République, 75001 Paris",
+  "resume": "Expérimenté DevOps en AI services avec 5 ans d'expérience dans la gestion de plateformes cloud et la mise en œuvre de pipelines de déploiement automatiques.",
+  "experiences": [
+    {
+      "titre": "DevOps Engineer en AI services",
+      "entreprise": "XYZ Corporation",
+      "duree": "2020-2022",
+      "description": [
+        "Gestion de plateformes cloud pour les services d'IA",
+        "Mise en œuvre de pipelines de déploiement automatiques avec Jenkins et Docker",
+        "Développement de scripts Python pour la gestion des données et la sécurité",
+        "Collaboration avec les équipes de développement pour la mise en œuvre de nouvelles fonctionnalités"
+      ]
+    },
+    {
+      "titre": "Développeur logiciel",
+      "entreprise": "ABC Company",
+      "duree": "2018-2020",
+      "description": [
+        "Développement de logiciels en Java pour les applications mobiles",
+        "Intégration de services cloud pour la gestion des données",
+        "Test et débogage de logiciels avec Selenium et JUnit"
+      ]
+    }
+  ],
+  "formation": [
+    {
+      "diplome": "Diplôme en ingénierie informatique",
+      "etablissement": "Université de Paris",
+      "duree": "2015-2018"
+    }
+  ],
+  "competences": [
+    "Python",
+    "Java",
+    "C++",
+    "Jenkins",
+    "Docker",
+    "Kubernetes",
+    "Ansible",
+    "AWS",
+    "Azure",
+    "Google Cloud",
+    "Linux",
+    "Windows",
+    "MySQL",
+    "PostgreSQL",
+    "MongoDB",
+    "AWS IAM",
+    "Azure Active Directory",
+    "Google Cloud Identity and Access Management"
+  ],
+  "langues": [
+    {
+      "langue": "Français",
+      "niveau": "mère langue"
+    },
+    {
+      "langue": "Anglais",
+      "niveau": "fluent"
+    },
+    {
+      "langue": "Espagnol",
+      "niveau": "basique"
+    }
+  ],
   "projets": []
 }

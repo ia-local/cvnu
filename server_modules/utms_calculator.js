@@ -151,7 +151,6 @@ const COEFFICIENTS = {
         HIGH: 5
     },
 
-    // Coûts par token pour différents modèles (pour calcul des coûts réels externes)
     // Ces valeurs sont des exemples et doivent être mises à jour avec les prix réels de l'API Groq/OpenAI, etc.
     TOKEN_COSTS_PER_MODEL: {
         "llama3-8b-8192": { input: 0.0000005, output: 0.0000015 }, // Coût par token en USD

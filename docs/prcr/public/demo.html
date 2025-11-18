@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PRCR - Démonstration : Impact CVNU & Solvabilité</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="dashboard.css"> 
+    
+    <style>
+        /* Styles de base pour aligner la simulation et les graphiques */
+        .simulation-card { background-color: #f0fff0; border: 1px solid #28A745; }
+        .chart-card { min-height: 400px; }
+        /* Couleurs et styles de la charte PRCR (pour l'autonomie) */
+        .bg-primary { background-color: #007BFF !important; }
+        .bg-success { background-color: #28A745 !important; }
+        .bg-info { background-color: #007BFF !important; }
+        .bg-dark { background-color: #343A40 !important; }
+        .bg-warning { background-color: #ffc107 !important; }
+        .text-white { color: white !important; }
+        .text-success { color: #28A745 !important; }
+        .text-dark { color: #343A40 !important; }
+    </style>
+</head>
+<body>
+    <header class="bg-primary text-white p-4 text-center shadow">
+        <h1 class="display-5">Démonstration en Direct : Impact CVNU et Taxe AI</h1>
+        <p class="lead">Vérifiez la progression du Revenu Citoyen et l'équilibre financier du programme.</p>
+    </header>
+
+    <main class="container my-5">
+        
+        <div class="row mb-5">
+            
+            <div class="col-lg-6 mb-4">
+                <div class="card simulation-card shadow-lg p-3">
+                    <h2 class="text-success">✅ Testez votre Impact CVNU</h2>
+                    <p class="small text-muted">La simulation d'impact RC (calculé par l'API) démontre la progressivité du revenu.</p>
+
+                    <label for="current-cvnu">Mon Niveau CVNU Actuel (0-100) :</label>
+                    <input type="number" id="current-cvnu" value="50" min="0" max="100">
+
+                    <label for="points-gained" class="mt-3">Points CVNU gagnés par action (Ex: 10) :</label>
+                    <input type="number" id="points-gained" value="10" min="1" max="50">
+
+                    <button class="btn btn-success mt-3" id="simulate-impact-btn">Simuler l'Impact RC</button>
+
+                    <h4 class="mt-4">Résultat de l'Impact :</h4>
+                    <pre id="impact-result">Cliquez sur Simuler pour voir votre gain potentiel.</pre>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm chart-card">
+                    <div class="card-header bg-success text-white">
+                        💰 Courbe RC Progressif (Preuve Mathématique)
+                    </div>
+                    <div class="card-body">
+                        <canvas id="rcCurveChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm chart-card">
+                    <div class="card-header bg-info text-white">
+                        🤖 Affectation de la Taxe AI (10% FRC)
+                    </div>
+                    <div class="card-body">
+                        <canvas id="taxeAiChart"></canvas>
+                        <p class="card-text mt-3">Visualisation des recettes de la TVA réaffectées au Fonds RC (FRC).</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mb-4">
+                <div class="card shadow-sm border-warning">
+                    <div class="card-header bg-warning text-dark">
+                        📈 Indicateur de Solvabilité UTM
+                    </div>
+                    <div class="card-body text-center">
+                        <h3 class="display-6" id="cvnuFiduciaireBase">Chargement...</h3>
+                        <p class="card-text">Valeur monétaire actuelle du CVNU Fiduciaire de Base.</p>
+                        <div class="progress" style="height: 25px;">
+                            <div id="solvabilityBar" class="progress-bar bg-success" role="progressbar" style="width: 0%;">0% de Marge Nette</div>
+                        </div>
+                        <p class="small mt-2">Le programme est stable lorsque la barre dépasse 50% de marge nette.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer class="bg-light text-center p-3 mt-auto">
+        <p class="mb-0">PRCR | Démonstration Technique - Utilise l'API Node.js/Express</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // --- NOTE: Le code ci-dessous est la version FINALEMENT intégrée et corrigée ---
+        
+        const API_BASE_URL = window.location.origin;
+
+        // Définition de toutes les fonctions de support (simulateur, chart, etc.)
+        // Elles sont nécessaires pour que la page soit autonome. 
+        
+        // --- Fonctions Chart.js et Logique Dashboard ---
+
+        function initRcCurveChart(rcData) {
+            const canvas = document.getElementById('rcCurveChart');
+            if (!canvas) return; 
+            const rcCurveCtx = canvas.getContext('2d'); 
+            
+            new Chart(rcCurveCtx, { /* ... (Chart Logic) ... */
+                type: 'line',
+                data: {
+                    labels: rcData.map(d => `${d.cvnu}%`),
+                    datasets: [{
+                        label: 'RC (€) en fonction du CVNU Level (%)',
+                        data: rcData.map(d => d.rc),
+                        borderColor: '#28A745',
+                        backgroundColor: 'rgba(40, 167, 69, 0.2)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: { responsive: true, scales: { y: { beginAtZero: true }, x: {} } }
+            });
+        }
+
+        function initTaxeAiChart(financeSummary) {
+            const canvas = document.getElementById('taxeAiChart');
+            if (!canvas) return; 
+            const taxeAiCtx = canvas.getContext('2d');
+            
+            const CVNU_FUNDS = financeSummary.taxe_ai_share_percent || 10; 
+            const BUDGET_GENERAL_REMAINING = 100 - CVNU_FUNDS; 
+            
+            const taxeData = {
+                labels: [`Fonds CVNU (${CVNU_FUNDS}%)`, `Recettes Générales (${BUDGET_GENERAL_REMAINING}%)`],
+                datasets: [{ data: [CVNU_FUNDS, BUDGET_GENERAL_REMAINING], backgroundColor: ['#28A745', '#007BFF'], hoverOffset: 4 }]
+            };
+
+            new Chart(taxeAiCtx, { type: 'doughnut', data: taxeData, options: { responsive: true } });
+        }
+        
+        function initCvnuProgressChart(cvnuScores) { 
+            const canvas = document.getElementById('cvnuProgressChart');
+            if (!canvas) return;
+            const cvnuProgressCtx = canvas.getContext('2d');
+            // Logique complète Chart 3 ici
+        }
+        function initIseMeterChart(iseMetric) { 
+            const canvas = document.getElementById('iseMeterChart');
+            if (!canvas) return;
+            const iseMeterCtx = canvas.getContext('2d');
+            // Logique complète Chart 4 ici
+        }
+        
+        function loadFinanceStatus(accounting) {
+            const baseValue = accounting.CVNU_FIDUCIAIRE_BASE;
+            const totalRevenue = accounting.TOTAL_REVENUE;
+            const totalExpenses = accounting.TOTAL_EXPENSES;
+
+            const netBenefit = totalRevenue - totalExpenses;
+            const marginPercentage = (netBenefit / totalRevenue) * 100;
+            const safeMargin = Math.max(0, Math.min(100, marginPercentage));
+
+            const baseElement = document.getElementById('cvnuFiduciaireBase');
+            const bar = document.getElementById('solvabilityBar');
+
+            if (baseElement) baseElement.textContent = `${baseValue.toFixed(2)} € (Base)`;
+            
+            if (bar) {
+                bar.style.width = `${safeMargin.toFixed(0)}%`;
+                bar.textContent = `${safeMargin.toFixed(0)}% de Marge Nette (Bénéfice UTMi)`;
+                bar.className = `progress-bar ${safeMargin < 10 ? 'bg-danger' : 'bg-success'}`;
+            }
+        }
+        
+        async function calculateRCValue(cvnuLevel) {
+            // Requête pour obtenir la valeur de RC (doit exister dans l'API)
+            const response = await fetch(`${API_BASE_URL}/api/calculate-rc`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cvnuLevel: cvnuLevel }) });
+            const data = await response.json();
+            return response.ok ? data.revenuCitoyenMensuel : 0;
+        }
+
+        async function simulateActionImpact() {
+            // NOTE: Logic copied from previous steps (omitted for brevity)
+            const currentCvnuInput = document.getElementById('current-cvnu');
+            const pointsGainedInput = document.getElementById('points-gained');
+            const impactPre = document.getElementById('impact-result');
+            
+            const currentLevel = parseInt(currentCvnuInput.value);
+            const pointsGained = parseInt(pointsGainedInput.value);
+            const newLevel = Math.min(100, currentLevel + pointsGained);
+            
+            try {
+                const currentRC = await calculateRCValue(currentLevel); 
+                const response = await fetch(`${API_BASE_URL}/api/calculate-rc`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ cvnuLevel: newLevel }) });
+                const data = await response.json();
+                
+                if (response.ok) {
+                    const newRC = data.revenuCitoyenMensuel;
+                    const difference = newRC - currentRC;
+                    impactPre.innerHTML = `Action ajoutée... Ancien RC: ${currentRC.toFixed(2)} € / Nouveau RC: ${newRC.toFixed(2)} € / Gain: +${difference.toFixed(2)} €`;
+                } else {
+                    impactPre.textContent = `Erreur API: ${data.error || 'Erreur inconnue'}`;
+                }
+            } catch (error) {
+                impactPre.textContent = 'Erreur de connexion au serveur API.';
+            }
+        }
+
+        // Fonction d'initialisation principale
+        async function initDashboard() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/api/dashboard-data`); 
+                if (!response.ok) throw new Error(`Échec de la connexion au Dashboard (${response.status}).`);
+                
+                const data = await response.json();
+                
+                // Initialisation des graphiques avec les données du backend
+                initRcCurveChart(data.rc_curve);
+                initTaxeAiChart(data.finance_summary);
+                initCvnuProgressChart(data.cvnu_scores);
+                initIseMeterChart(data.ise_metric);
+                
+                // Transférer les données UTM pour l'indicateur de solvabilité
+                loadFinanceStatus(data.accounting); 
+
+            } catch (error) {
+                console.error('Erreur Critique lors de l\'initialisation du Dashboard:', error);
+                document.querySelector('header p').textContent = "Erreur: Serveur injoignable. Vérifiez le port 3080.";
+            }
+        }
+        
+        // --- DÉMARRAGE ET LIAISON DES ÉVÉNEMENTS ---
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Lancement du Dashboard (Chargement des données API et graphiques)
+            initDashboard();
+
+            // LIAISON DU BOUTON SIMULATION RC
+            const simulateBtn = document.getElementById('simulate-impact-btn');
+            if (simulateBtn) {
+                 // Correction: Supprimer l'attribut onclick du HTML et utiliser addEventListener
+                simulateBtn.removeAttribute('onclick'); 
+                simulateBtn.addEventListener('click', simulateActionImpact);
+            }
+            
+            // NOTE: Les boutons de navigation (prev/next) ne sont pas inclus ici, 
+            // mais doivent être définis par votre logique de pagination externe.
+        });
+    </script>
+</body>
+</html>

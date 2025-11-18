@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Espace CVNU | Programme PRCR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS PRCR (Charte Graphique) */
+        body { font-family: 'Roboto', sans-serif; line-height: 1.8; color: #343A40; margin: 0; padding: 20px; background-color: #F8F9FA; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        header { text-align: center; padding-bottom: 20px; border-bottom: 3px solid #007BFF; }
+        h1 { color: #007BFF; font-family: 'Montserrat', sans-serif; margin: 0; }
+        h2 { color: #343A40; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-top: 30px; font-family: 'Montserrat', sans-serif; }
+        h3 { color: #28A745; margin-top: 20px; }
+        label { display: block; margin: 10px 0 5px; font-weight: bold; }
+        input[type="number"], select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background-color: #007BFF; color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; margin-top: 15px; font-weight: bold; transition: background-color 0.3s; }
+        button:hover { background-color: #0056b3; }
+        pre { background-color: #e9ecef; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; color: #343A40; border-left: 5px solid #007BFF; }
+        .rc-amount { font-size: 1.5em; font-weight: bold; color: #28A745; }
+        .validation-alert { background-color: #fff3cd; border-color: #ffeeba; color: #856404; padding: 10px; border-radius: 5px; margin-top: 10px; }
+        .ia-panel { border: 1px solid #007BFF; padding: 15px; border-radius: 8px; margin-top: 15px; background-color: #e6f7ff; }
+        .ia-question { background-color: #343A40; color: white; padding: 10px; border-radius: 5px; font-weight: bold; }
+        .ia-answer { margin-top: 10px; border-left: 3px solid #28A745; padding-left: 10px; font-style: italic; }
+        /* Styles spécifiques FAQ */
+        #faq-list li { margin-bottom: 8px; border-bottom: 1px dotted #ccc; padding-bottom: 5px; }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PRCR – Mon Espace CVNU</h1>
+            <p>Utilité et Équité | Le portail de la **Réforme du Droit au Travail**.</p>
+        </header>
+
+        <div id="policy-details">
+            </div>
+
+        <hr style="margin: 30px 0;">
+
+        <h2>✅ Gérer mes Actions CVNU (Simulation)</h2>
+        <p class="validation-alert">Les résultats sont des simulations basées sur les règles de la politique. La validation finale est assurée par le Smart Contract.</p>
+
+        <label for="current-cvnu">Mon Niveau CVNU Actuel (0-100) :</label>
+        <input type="number" id="current-cvnu" value="50" min="0" max="100">
+
+        <label for="action-category" style="margin-top: 20px;">Catégorie de la nouvelle action :</label>
+        <select id="action-category">
+            <option value="Citoyenne">Citoyenne (Bénévolat, Participation)</option>
+            <option value="Vertueuse">Vertueuse (Mobilité douce, Écologie)</option>
+            <option value="Numérique">Numérique (Formation, Tutorat)</option>
+            <option value="Utilitaire">Utilitaire (Entraide, Services mutuels)</option>
+        </select>
+        
+        <label for="points-gained" style="margin-top: 20px;">Points CVNU estimés par cette action (Ex: 10) :</label>
+        <input type="number" id="points-gained" value="10" min="1" max="50">
+
+        <button onclick="simulateActionImpact()">Simuler l'Impact de l'Action</button>
+
+        <h3>Résultat de l'Impact :</h3>
+        <pre id="impact-result">Le Revenu Citoyen futur sera affiché ici après simulation.</pre>
+
+        <hr style="margin: 30px 0;">
+        
+        <h2>🛡️ Simulateur de Débat Politique (GAN)</h2>
+        <p>Testez la robustesse de notre programme face à l'opposition. Le générateur pose une question critique, l'assistant PRCR répond en citant nos sources (Art. L..., Taxe IA).</p>
+        
+        <label for="debate-difficulty">Niveau du Débat :</label>
+        <select id="debate-difficulty" style="width: 50%; display: inline-block;">
+            <option value="débutant">Débutant (Information)</option>
+            <option value="intermédiaire">Intermédiaire (Faisabilité Budgétaire)</option>
+            <option value="expert">Expert (Failles Légales et Sociales)</option>
+        </select>
+        <button onclick="startGanDebate()" style="width: 48%; margin-left: 10px;">Lancer le Débat IA</button>
+        
+        <div id="debate-output" class="ia-panel">
+            Cliquez sur "Lancer le Débat IA" pour commencer.
+        </div>
+
+        <hr style="margin: 30px 0;">
+        
+        <h2>📊 Questions les Plus Fréquentes (FAQ Stats)</h2>
+                <p>Analyse des questions les plus débattues par le public (mis à jour après chaque simulation).</p>
+        <button id="fetch-faq-btn">Actualiser les Statistiques</button>
+        <div id="faq-stats-output" class="ia-panel" style="margin-top: 20px;">
+            <p>Cliquez sur "Actualiser les Statistiques" pour charger les données de fréquence.</p>
+            
+            <div id="top-faq-cards" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-top: 15px;">
+            </div>
+
+        </div>
+        <div id="faq-stats-output" class="ia-panel">
+            <p>Cliquez sur "Actualiser les Statistiques" pour charger les données de fréquence.</p>
+            <ul id="faq-list">
+                </ul>
+        </div>
+        
+        <hr style="margin: 30px 0;">
+
+        <h2>⚙️ Gestion d'Époque (Analyse IA)</h2>
+        <p>Statut d'Analyse : <span id="epoch-status" style="font-weight: bold;">Chargement...</span></p>
+        
+        <div id="faq-suggestion-panel" class="ia-panel">
+            <p>Pas de nouvelle suggestion IA en attente. Continuez le débat pour atteindre le seuil d'analyse.</p>
+        </div>
+
+        <button onclick="addSuggestedFaq()" id="add-faq-btn" style="background-color: #28A745; display: none;">✅ Ajouter cette FAQ aux sources</button>
+
+        <hr style="margin: 30px 0;">
+        
+        <h2>💡 Explications Dynamiques (Groq AI)</h2>
+        <label for="details-topic">Détails à générer :</label>
+        <select id="details-topic">
+            <option value="Vertueuse">Détail Catégorie Vertueuse (CVNU)</option>
+            <option value="Numérique">Détail Catégorie Numérique (CVNU)</option>
+            <option value="taxe_ia_justification">Justification Politique de la Taxe IA</option>
+        </select>
+        <button onclick="fetchAiDetails()">Générer l'Explication</button>
+        
+        <div id="details-output" class="ia-panel">
+            L'explication détaillée de la politique sera affichée ici.
+        </div>
+        
+        <hr style="margin: 30px 0;">
+        <h2>🔬 Moteur 1001 Solutions (Double-Modèle)</h2>
+        <p>Testez la robustesse de notre architecture IA. Le système utilise Gemini pour la ligne de défense stratégique et Llama pour les actions concrètes, générant des milliers de variantes de discours.</p>
+        
+        <label for="problem-input">Question Critique à Résoudre (Ex: Faisabilité budgétaire) :</label>
+        <input type="text" id="problem-input" value="Comment garantir la stabilité financière du FRC face à une récession ?" placeholder="Entrez la question critique ici...">
+        
+        <label for="solution-difficulty" style="margin-top: 20px;">Niveau d'Analyse :</label>
+        <select id="solution-difficulty">
+            <option value="intermédiaire">Stratégique (Intermédiaire)</option>
+            <option value="expert">Technique (Expert)</option>
+        </select>
+        
+        <button onclick="generate1001Solutions()">Générer les 1001 Solutions</button>
+        
+        <div id="solutions-output" class="ia-panel" style="margin-top: 20px;">
+            Les solutions générées par la confrontation IA seront affichées ici.
+        </div>
+        
+        <hr style="margin: 30px 0;">
+        <h2>🗓️ Plan de Déploiement du Programme PRCR</h2>
+        <div id="deployment-plan">
+            <p>Chargement du plan de déploiement...</p>
+        </div>
+    </div> <script src="app.js"></script>
+</body>
+</html>

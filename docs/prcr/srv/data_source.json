@@ -1,0 +1,60 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "Corpus de Référence Politique et Légal PRCR",
+  "description": "Textes fondamentaux, arguments de débat, et références légales structurant le Programme du Revenu Citoyen et de la Régulation (PRCR).",
+  "version": "1.0",
+  "datePublished": "2025-10-14",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Parti pour le Revenu Citoyen et la Régulation (PRCR)"
+  },
+  "documentation": [
+    {
+      "@type": "CreativeWork",
+      "name": "Manifeste du PRCR",
+      "identifier": "MANIFESTO",
+      "text": "Le programme PRCR vise à réconcilier le citoyen avec l'impôt (Taxe IA régulatrice) et l'économie avec le social (Revenu Citoyen progressif basé sur le CVNU). Il remplace l'assistanat par la valorisation de la contribution sociétale (CVNU Level)."
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Réforme du Droit au Travail et à la Rémunération des Compétences",
+      "identifier": "LEGAL-REFORM-TEXT",
+      "sections": [
+        {
+          "title": "TITRE I : Redéfinition du Droit au Travail et à la Rémunération des Compétences",
+          "articles": [
+            {"code": "Art. L3121-1", "definition": "Le travail est défini comme toute activité productive ou d'apprentissage qui génère une compétence valorisable et reconnue au sein du CVNU. Droit effectif à partir de 16 ans."},
+            {"code": "Art. L3222-1", "definition": "Institution d'une allocation mensuelle universelle, progressive et personnalisée (RC) de 550 € à 5 500 €, versée en fonction de la progression des compétences CVNU."}
+          ]
+        },
+        {
+          "title": "TITRE II : Mécanismes de Financement et de Sécurité des Transactions",
+          "articles": [
+            {"code": "Art. L4331-1 (nouvel)", "definition": "Toutes les transactions financières (financement et versement RC) sont sécurisées, automatisées et transparentes par l'utilisation de smart contracts."},
+            {"code": "Art. L4334-1", "definition": "Un pourcentage défini des recettes de la TVA est affecté spécifiquement au Fonds de Redistribution (FRC) pour le financement de l'allocation et de la formation professionnelle."}
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Références Fiscales et Légales Clés",
+      "identifier": "KEY-REFERENCES",
+      "references": [
+        {"source": "Code Général des Impôts (CGI)", "article": "Art. 256", "definition": "Justifie la réaffectation de la TVA pour financer les dispositifs de formation et d'emploi."},
+        {"source": "Loi sur la Sécurité Sociale", "article": "Primes de Nécessité d'Usage (NU)", "definition": "Mécanisme remplaçant et sécurisant les droits acquis (ex: AAH) au-dessus du RC de base."}
+      ]
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Arguments de Défense (Contre-Attaques)",
+      "identifier": "DEBATE-ARGUMENTS",
+      "points": [
+        {"critique": "Taxe IA freine innovation", "reponse": "FAUX : Affectation TVA sur gain de productivité non redistribué. C'est un dividende technologique, pas une pénalité fiscale."},
+        {"critique": "CVNU est du flicage social", "reponse": "FAUX : C'est un Passeport d'Utilité volontaire et sécurisé par la Blockchain (Art. L4331-1). Il mesure la contribution, pas la conformité."},
+        {"critique": "Fusion AAH/RSA régresse droits sociaux", "reponse": "FAUX : Sécurisation totale. Les aides sont transformées en Primes NU garanties, s'additionnant au RC, et mettent fin au piège à l'emploi."}
+      ]
+    }
+  ]
+}

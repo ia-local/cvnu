@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application CVNU & Taxe IA - Test Frontend</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; padding: 20px; background-color: #f0f4f8; }
+        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h1 { color: #0056b3; border-bottom: 2px solid #0056b3; padding-bottom: 10px; }
+        h3 { margin-top: 25px; color: #333; }
+        label { display: block; margin: 10px 0 5px; font-weight: bold; }
+        input[type="number"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; margin-top: 15px; }
+        button:hover { background-color: #0056b3; }
+        pre { background-color: #eee; padding: 15px; border-radius: 5px; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 Simulateur de Revenu Citoyen (RC)</h1>
+
+        <div id="policy-details">
+            </div>
+
+        <hr style="margin: 30px 0;">
+
+        <h2>Calculer votre Revenu CVNU</h2>
+        <label for="cvnu-input">Votre Niveau CVNU (0 à 100) :</label>
+        <input type="number" id="cvnu-input" value="50" min="0" max="100">
+        <button onclick="calculateRC()">Simuler le RC</button>
+        
+        <h3>Résultat de la Simulation :</h3>
+        <pre id="rc-result">Entrez votre niveau CVNU et cliquez sur "Simuler".</pre>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

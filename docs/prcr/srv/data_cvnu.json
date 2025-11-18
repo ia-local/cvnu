@@ -1,0 +1,29 @@
+[
+  {
+    "actionId": "CVNU-001",
+    "citizenId": "FR-123456789",
+    "category": "Citoyenne",
+    "points": 15,
+    "description": "Bénévolat : 10 heures d'aide aux devoirs validées.",
+    "validatorId": "ASS-ALPHA",
+    "dateValidated": "2025-10-01T10:00:00Z"
+  },
+  {
+    "actionId": "CVNU-002",
+    "citizenId": "FR-123456789",
+    "category": "Vertueuse",
+    "points": 10,
+    "description": "Plan de mobilité douce validé (3 cycles de 28 jours).",
+    "validatorId": "ENT-BETA",
+    "dateValidated": "2025-10-15T14:30:00Z"
+  },
+  {
+    "actionId": "CVNU-003",
+    "citizenId": "FR-987654321",
+    "category": "Numérique",
+    "points": 25,
+    "description": "Formation 'Inclusion Numérique pour Seniors' complétée.",
+    "validatorId": "FORM-GAMMA",
+    "dateValidated": "2025-09-20T11:00:00Z"
+  }
+]

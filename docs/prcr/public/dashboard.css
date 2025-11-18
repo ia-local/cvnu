@@ -1,0 +1,34 @@
+/* dashboard.css */
+
+:root {
+    --prcr-blue: #007BFF;
+    --prcr-green: #28A745;
+    --prcr-red: #DC3545;
+    --prcr-dark: #343A40;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--prcr-dark);
+}
+
+.card {
+    border-radius: 10px;
+    border: none;
+}
+
+.card-header {
+    font-weight: bold;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+
+/* Couleurs spécifiques aux titres de cartes */
+.bg-success { background-color: var(--prcr-green) !important; }
+.bg-info { background-color: var(--prcr-blue) !important; }
+.bg-dark { background-color: var(--prcr-dark) !important; }
+
+/* Amélioration de la lisibilité des graphiques Chart.js */
+canvas {
+    max-height: 350px;
+}

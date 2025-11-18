@@ -21,10 +21,10 @@ const { generateProfessionalSummary } = require('./server_modules/cv_professiona
 
 // --- Server and AI Configuration ---
 const config = {
-  port: process.env.PORT || 3000,
+  port: process.env.PORT || 3100,
   groq: {
     apiKey: process.env.GROQ_API_KEY,
-    model: 'gemma2-9b-it', // Modèle par défaut pour les conversations de chat
+    model: 'llama-3.1-8b-instant', // Modèle par défaut pour les conversations de chat
     temperature: 0.7,
     maxTokens: 2048,
   },

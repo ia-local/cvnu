@@ -1,0 +1,68 @@
+{
+  "questions_compteur": [
+    {
+      "id": "Q-001",
+      "text": "Bien que la politique PRCR ne mentionne pas explicitement les algorithmes sous-jacents du RSA et du Revenu Citoyen (RC), nous pouvons formuler une question basée sur la description des deux mécanismes :\n\n**Question de niveau débutant :**\n\n\"Quel est la principale différence entre le mécanisme de calcul du Revenu Citoyen (RC) et celui du RSA (Revenu de Solidarité Active) au sein du Programme du Revenu Citoyen et de la Régulation (PRCR) ?\"",
+      "difficulty": "débutant",
+      "count": 1,
+      "last_asked": "2025-10-14T07:54:52.121Z"
+    },
+    {
+      "id": "Q-002",
+      "text": "Voici une question basique pour tester les connaissances du candidat sur le PRCR :\n\n**Question :**\n\nQuel est l'avantage principal de la généralisation du RSA (Revenu de Solidarité Active) au sein du Revenu Citoyen (RC) dans le Plan de Déploiement et de Généralisation du RC/CVNU, selon la politique PRCR ?\n\n**A** : Il permet une aide sociale plus généreuse aux personnes les plus nécessiteuses.\n**B** : Il favorise l'intégration des aides sociales existantes au modèle de Revenu Citoyen.\n**C** : Il diminue la progressivité du Revenu Citoyen en fonction du CVNU Level.\n**D** : Il augmente le montant maximal de la Taxe IA.\n\n**Réponse attendue :**\n\n**B** : Il favorise l'intégration des aides sociales existantes au modèle de Revenu Citoyen.\n\nCette question permet de tester la compréhension du candidat sur la logique de généralisation du RSA au sein du RC, tel que prévu dans la politique PRCR.",
+      "difficulty": "débutant",
+      "count": 1,
+      "last_asked": "2025-10-14T07:54:54.231Z"
+    },
+    {
+      "id": "Q-003",
+      "text": "Voici une question de niveau débutant basée sur la politique PRCR :\n\n**Question** : Quelle est la principale différence entre le Revenu Citoyen (RC) et le RSA (Revenu de Solidarité Active) dans le contexte du Programme du Revenu Citoyen et de la Régulation (PRCR) ?\n\n**Réponse attendue** : Le Revenu Citoyen (RC) est un revenu progressif lié au CVNU Level (Compte de Valorisation), tandis que le RSA est un revenu social destiné aux personnes en situation de précarité, qui sera fusionné dans le Revenu Citoyen de Base (550€) dans la phase 2 du plan de déploiement du PRCR.\n\n**Défi** : Cette question met en évidence la différence fondamentale entre le RC et le RSA, qui est un aspect clé de la politique PRCR. La bonne réponse démontre une compréhension des principes de base du PRCR et de la manière dont les deux revenus sont liés.",
+      "difficulty": "débutant",
+      "count": 9,
+      "last_asked": "2025-10-14T08:52:35.764Z"
+    },
+    {
+      "id": "Q-004",
+      "text": "Question de niveau débutant :\n\nQuelle est la principale différence entre le Revenu Citoyen (RC) et la Réduction d'Impôt pour les Sans-Emploi (RSA) dans le cadre du Programme du Revenu Citoyen et de la Régulation (PRCR) ?",
+      "difficulty": "débutant",
+      "count": 1,
+      "last_asked": "2025-10-14T08:04:17.429Z"
+    },
+    {
+      "id": "Q-005",
+      "text": "Quelle est la garantie que le Revenu Citoyen ne deviendra pas une simple inflation monétaire ?",
+      "difficulty": "débutant",
+      "count": 1,
+      "last_asked": "2025-10-14T08:05:18.151Z"
+    },
+    {
+      "id": "Q-006",
+      "text": "Voici une question de niveau 'débutant' qui remet en question la différence entre RC et RSA, dans le contexte de la politique PRCR :\n\n**Question :** Quelle est la principale différence entre le Revenu Citoyen (RC) proposé par la politique PRCR et le Revenu de Solidarité Active (RSA) actuel, et comment la fusion de ces deux systèmes dans le Revenu Citoyen de Base (550€) pourrait-elle impacté les bénéficiaires ?",
+      "difficulty": "débutant",
+      "count": 4,
+      "last_asked": "2025-10-14T08:52:36.300Z"
+    },
+    {
+      "id": "Q-007",
+      "text": "Comment la mise en œuvre du Revenu Citoyen (RC) dans le cadre du Programme du Revenu Citoyen et de la Régulation (PRCR) diffère-t-elle du Revenu de Solidarité Active (RSA) actuel, et quels sont les principaux avantages attendus pour les citoyens français avec cette nouvelle approche ?",
+      "difficulty": "débutant",
+      "count": 1,
+      "last_asked": "2025-10-14T08:27:46.610Z"
+    },
+    {
+      "id": "Q-008",
+      "text": "Comment le Revenu Citoyen (RC) proposé par la politique PRCR diffère-t-il du Revenu de Solidarité Active (RSA) actuel, notamment en termes de conditions d'éligibilité, de montant et de mécanismes de financement ?",
+      "difficulty": "débutant",
+      "count": 1,
+      "last_asked": "2025-10-14T08:43:30.397Z"
+    },
+    {
+      "id": "Q-009",
+      "text": "Comment la mise en place du Revenu Citoyen (RC) dans le cadre du Programme du Revenu Citoyen et de la Régulation (PRCR) diffère-t-elle du Revenu de Solidarité Active (RSA) actuel, notamment en termes de calcul du montant versé et de conditions d'éligibilité ?",
+      "difficulty": "débutant",
+      "count": 1,
+      "last_asked": "2025-10-14T08:43:30.437Z"
+    }
+  ],
+  "original_questions_asked": 9
+}

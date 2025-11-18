@@ -20,7 +20,7 @@ bot.get('/evenements', async (req, res) => {
                     content: `** Générez 5 idées d'événements innovants pour promouvoir l'IA à Caen. Incluez des titres, des descriptions et des formats. Ta réponse de t'être rédigé au format liste en HTML, respectant les normes du Web sémantique W3C intégrant des emoji intélligent associer.`,
                 },
             ],
-            model: 'gemma2-9b-it',
+            model: 'llama-3.1-8b-instant',
         });
   
         res.status(200).send(chatCompletion.choices[0].message.content);
@@ -37,7 +37,7 @@ async function generateResponse(req, res) {
         }
 
         const response = await groq.chat.completions.create({
-            model: 'gemma2-9b-it',
+            model: 'llama-3.1-8b-instant',
             messages: [
                 { role: 'assistant', content: "welcom @worker_Pibot tu es l'intelligence artificielle au cœur du projet C, intitulé « blog des Séveloppeurs ». Tu résides donc à cette adresse https://wp.univers-mc.cloud wp-admin worldpress, bienvenu dans le code source main.js nodeJs. Dont le thème world wp-content/themes/XordThemes/$ blog world t'es indexé en système version sur GitHub https://github.com/universmc/blog/, Si tout est bien compris, nous allons commencer par les présentations." },
                 { role: 'user', content: prompt }
